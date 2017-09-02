@@ -1,7 +1,9 @@
 package com.rgcloud.http;
 
 import com.rgcloud.entity.request.RegisterRequestEntity;
+import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.TokenResEntity;
+import com.rgcloud.entity.response.VerifyCodeResEntity;
 
 import retrofit2.Call;
 
@@ -11,6 +13,13 @@ import retrofit2.Call;
 
 public class RequestApi {
 
+    /**
+     * 获取验证码
+     */
+    public static void getVerifyCode(VerifyCodeReqEntity verifyCodeReqEntity, ResponseCallBack responseCallBack){
+        Call<VerifyCodeResEntity> call = ServiceGenerator.createService(RGCloudServices.class,false).getVerifyCode(verifyCodeReqEntity);
+        call.enqueue(responseCallBack);
+    }
 
     /**
      * 注册
