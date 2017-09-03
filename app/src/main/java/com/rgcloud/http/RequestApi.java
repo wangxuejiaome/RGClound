@@ -17,7 +17,7 @@ public class RequestApi {
      * 获取验证码
      */
     public static void getVerifyCode(VerifyCodeReqEntity verifyCodeReqEntity, ResponseCallBack responseCallBack){
-        Call<VerifyCodeResEntity> call = ServiceGenerator.createService(RGCloudServices.class,false).getVerifyCode(verifyCodeReqEntity);
+        Call<VerifyCodeResEntity> call = ServiceGenerator.createService(RGCloudServices.class,true).getVerifyCode(verifyCodeReqEntity);
         call.enqueue(responseCallBack);
     }
 
@@ -25,7 +25,7 @@ public class RequestApi {
      * 注册
      */
     public static void register(RegisterRequestEntity registerRequestEntity,ResponseCallBack responseCallBack){
-        Call<TokenResEntity> call = ServiceGenerator.createService(RGCloudServices.class,false).register(registerRequestEntity);
+        Call<TokenResEntity> call = ServiceGenerator.createService(RGCloudServices.class,true).register(registerRequestEntity);
         call.enqueue(responseCallBack);
     }
 

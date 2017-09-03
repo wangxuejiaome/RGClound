@@ -36,7 +36,7 @@ public class TCApplication extends MultiDexApplication {
 
         instance = this;
 
-        initSDK();
+       // initSDK();
 
         //配置分享第三方平台的appkey
         PlatformConfig.setWeixin(TCConstants.WEIXIN_SHARE_ID, TCConstants.WEIXIN_SHARE_SECRECT);

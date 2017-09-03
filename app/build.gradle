@@ -17,9 +17,9 @@ android {
         multiDexEnabled = true
 
         ndk {
-            abiFilters rootProject.ext.ndkAbi
+            //abiFilters rootProject.ext.ndkAbi
 
-            //abiFilters "armeabi", "armeabi-v7a"  //自己添加的
+            abiFilters "armeabi", "armeabi-v7a","x86"  //自己添加的
         }
 
         manifestPlaceholders = [
