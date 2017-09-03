@@ -111,7 +111,7 @@
         android:layout_marginLeft="@dimen/x20"
         android:layout_marginRight="@dimen/x20"
         android:layout_marginTop="@dimen/x120"
-        android:background="@drawable/shape_primary_blue_coner8"
+        android:background="@drawable/shape_primary_blue_corner8"
         android:text="登录"
         android:textColor="@color/white"
         android:textSize="14sp"/>

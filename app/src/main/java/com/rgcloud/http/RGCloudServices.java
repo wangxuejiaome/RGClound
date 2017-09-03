@@ -1,5 +1,7 @@
 package com.rgcloud.http;
 
+import com.rgcloud.entity.BaseResEntity;
+import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
@@ -29,8 +31,14 @@ public interface RGCloudServices {
     Call<TokenResEntity> register(@Body RegisterReqEntity registerReqEntity);
 
     /**
-     * 注册
+     * 登录
      */
     @POST("memberApi/login")
     Call<TokenResEntity> login(@Body LoginReqEntity loginReqEntity);
+
+    /**
+     * 忘记密码
+     */
+    @POST("memberApi/resetLoginPassword")
+    Call<BaseResEntity> forgetPassword(@Body ForgetPasswordReqEntity forgetPasswordReqEntity);
 }

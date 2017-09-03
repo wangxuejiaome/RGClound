@@ -42,12 +42,14 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
      * 登录类型：0.普通登录；1.强制登录；2.token异常
      */
     private int mLoginType;
+    private PreferencesUtil mPreferencesUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
         ButterKnife.bind(this);
+        mPreferencesUtil = new PreferencesUtil(mContext);
         ResponseCallBack.setLoginInterface(this);
         initView();
         initData();
@@ -85,8 +87,8 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
                 TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
-                PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
-                preferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
+                mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
+                mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("登录成功");
                 startActivity(new Intent(mContext, Main2Activity.class));
@@ -110,15 +112,23 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 .show();
     }
 
-    @OnClick({R.id.tv_forget_password, R.id.btn_login, R.id.btn_wx_login})
+    @OnClick({R.id.tv_forget_password, R.id.btn_login, R.id.btn_wx_login,R.id.btn_right_include_title})
     public void onViewClicked(View view) {
         super.onClick(view);
         switch (view.getId()) {
+            case R.id.btn_right_include_title:
+                startActivity(new Intent(mContext, RegisterActivity.class));
+                break;
+            case R.id.tv_forget_password:
+                mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN,false);
+                startActivity(new Intent(mContext, ForgetPasswordActivity.class));
+                break;
             case R.id.btn_login:
                 login();
                 break;
             case R.id.btn_wx_login:
                 break;
+
         }
     }
 

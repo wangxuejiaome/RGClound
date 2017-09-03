@@ -23,6 +23,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.tencent.qalsdk.base.a.ca;
+
 /**
  * Created by play on 2016/6/21.
  */
@@ -65,9 +67,6 @@ public class ResponseCallBack<T> implements Callback<T> {
                 if (mContext != null) {
                     CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 }
-                if (!TextUtils.isEmpty(resEntity.Message)) {
-                    ToastUtil.showShortToast(resEntity.Message);
-                }
                 switch (resEntity.Code) {
                     case "301"://登陆后再试
                     case "303"://需要重新登录
@@ -81,6 +80,19 @@ public class ResponseCallBack<T> implements Callback<T> {
                         loginAnywayIntent.putExtra("loginType",1);
                         mContext.startActivity(loginAnywayIntent);*/
                         break;
+                    case "300"://非法请求
+                    case "400"://操作失败
+                    case "401"://请勿重复发送
+                    case "402"://数据格式有误
+                    case "403"://验证码有误
+                    case "404"://用户名或密码错误
+                    case "405"://手机号已被注册
+                    case "406"://原始密码不正确
+                    case "407"://会员账户异常
+                    if (!TextUtils.isEmpty(resEntity.Message)) {
+                        ToastUtil.showShortToast(resEntity.Message);
+                    }
+                    break;
                     default:
                         ToastUtil.showShortToast("服务器异常，请稍候再试");
                         break;

@@ -80,6 +80,7 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
+
     private void getVerifyCode() {
         final VerifyCodeReqEntity verifyCodeReqEntity = new VerifyCodeReqEntity();
         if (TextUtils.isEmpty(etPhone.getText().toString().trim())) {
@@ -99,7 +100,6 @@ public class RegisterActivity extends BaseActivity {
             }
         });
     }
-
     private void register() {
         if (!checkedValidate()) return;
         RegisterReqEntity registerReqEntity = new RegisterReqEntity();
@@ -116,6 +116,7 @@ public class RegisterActivity extends BaseActivity {
                 TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
                 PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
                 preferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
+                preferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("注册成功");
                 startActivity(new Intent(mContext, Main2Activity.class));

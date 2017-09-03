@@ -171,7 +171,7 @@
     android:layout_marginLeft="@dimen/x20"
     android:layout_marginTop="@dimen/x120"
     android:layout_marginRight="@dimen/x20"
-    android:background="@drawable/shape_primary_blue_coner8"/>
+    android:background="@drawable/shape_primary_blue_corner8"/>
 
 
 </LinearLayout>
