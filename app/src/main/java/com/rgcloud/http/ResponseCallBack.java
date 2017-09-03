@@ -1,11 +1,17 @@
 package com.rgcloud.http;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 
+import com.rgcloud.R;
+import com.rgcloud.activity.LoginActivity;
+import com.rgcloud.application.AppActivityManager;
 import com.rgcloud.entity.BaseResEntity;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.ToastUtil;
@@ -20,7 +26,7 @@ import retrofit2.Response;
 /**
  * Created by play on 2016/6/21.
  */
-public class ResponseCallBack<T>  implements Callback<T> {
+public class ResponseCallBack<T> implements Callback<T> {
 
     private static final String TAG = "ResponseCallBack";
 
@@ -56,33 +62,24 @@ public class ResponseCallBack<T>  implements Callback<T> {
             if (resEntity.Code.equals("200")) {
                 onObjectResponse(response.body());
             } else {
+                if (mContext != null) {
+                    CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+                }
                 if (!TextUtils.isEmpty(resEntity.Message)) {
                     ToastUtil.showShortToast(resEntity.Message);
                 }
                 switch (resEntity.Code) {
-                    case "300":
-                        ToastUtil.showShortToast("非法请求");
+                    case "301"://登陆后再试
+                    case "303"://需要重新登录
+                        Intent loginAgainIntent = new Intent(mContext, LoginActivity.class);
+                        loginAgainIntent.putExtra("loginType", 2);
+                        mContext.startActivity(loginAgainIntent);
                         break;
-                    case "301":
-                        ToastUtil.showShortToast("登陆后再试");
-                        break;
-                    case "303":
-                        ToastUtil.showShortToast("需要重新登录");
-                        break;
-                    case "400":
-                        ToastUtil.showShortToast("操作失败");
-                        break;
-                    case "401":
-                        ToastUtil.showShortToast("请勿重复发送");
-                        break;
-                    case "402":
-                        ToastUtil.showShortToast("数据格式有误");
-                        break;
-                    case "407":
-                        ToastUtil.showShortToast("会员账户异常");
-                        break;
-                    case "408":
-                        ToastUtil.showShortToast("账户已在别处登陆，是否强制登陆");
+                    case "408"://账户已在别处登陆，是否强制登陆
+                        mLoginInterface.loginAnyway();
+                        /*Intent loginAnywayIntent = new Intent(mContext, LoginActivity.class);
+                        loginAnywayIntent.putExtra("loginType",1);
+                        mContext.startActivity(loginAnywayIntent);*/
                         break;
                     default:
                         ToastUtil.showShortToast("服务器异常，请稍候再试");
@@ -97,5 +94,15 @@ public class ResponseCallBack<T>  implements Callback<T> {
     @Override
     public void onFailure(Call<T> call, Throwable t) {
         onFailure(t);
+    }
+
+    private static LoginInterface mLoginInterface;
+
+    public static void setLoginInterface(LoginInterface loginInterface) {
+        mLoginInterface = loginInterface;
+    }
+
+    public interface LoginInterface {
+        void loginAnyway();
     }
 }

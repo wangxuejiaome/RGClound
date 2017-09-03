@@ -1,5 +1,6 @@
 package com.rgcloud.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -7,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.rgcloud.R;
-import com.rgcloud.entity.request.RegisterRequestEntity;
+import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
@@ -18,8 +19,6 @@ import com.rgcloud.util.CountDownUtil;
 import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.view.TitleBar;
-
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,43 +53,43 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void initView() {
-        initTitleBar(R.id.tb_register,"注册");
+        initTitleBar(R.id.tb_register, "注册");
     }
 
     private void initData() {
 
     }
 
-    private boolean checkedValidate(){
-        if(TextUtils.isEmpty(etPhone.getText().toString().trim())) {
+    private boolean checkedValidate() {
+        if (TextUtils.isEmpty(etPhone.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入手机号");
             return false;
         }
-        if(TextUtils.isEmpty(etNickName.getText().toString().trim())){
+        if (TextUtils.isEmpty(etNickName.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入昵称");
             return false;
         }
-        if(TextUtils.isEmpty(etPassword.getText().toString().trim())){
+        if (TextUtils.isEmpty(etPassword.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入密码");
             return false;
         }
-        if(TextUtils.isEmpty(etVerifyCode.getText().toString().trim())){
+        if (TextUtils.isEmpty(etVerifyCode.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入验证码");
             return false;
         }
         return true;
     }
 
-    private void getVerifyCode(){
+    private void getVerifyCode() {
         final VerifyCodeReqEntity verifyCodeReqEntity = new VerifyCodeReqEntity();
-        if(TextUtils.isEmpty(etPhone.getText().toString().trim())){
+        if (TextUtils.isEmpty(etPhone.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入手机号");
             return;
-        }else {
+        } else {
             verifyCodeReqEntity.PhoneNumber = etPhone.getText().toString().trim();
             verifyCodeReqEntity.TemplateId = 1;
         }
-        RequestApi.getVerifyCode(verifyCodeReqEntity,new ResponseCallBack(mContext){
+        RequestApi.getVerifyCode(verifyCodeReqEntity, new ResponseCallBack(mContext) {
             @Override
             public void onObjectResponse(Object resEntity) {
                 VerifyCodeResEntity verifyCodeResEntity = (VerifyCodeResEntity) resEntity;
@@ -101,23 +100,25 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    private void register(){
-        if(!checkedValidate()) return;
-        RegisterRequestEntity registerRequestEntity = new RegisterRequestEntity();
-        registerRequestEntity.LoginPhone = etPhone.getText().toString().trim();
-        //registerRequestEntity.
-        registerRequestEntity.setPassword(etPassword.getText().toString().trim());
-        registerRequestEntity.ValidCode = etVerifyCode.getText().toString().trim();
-        registerRequestEntity.EquipmentId = JPushInterface.getRegistrationID(mContext);
-        RequestApi.register(registerRequestEntity,new ResponseCallBack(mContext){
+    private void register() {
+        if (!checkedValidate()) return;
+        RegisterReqEntity registerReqEntity = new RegisterReqEntity();
+        registerReqEntity.LoginPhone = etPhone.getText().toString().trim();
+        registerReqEntity.NickName = etNickName.getText().toString().trim();
+        registerReqEntity.setPassword(etPassword.getText().toString().trim());
+        registerReqEntity.ValidCode = etVerifyCode.getText().toString().trim();
+        registerReqEntity.EquipmentId = JPushInterface.getRegistrationID(mContext);
+        RequestApi.register(registerReqEntity, new ResponseCallBack(mContext) {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
-                if(resEntity == null) return;
+                if (resEntity == null) return;
                 TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
                 PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
-                preferencesUtil.put(PreferencesUtil.ACCESS_TOKEN,tokenResEntity.Token);
+                preferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+                ToastUtil.showShortToast("注册成功");
+                startActivity(new Intent(mContext, Main2Activity.class));
             }
         });
     }
