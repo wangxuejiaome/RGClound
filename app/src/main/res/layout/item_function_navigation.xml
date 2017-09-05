@@ -9,9 +9,9 @@
         android:layout_height="@dimen/x100"
         android:id="@+id/iv_function_navigation_item"
         android:layout_gravity="center_horizontal"
-        android:paddingTop="@dimen/y20"
+        android:layout_marginTop="@dimen/y20"
         android:src="@mipmap/ic_function_navigation_temp"
-        />
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:layout_width="match_parent"

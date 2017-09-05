@@ -25,6 +25,10 @@ allprojects {
         maven {
             url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //            url "http://maven.oa.com/nexus/content/repositories/jcenter"
+
+        }
+        maven {
+            url "https://jitpack.io"
         }
     }
 }
