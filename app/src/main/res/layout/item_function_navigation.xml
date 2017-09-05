@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/x100"
+        android:id="@+id/iv_function_navigation_item"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/y20"
+        android:src="@mipmap/ic_function_navigation_temp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_name_function_navigation_item"
+        android:text="重大活动"
+        android:textSize="12sp"
+        android:textColor="@color/grey900"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/y20"
+        android:paddingBottom="@dimen/y20"/>
+
+</LinearLayout>

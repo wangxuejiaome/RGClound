@@ -284,4 +284,15 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item><!--半透明的，默认是true，是半透明的-->
     </style>
+
+    <style name="TabNavigationMain">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:drawablePadding">@dimen/y4</item>
+        <item name="android:paddingTop">@dimen/y10</item>
+        <item name="android:paddingBottom">@dimen/y10</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

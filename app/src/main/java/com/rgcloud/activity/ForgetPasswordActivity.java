@@ -94,6 +94,7 @@ public class ForgetPasswordActivity extends BaseActivity {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("密码重置成功，请重新登录");
                 finish();
             }
