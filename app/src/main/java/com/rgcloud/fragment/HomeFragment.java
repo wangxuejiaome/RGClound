@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.rgcloud.R;
+import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.FunctionAdapter;
 import com.rgcloud.adapter.FunctionNavigationAdapter;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.FunctionEntity;
+import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.stx.xhb.mylibrary.XBanner;
 
@@ -43,6 +46,7 @@ public class HomeFragment extends Fragment {
     RecyclerView rvRecommend;
 
     private FunctionNavigationAdapter mFunctionNavigationAdapter;
+    private ActivityAdapter mActivityAdapter;
 
     @Nullable
     @Override
@@ -58,9 +62,16 @@ public class HomeFragment extends Fragment {
         initView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        bannerHome.startAutoPlay();
+    }
+
+
     private void initView() {
 
-        rvFunctionNavigation.setLayoutManager(new GridLayoutManager(getActivity(),4));
+        rvFunctionNavigation.setLayoutManager(new GridLayoutManager(getActivity(), 4));
      /*   rvFunctionNavigation.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));*/
         List<HomeResEntity> homeResEntityList = new ArrayList<>();
@@ -71,17 +82,45 @@ public class HomeFragment extends Fragment {
         mFunctionNavigationAdapter = new FunctionNavigationAdapter(homeResEntityList);
         rvFunctionNavigation.setAdapter(mFunctionNavigationAdapter);
 
-        rvFunction.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        rvFunction.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvFunction.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x20).build());
         List<FunctionEntity> functionEntityList = new ArrayList<>();
-        functionEntityList.add(new FunctionEntity("我爱直播","围观如皋精彩现场",R.mipmap.ic_live_function));
-        functionEntityList.add(new FunctionEntity("我要点单","百姓点单政府制单",R.mipmap.ic_live_function));
-        functionEntityList.add(new FunctionEntity("文化日历","每日活动新鲜速递",R.mipmap.ic_live_function));
-        functionEntityList.add(new FunctionEntity("文化地图","文化点位一栏无余",R.mipmap.ic_live_function));
-        functionEntityList.add(new FunctionEntity("民营剧团","特色好戏任你来点",R.mipmap.ic_live_function));
-        functionEntityList.add(new FunctionEntity("志愿服务","志愿服务组织报名",R.mipmap.ic_live_function));
+        functionEntityList.add(new FunctionEntity("我爱直播", "围观如皋精彩现场", R.mipmap.ic_live_function));
+        functionEntityList.add(new FunctionEntity("我要点单", "百姓点单政府制单", R.mipmap.ic_order_fuction));
+        functionEntityList.add(new FunctionEntity("文化日历", "每日活动新鲜速递", R.mipmap.ic_canlendar_function));
+        functionEntityList.add(new FunctionEntity("文化地图", "文化点位一栏无余", R.mipmap.ic_map_function));
+        functionEntityList.add(new FunctionEntity("民营剧团", "特色好戏任你来点", R.mipmap.ic_troupe_function));
+        functionEntityList.add(new FunctionEntity("志愿服务", "志愿服务组织报名", R.mipmap.ic_service_function));
         FunctionAdapter functionAdapter = new FunctionAdapter(functionEntityList);
         rvFunction.setAdapter(functionAdapter);
+
+        rvRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvRecommend.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
+        List<ActivityResEntity> activityResEntityList = new ArrayList<>();
+        activityResEntityList.add(new ActivityResEntity());
+        activityResEntityList.add(new ActivityResEntity());
+        activityResEntityList.add(new ActivityResEntity());
+        mActivityAdapter = new ActivityAdapter(activityResEntityList);
+        rvRecommend.setAdapter(mActivityAdapter);
+    }
+
+    private void setView() {
+
+        /*bannerHome.setData(imgResList,null);
+        bannerHome.setmAdapter(new XBanner.XBannerAdapter() {
+            @Override
+            public void loadBanner(XBanner banner, Object model, View view, int position) {
+                ImageView imageView = (ImageView) view;
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setImageResource(imgResList.get(position));
+            }
+        });*/
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        bannerHome.stopAutoPlay();
     }
 
     @Override
