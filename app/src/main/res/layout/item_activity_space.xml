@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y320">
+
+    <ImageView
+        android:id="@+id/iv_activity_space_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/activity_temp"/>
+
+
+    <TextView
+        android:id="@+id/tv_address_activity_space_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="江苏省南通市如皋西福路"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y80"
+        android:layout_above="@+id/tv_address_activity_space_item"
+        android:layout_marginBottom="@dimen/y40"
+        android:layout_marginLeft="@dimen/x96"
+        android:layout_marginRight="@dimen/x96"
+        android:gravity="center_vertical">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y2"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_name_activity_space_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/x20"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="如皋文化馆"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y2"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/view_left"
+        android:layout_width="@dimen/x2"
+        android:layout_height="@dimen/y216"
+        android:layout_alignTop="@+id/ll_top"
+        android:layout_marginLeft="@dimen/x96"
+        android:layout_marginTop="@dimen/y40"
+        android:background="@color/white"/>
+
+
+    <View
+        android:id="@+id/view_right"
+        android:layout_width="@dimen/x2"
+        android:layout_height="@dimen/y216"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/ll_top"
+        android:layout_marginRight="@dimen/x96"
+        android:layout_marginTop="@dimen/y40"
+        android:background="@color/white"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y2"
+        android:layout_alignBottom="@+id/view_left"
+        android:layout_alignLeft="@+id/view_left"
+        android:layout_alignRight="@+id/view_right"
+        android:background="@color/white"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_count_activity_space_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_address_activity_space_item"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/y24"
+        android:text="2个在线活动"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
+
+
+</RelativeLayout>
