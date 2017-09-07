@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/activity_post_topic_comment"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f7f7f7"
+              android:orientation="vertical"
+              tools:context="com.periodical.activity.PostTopicCommentActivity">
+
+    <com.rgcloud.view.TitleBar
+        android:id="@+id/tb_post_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y300"
+        android:id="@+id/et_post_comment"
+        android:hint="写下你的评论"
+        android:paddingLeft="@dimen/x32"
+        android:paddingTop="@dimen/y20"
+        android:textSize="13sp"
+        android:textColorHint="#66000000"
+        android:textColor="#99000000"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/y32"
+        android:gravity="start"/>
+
+</LinearLayout>

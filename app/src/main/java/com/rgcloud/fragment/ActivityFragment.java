@@ -1,6 +1,7 @@
 package com.rgcloud.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
+import com.rgcloud.activity.PostCommentActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.NavigationAdapter;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
@@ -97,6 +99,7 @@ public class ActivityFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
+                startActivity(new Intent(getActivity(), PostCommentActivity.class));
                 break;
             case R.id.rv_activity_navigation:
                 break;

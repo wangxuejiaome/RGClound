@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-   <!-- <color name="colorPrimaryBlue">#0398ff</color>-->
-    <color name="colorPrimaryBlue">#008cba</color>
+    <color name="colorPrimaryBlue">#0398ff</color>
+    <!--<color name="colorPrimaryBlue">#008cba</color>-->
     <color name="grey900">#333333</color>
     <color name="grey700">#666666</color>
     <color name="grey500">#999999</color>
 
     <color name="colorDivider">#e5e5e5</color>
-
 
 
     <color name="tencent_tls_ui_white">#FFFFFF</color>
@@ -128,7 +127,6 @@
     <color name="colorGray8">#181818</color>
     <!--green-->
     <color name="colorGreen">#0accac</color>
-
 
 
     <color name="colorSendName">#9966cc</color>
