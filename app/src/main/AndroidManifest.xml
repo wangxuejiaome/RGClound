@@ -306,6 +306,8 @@
         </activity>
         <activity android:name=".activity.UpdatePasswordActivity">
         </activity>
+        <activity android:name=".activity.SearchActivity">
+        </activity>
     </application>
 
 </manifest>

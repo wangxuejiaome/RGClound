@@ -1,6 +1,7 @@
 package com.rgcloud.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.rgcloud.R;
+import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.FunctionAdapter;
 import com.rgcloud.adapter.FunctionNavigationAdapter;
@@ -133,6 +135,7 @@ public class HomeFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
         }
     }
