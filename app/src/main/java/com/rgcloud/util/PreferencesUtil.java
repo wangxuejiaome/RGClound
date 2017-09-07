@@ -24,43 +24,11 @@ public class PreferencesUtil {
      */
     private static final String PREFERENCES_FILE_NAME = "preferencesPeriodical";
 
-    /**
-     * 主题模式切换0：白色  1：黑色，默认是白色
-     */
-    public static final String THEME_MODE = "themeMode";
-
-    /**
-     * 字体大小切换切换0：小  1：中（正常） 2:大 3：特大
-     */
-    public static final String TEXT_MODE = "textMode";
-
-    /**
-     * 语言 简体中文：zh_cn ，通用英语：en 默认简体中文
-     */
-    public static final String LOCAL_LANGUAGE = "localLanguage";
 
     /**
      * 用户TOKEN
      */
     public static final String ACCESS_TOKEN = "accessToken";
-
-    /**
-     * 用户昵称
-     */
-    public static final String NICKNAME = "nickname";
-    /**
-     * 用户头像
-     */
-    public static final String USER_HEADER = "userHeader";
-
-    /**
-     * 用户性别 0男，1女
-     */
-    public static final String USER_SEX = "userSex";
-    /**
-     * 用户部门
-     */
-    public static final String USER_DEPARTMENT = "userDepartment";
 
 
     /**
@@ -250,10 +218,7 @@ public class PreferencesUtil {
 
     public void loginOutRemove() {
         mEditor.remove(ACCESS_TOKEN)
-                .remove(USER_HEADER)
-                .remove(NICKNAME)
-                .remove(USER_SEX)
-                .remove(USER_DEPARTMENT);
+                .remove(HAS_LOGIN);
         mEditor.commit();
     }
 

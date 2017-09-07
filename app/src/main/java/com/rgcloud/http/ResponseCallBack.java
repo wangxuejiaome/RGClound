@@ -99,6 +99,9 @@ public class ResponseCallBack<T> implements Callback<T> {
                 }
             }
         } else {
+            if (mContext != null) {
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+            }
             ToastUtil.showShortToast("访问异常code:" + response.code());
         }
     }

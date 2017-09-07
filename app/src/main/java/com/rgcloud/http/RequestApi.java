@@ -1,9 +1,11 @@
 package com.rgcloud.http;
 
 import com.rgcloud.entity.BaseResEntity;
+import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
+import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
@@ -50,5 +52,22 @@ public class RequestApi {
         Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).forgetPassword(forgetPasswordReqEntity);
         call.enqueue(responseCallBack);
     }
+
+    /**
+     * 修改密码
+     */
+    public static void updatePassword(UpdatePasswordReqEntity updatePasswordReqEntity, ResponseCallBack responseCallBack) {
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).updatePassword(updatePasswordReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 退出登录
+     */
+    public static void loginOut(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).loginOut(baseReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
 
 }

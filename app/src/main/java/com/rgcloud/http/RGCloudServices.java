@@ -1,9 +1,11 @@
 package com.rgcloud.http;
 
 import com.rgcloud.entity.BaseResEntity;
+import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
+import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
@@ -41,4 +43,16 @@ public interface RGCloudServices {
      */
     @POST("memberApi/resetLoginPassword")
     Call<BaseResEntity> forgetPassword(@Body ForgetPasswordReqEntity forgetPasswordReqEntity);
+
+    /**
+     * 修改密码
+     */
+    @POST("memberApi/updateLoginPassword")
+    Call<BaseResEntity> updatePassword(@Body UpdatePasswordReqEntity updatePasswordReqEntity);
+
+    /**
+     * 修改密码
+     */
+    @POST("memberApi/logOut")
+    Call<BaseResEntity> loginOut(@Body BaseReqEntity baseReqEntity);
 }

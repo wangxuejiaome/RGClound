@@ -33,7 +33,7 @@ public class ForgetPasswordActivity extends BaseActivity {
     Button btnVerifyCode;
     @Bind(R.id.et_new_password_forget_password)
     EditText etNewPassword;
-    @Bind(R.id.btn_update_password)
+    @Bind(R.id.btn_set_password)
     Button btnUpdatePassword;
 
     @Override
@@ -101,13 +101,13 @@ public class ForgetPasswordActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.btn_verify_code_forget_password, R.id.btn_update_password})
+    @OnClick({R.id.btn_verify_code_forget_password, R.id.btn_set_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_verify_code_forget_password:
                 getVerifyCode();
                 break;
-            case R.id.btn_update_password:
+            case R.id.btn_set_password:
                 forgetPassword();
                 break;
         }
