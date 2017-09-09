@@ -108,9 +108,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.7.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.CymChad/BaseRecyclerViewAdapterHelper/2.9.12/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.ctiao/dfm/0.4.4/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.4.0/jars" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.4.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.xhb/xbanner/1.2.8/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/volley-1.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
@@ -134,7 +131,6 @@
     <orderEntry type="library" exported="" name="support-compat-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="support-fragment-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="qalsdk" level="project" />
-    <orderEntry type="library" exported="" name="play-services-base-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="umeng_social_shareview" level="project" />
     <orderEntry type="library" exported="" name="fbcore-0.7.0" level="project" />
     <orderEntry type="library" exported="" name="open_sdk_r5781" level="project" />
@@ -154,7 +150,6 @@
     <orderEntry type="library" exported="" name="logging-interceptor-3.3.1" level="project" />
     <orderEntry type="library" exported="" name="SocialSDK_WeChat_Simplify" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-24.2.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-appindexing-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="jcore-1.1.1" level="project" />
     <orderEntry type="library" exported="" name="BaseRecyclerViewAdapterHelper-2.9.12" level="project" />
     <orderEntry type="library" exported="" name="jpush-3.0.3" level="project" />
@@ -180,6 +175,5 @@
     <orderEntry type="library" exported="" name="wechat-sdk-android-with-mta-1.1.6" level="project" />
     <orderEntry type="library" exported="" name="mobilepb" level="project" />
     <orderEntry type="library" exported="" name="volley-1.0.0-" level="project" />
-    <orderEntry type="library" exported="" name="play-services-basement-8.4.0" level="project" />
   </component>
 </module>

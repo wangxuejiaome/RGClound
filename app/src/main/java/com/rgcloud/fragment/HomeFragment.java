@@ -12,15 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.rgcloud.R;
+import com.rgcloud.activity.Main2Activity;
 import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.FunctionAdapter;
 import com.rgcloud.adapter.FunctionNavigationAdapter;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.FunctionEntity;
+import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
+import com.rgcloud.http.RequestApi;
+import com.rgcloud.http.ResponseCallBack;
+import com.rgcloud.util.CirCleLoadingDialogUtil;
+import com.rgcloud.util.GlideUtil;
 import com.stx.xhb.mylibrary.XBanner;
 
 import java.util.ArrayList;
@@ -49,6 +57,7 @@ public class HomeFragment extends Fragment {
 
     private FunctionNavigationAdapter mFunctionNavigationAdapter;
     private ActivityAdapter mActivityAdapter;
+    private HomeResEntity mHomeResEntity;
 
     @Nullable
     @Override
@@ -62,6 +71,7 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        initData();
     }
 
     @Override
@@ -76,12 +86,7 @@ public class HomeFragment extends Fragment {
         rvFunctionNavigation.setLayoutManager(new GridLayoutManager(getActivity(), 4));
      /*   rvFunctionNavigation.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));*/
-        List<HomeResEntity> homeResEntityList = new ArrayList<>();
-        homeResEntityList.add(new HomeResEntity());
-        homeResEntityList.add(new HomeResEntity());
-        homeResEntityList.add(new HomeResEntity());
-        homeResEntityList.add(new HomeResEntity());
-        mFunctionNavigationAdapter = new FunctionNavigationAdapter(homeResEntityList);
+        mFunctionNavigationAdapter = new FunctionNavigationAdapter(null);
         rvFunctionNavigation.setAdapter(mFunctionNavigationAdapter);
 
         rvFunction.setLayoutManager(new GridLayoutManager(getActivity(), 2));
@@ -98,26 +103,44 @@ public class HomeFragment extends Fragment {
 
         rvRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvRecommend.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
-        List<ActivityResEntity> activityResEntityList = new ArrayList<>();
-        activityResEntityList.add(new ActivityResEntity());
-        activityResEntityList.add(new ActivityResEntity());
-        activityResEntityList.add(new ActivityResEntity());
-        mActivityAdapter = new ActivityAdapter(activityResEntityList);
+        mActivityAdapter = new ActivityAdapter(null);
         rvRecommend.setAdapter(mActivityAdapter);
+    }
+
+    private void initData() {
+        getHomeInfo();
     }
 
     private void setView() {
 
-        /*bannerHome.setData(imgResList,null);
+        bannerHome.setData(mHomeResEntity.TopChangeImageUrl, null);
         bannerHome.setmAdapter(new XBanner.XBannerAdapter() {
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
                 ImageView imageView = (ImageView) view;
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setImageResource(imgResList.get(position));
+                GlideUtil.displayWithPlaceHolder(getActivity(), (String) model, R.mipmap.banner_default, imageView);
             }
-        });*/
+        });
+
+        mFunctionNavigationAdapter.setNewData(mHomeResEntity.IconList);
+        mActivityAdapter.setNewData(mHomeResEntity.RecommendList);
     }
+
+    private void getHomeInfo() {
+        RequestApi.getHomeInfo(new BaseReqEntity(), new ResponseCallBack(getActivity()) {
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                if (resEntity == null) return;
+                mHomeResEntity = (HomeResEntity) resEntity;
+                setView();
+                ((Main2Activity) getActivity()).setSearchKey(mHomeResEntity.HotSearchKeyWords);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+            }
+        });
+    }
+
 
     @Override
     public void onStop() {

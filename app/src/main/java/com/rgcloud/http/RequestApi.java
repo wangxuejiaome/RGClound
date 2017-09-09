@@ -7,6 +7,7 @@ import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
+import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
 import com.umeng.socialize.media.Base;
@@ -66,6 +67,14 @@ public class RequestApi {
      */
     public static void loginOut(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
         Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).loginOut(baseReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取首页信息
+     */
+    public static void getHomeInfo(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
+        Call<HomeResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getHomeInfo(baseReqEntity);
         call.enqueue(responseCallBack);
     }
 

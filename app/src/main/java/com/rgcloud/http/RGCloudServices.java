@@ -7,6 +7,7 @@ import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
+import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
 
@@ -55,4 +56,10 @@ public interface RGCloudServices {
      */
     @POST("memberApi/logOut")
     Call<BaseResEntity> loginOut(@Body BaseReqEntity baseReqEntity);
+
+    /**
+     * 修改密码
+     */
+    @POST("mainapi/recieveMainInfo")
+    Call<HomeResEntity> getHomeInfo(@Body BaseReqEntity baseReqEntity);
 }

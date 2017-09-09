@@ -16,6 +16,8 @@ import com.rgcloud.fragment.InformationFragment;
 import com.rgcloud.fragment.PersonalFragment;
 import com.rgcloud.util.ToastUtil;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,6 +43,15 @@ public class Main2Activity extends BaseActivity {
     private ActivitySpaceFragment mActivitySpaceFragment;
     private PersonalFragment mPersonalFragment;
 
+    private List<String> mSearchKey;
+
+    public List<String> getSearchKey() {
+        return mSearchKey;
+    }
+
+    public void setSearchKey(List<String> searchKey) {
+        mSearchKey = searchKey;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

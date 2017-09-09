@@ -81,11 +81,7 @@ public class ActivityFragment extends Fragment {
 
         rvActivity.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvActivity.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
-        List<ActivityResEntity> activityResEntityList = new ArrayList<>();
-        activityResEntityList.add(new ActivityResEntity());
-        activityResEntityList.add(new ActivityResEntity());
-        activityResEntityList.add(new ActivityResEntity());
-        mActivityAdapter = new ActivityAdapter(activityResEntityList);
+        mActivityAdapter = new ActivityAdapter(null);
         rvActivity.setAdapter(mActivityAdapter);
     }
 
