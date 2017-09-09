@@ -310,6 +310,8 @@
         </activity>
         <activity android:name=".activity.PostCommentActivity">
         </activity>
+        <activity android:name=".activity.OrderActivity">
+        </activity>
     </application>
 
 </manifest>

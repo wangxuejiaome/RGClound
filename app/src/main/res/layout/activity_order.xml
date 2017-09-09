@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rgcloud.activity.OrderActivity">
+
+    <com.rgcloud.view.TitleBar
+        android:id="@+id/tb_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="标题"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/et_title_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x70"
+            android:background="@null"
+            android:gravity="fill_vertical"
+            android:hint="输入1-6个字"
+            android:imeOptions="actionNext"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dline"
+        android:background="@color/colorDivider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="问题类别"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rg_order"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x60"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_consult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="咨询"
+                android:textColor="@color/grey900"/>
+
+            <RadioButton
+                android:id="@+id/rb_advices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x60"
+                android:text="建议"
+                android:textColor="@color/grey900"/>
+
+            <RadioButton
+                android:id="@+id/rb_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x60"
+                android:text="点单"
+                android:textColor="@color/grey900"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dline"
+        android:background="@color/colorDivider"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x20"
+        android:paddingTop="@dimen/y50"
+        android:text="内容"
+        android:textColor="@color/grey900"
+        android:textSize="14sp"/>
+
+    <EditText
+        android:id="@+id/et_content_order"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y234"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@drawable/shape_white_grey_corner2_border"
+        android:gravity="start"
+        android:hint="请详细描述您的需求……"
+        android:padding="@dimen/x8"
+        android:textColor="@color/grey900"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_input_count_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="@dimen/x24"
+        android:paddingTop="@dimen/x10"
+        android:text="0/120"
+        android:textColor="@color/grey700"
+        android:textSize="14sp"/>
+
+    <Button
+        android:id="@+id/btn_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginTop="@dimen/x120"
+        android:background="@drawable/shape_primary_blue_corner8"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
+
+
+</LinearLayout>

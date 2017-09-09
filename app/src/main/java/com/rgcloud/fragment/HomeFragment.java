@@ -14,8 +14,11 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
 import com.rgcloud.activity.Main2Activity;
+import com.rgcloud.activity.OrderActivity;
 import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.FunctionAdapter;
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment {
     private FunctionNavigationAdapter mFunctionNavigationAdapter;
     private ActivityAdapter mActivityAdapter;
     private HomeResEntity mHomeResEntity;
+    private FunctionAdapter mFunctionAdapter;
 
     @Nullable
     @Override
@@ -98,8 +102,32 @@ public class HomeFragment extends Fragment {
         functionEntityList.add(new FunctionEntity("文化地图", "文化点位一栏无余", R.mipmap.ic_map_function));
         functionEntityList.add(new FunctionEntity("民营剧团", "特色好戏任你来点", R.mipmap.ic_troupe_function));
         functionEntityList.add(new FunctionEntity("志愿服务", "志愿服务组织报名", R.mipmap.ic_service_function));
-        FunctionAdapter functionAdapter = new FunctionAdapter(functionEntityList);
-        rvFunction.setAdapter(functionAdapter);
+        mFunctionAdapter = new FunctionAdapter(functionEntityList);
+        rvFunction.setAdapter(mFunctionAdapter);
+
+        rvFunction.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                FunctionEntity functionEntity = mFunctionAdapter.getItem(position);
+                switch (functionEntity.name){
+                    case "我爱直播":
+
+                        break;
+                    case "我要点单":
+                        startActivity(new Intent(getActivity(), OrderActivity.class));
+                        break;
+                    case "文化日历":
+                        break;
+                    case "文化地图":
+                        break;
+                    case "民营剧团":
+                        break;
+                    case "志愿服务":
+                        break;
+                }
+            }
+        });
+
 
         rvRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvRecommend.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());

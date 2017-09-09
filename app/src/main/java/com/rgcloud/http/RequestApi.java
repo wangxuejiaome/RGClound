@@ -4,13 +4,14 @@ import com.rgcloud.entity.BaseResEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
+import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.HomeResEntity;
+import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
-import com.umeng.socialize.media.Base;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -78,5 +79,22 @@ public class RequestApi {
         call.enqueue(responseCallBack);
     }
 
+
+    /**
+     * 获取个人信息
+     */
+    public static void getPersonalInfo(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
+        Call<PersonalInfoResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getPersonalInfo(baseReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+
+    /**
+     * 点单
+     */
+    public static void order(OrderReqEntity orderReqEntity, ResponseCallBack responseCallBack) {
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).order(orderReqEntity);
+        call.enqueue(responseCallBack);
+    }
 
 }

@@ -13,6 +13,11 @@ import android.widget.TextView;
 
 import com.rgcloud.R;
 import com.rgcloud.activity.SettingActivity;
+import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.response.PersonalInfoResEntity;
+import com.rgcloud.http.RequestApi;
+import com.rgcloud.http.ResponseCallBack;
+import com.rgcloud.util.CirCleLoadingDialogUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,6 +43,8 @@ public class PersonalFragment extends Fragment {
     LinearLayout llLivel;
     @Bind(R.id.ll_point_personal)
     LinearLayout llPoint;
+    @Bind(R.id.tv_available_point)
+    TextView tvAvailablePoint;
     @Bind(R.id.ll_setting)
     LinearLayout llSetting;
     @Bind(R.id.ll_about_us)
@@ -49,6 +56,24 @@ public class PersonalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personal, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getPersonalInfo();
+    }
+
+    private void getPersonalInfo(){
+        RequestApi.getPersonalInfo(new BaseReqEntity(),new ResponseCallBack(getActivity()){
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                PersonalInfoResEntity personalInfoResEntity = (PersonalInfoResEntity) resEntity;
+                tvAvailablePoint.setText(personalInfoResEntity.RemindPoint + "积分");
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+            }
+        });
     }
 
     @Override
