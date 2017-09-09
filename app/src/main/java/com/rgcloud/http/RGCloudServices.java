@@ -1,6 +1,7 @@
 package com.rgcloud.http;
 
 import com.rgcloud.entity.BaseResEntity;
+import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
@@ -8,6 +9,7 @@ import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
+import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
@@ -65,6 +67,19 @@ public interface RGCloudServices {
     @POST("mainapi/recieveMainInfo")
     Call<HomeResEntity> getHomeInfo(@Body BaseReqEntity baseReqEntity);
 
+    /**
+     * 点单
+     */
+    @POST("mainapi/memberDemand")
+    Call<BaseResEntity> order(@Body OrderReqEntity orderReqEntity);
+
+
+    /**
+     * 获取活动列表
+     */
+    @POST("activeManageApi/revcieveActiveList")
+    Call<ActivityResEntity> getActivity(@Body ActivityReqEntity activityReqEntity);
+
 
     /**
      * 获取个人信息
@@ -72,9 +87,5 @@ public interface RGCloudServices {
     @POST("memberApi/memberInfo")
     Call<PersonalInfoResEntity> getPersonalInfo(@Body BaseReqEntity baseReqEntity);
 
-    /**
-     * 点单
-     */
-    @POST("mainapi/memberDemand")
-    Call<BaseResEntity> order(@Body OrderReqEntity orderReqEntity);
+
 }

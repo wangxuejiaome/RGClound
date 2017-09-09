@@ -3,7 +3,6 @@ package com.rgcloud.fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +12,20 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+
 import com.rgcloud.R;
 import com.rgcloud.activity.PostCommentActivity;
 import com.rgcloud.adapter.ActivityAdapter;
-import com.rgcloud.adapter.NavigationAdapter;
+import com.rgcloud.adapter.ActivityNavigationAdapter;
+import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
-import com.rgcloud.entity.NavigationEntity;
+import com.rgcloud.entity.ActivityNavigationEntity;
+import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.response.ActivityResEntity;
+import com.rgcloud.http.RequestApi;
+import com.rgcloud.http.ResponseCallBack;
+import com.rgcloud.util.CirCleLoadingDialogUtil;
+import com.rgcloud.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +33,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Created by wangxuejiao on 2017/9/5.
@@ -34,13 +43,23 @@ import butterknife.OnClick;
 
 public class ActivityFragment extends Fragment {
 
+
+    @Bind(R.id.ptr_classic_frame_layout)
+    PtrClassicFrameLayout ptrClassicFrameLayout;
     @Bind(R.id.rv_activity_navigation)
     RecyclerView rvActivityNavigation;
     @Bind(R.id.rv_activity)
     RecyclerView rvActivity;
 
-    private NavigationAdapter mNavigationAdapter;
+    private ActivityNavigationAdapter mActivityNavigationAdapter;
     private ActivityAdapter mActivityAdapter;
+    private ActivityResEntity mActivityResEntity;
+    private List<ActivityResEntity.ActiveTypeListBean> mActiveTypeList = new ArrayList<>();
+
+    private int mSelectedTypeId;
+
+    private boolean mIsEnd;
+    private int mPageIndex = 1;
 
     @Nullable
     @Override
@@ -54,28 +73,24 @@ public class ActivityFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        initData();
     }
 
     private void initView() {
         rvActivityNavigation.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        List<NavigationEntity> navigationEntityList = new ArrayList<>();
-        navigationEntityList.add(new NavigationEntity("全部", true));
-        navigationEntityList.add(new NavigationEntity("演出", false));
-        navigationEntityList.add(new NavigationEntity("展览", false));
-        navigationEntityList.add(new NavigationEntity("讲座", false));
-        navigationEntityList.add(new NavigationEntity("培训", false));
-        mNavigationAdapter = new NavigationAdapter(navigationEntityList);
-        rvActivityNavigation.setAdapter(mNavigationAdapter);
+        mActivityNavigationAdapter = new ActivityNavigationAdapter(mActiveTypeList);
+        rvActivityNavigation.setAdapter(mActivityNavigationAdapter);
 
         rvActivityNavigation.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                NavigationEntity selectedNavigationEntity = mNavigationAdapter.getItem(position);
-                for (int i = 0; i < mNavigationAdapter.getItemCount(); i++) {
-                    NavigationEntity navigationEntity = mNavigationAdapter.getItem(i);
-                    navigationEntity.hasSelected = navigationEntity.name.equals(selectedNavigationEntity.name);
+                for (int i = 0; i < mActiveTypeList.size(); i++) {
+                    ActivityResEntity.ActiveTypeListBean activeTypeListBean = mActiveTypeList.get(i);
+                    activeTypeListBean.hasSelected = i == position;
                 }
-                mNavigationAdapter.notifyDataSetChanged();
+                mActivityNavigationAdapter.notifyDataSetChanged();
+                mSelectedTypeId = mActiveTypeList.get(position).ActiveTypeId;
+                getActivities();
             }
         });
 
@@ -83,6 +98,71 @@ public class ActivityFragment extends Fragment {
         rvActivity.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
         mActivityAdapter = new ActivityAdapter(null);
         rvActivity.setAdapter(mActivityAdapter);
+
+        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                mPageIndex = 1;
+                getActivities();
+            }
+        });
+
+        mActivityAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                rvActivity.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mIsEnd) {
+                            mActivityAdapter.loadMoreEnd(true);
+                            ToastUtil.showShortToast("没有更多了");
+                        } else {
+                            mPageIndex++;
+                            getActivities();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void initData() {
+        getActivities();
+    }
+
+    private void getActivities() {
+        ActivityReqEntity activityReqEntity = new ActivityReqEntity();
+        activityReqEntity.ActiveType = 1;
+        activityReqEntity.ChildTypeId = mSelectedTypeId;
+        RequestApi.getActivity(activityReqEntity, new ResponseCallBack(getActivity()) {
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                if (resEntity == null) return;
+                mActivityResEntity = (ActivityResEntity) resEntity;
+                if (mActiveTypeList.size() == 0) {
+                    mActiveTypeList.addAll(mActivityResEntity.ActiveTypeList);
+                    mActiveTypeList.add(0,new ActivityResEntity.ActiveTypeListBean(0, "全部", true));
+                    mActivityNavigationAdapter.setNewData(mActiveTypeList);
+                }
+
+                if (mPageIndex == 1) {
+                    mActivityAdapter.setNewData(mActivityResEntity.ActiveList);
+                    ptrClassicFrameLayout.refreshComplete();
+                    mActivityAdapter.disableLoadMoreIfNotFullPage(rvActivity);
+                } else {
+                    mActivityAdapter.addData(mActivityResEntity.ActiveList);
+                    mActivityAdapter.loadMoreComplete();
+                }
+
+                mIsEnd = mActivityResEntity.ActiveList.size() < Constant.DEFAULT_PAGE_SIZE;
+
+                if (mActivityAdapter.getItemCount() == 0) {
+                    ToastUtil.showShortToast("暂无数据");
+                }
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+            }
+        });
     }
 
     @Override

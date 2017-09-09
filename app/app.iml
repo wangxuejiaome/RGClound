@@ -109,6 +109,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.CymChad/BaseRecyclerViewAdapterHelper/2.9.12/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.github.ctiao/dfm/0.4.4/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.xhb/xbanner/1.2.8/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/in.srain.cube/ultra-ptr/1.0.11/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/volley-1.0.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
@@ -133,6 +134,7 @@
     <orderEntry type="library" exported="" name="qalsdk" level="project" />
     <orderEntry type="library" exported="" name="umeng_social_shareview" level="project" />
     <orderEntry type="library" exported="" name="fbcore-0.7.0" level="project" />
+    <orderEntry type="library" exported="" name="ultra-ptr-1.0.11" level="project" />
     <orderEntry type="library" exported="" name="open_sdk_r5781" level="project" />
     <orderEntry type="library" exported="" name="SocialSDK_Sina_Simplify" level="project" />
     <orderEntry type="library" exported="" name="converter-gson-2.0.0-beta4" level="project" />

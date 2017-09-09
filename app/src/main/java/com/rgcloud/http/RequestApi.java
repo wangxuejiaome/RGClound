@@ -1,6 +1,7 @@
 package com.rgcloud.http;
 
 import com.rgcloud.entity.BaseResEntity;
+import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
@@ -8,6 +9,8 @@ import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
+import com.rgcloud.entity.response.ActivityResBean;
+import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
@@ -81,15 +84,6 @@ public class RequestApi {
 
 
     /**
-     * 获取个人信息
-     */
-    public static void getPersonalInfo(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
-        Call<PersonalInfoResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getPersonalInfo(baseReqEntity);
-        call.enqueue(responseCallBack);
-    }
-
-
-    /**
      * 点单
      */
     public static void order(OrderReqEntity orderReqEntity, ResponseCallBack responseCallBack) {
@@ -97,4 +91,20 @@ public class RequestApi {
         call.enqueue(responseCallBack);
     }
 
+    /**
+     * 获取活动列表
+     */
+
+    public static void getActivity(ActivityReqEntity activityReqEntity, ResponseCallBack responseCallBack) {
+        Call<ActivityResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivity(activityReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取个人信息
+     */
+    public static void getPersonalInfo(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
+        Call<PersonalInfoResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getPersonalInfo(baseReqEntity);
+        call.enqueue(responseCallBack);
+    }
 }
