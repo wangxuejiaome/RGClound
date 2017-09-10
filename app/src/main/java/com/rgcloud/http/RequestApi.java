@@ -17,6 +17,7 @@ import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
+import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
@@ -143,6 +144,14 @@ public class RequestApi {
      */
     public static void getTicket(GetTicketReqEntity getTicketReqEntity, ResponseCallBack responseCallBack) {
         Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getTicket(getTicketReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取空间场地
+     */
+    public static void getActivitySpace(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
+        Call<ActivitySpaceResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivitySpace(baseReqEntity);
         call.enqueue(responseCallBack);
     }
 

@@ -16,6 +16,7 @@ import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResEntity;
+import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
@@ -116,6 +117,12 @@ public interface RGCloudServices {
     @POST("activeManageApi/exchangeTicket")
     Call<BaseResEntity> getTicket(@Body GetTicketReqEntity getTicketReqEntity);
 
+
+    /**
+     * 获取空间场地
+     */
+    @POST("activeManageApi/recieveAcitveSpaces")
+    Call<ActivitySpaceResEntity> getActivitySpace(@Body BaseReqEntity baseReqEntity);
 
     /**
      * 获取个人信息
