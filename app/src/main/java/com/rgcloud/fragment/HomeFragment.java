@@ -17,6 +17,7 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
+import com.rgcloud.activity.CalendarActivity;
 import com.rgcloud.activity.Main2Activity;
 import com.rgcloud.activity.OrderActivity;
 import com.rgcloud.activity.SearchActivity;
@@ -117,6 +118,7 @@ public class HomeFragment extends Fragment {
                         startActivity(new Intent(getActivity(), OrderActivity.class));
                         break;
                     case "文化日历":
+                        startActivity(new Intent(getActivity(), CalendarActivity.class));
                         break;
                     case "文化地图":
                         break;

@@ -15,7 +15,7 @@ public class ActivityReqEntity extends BaseReqEntity {
      * SpaceId : 3
      * ActiveName : sample string 4
      * PageIndex : 5
-     * PageSize : 6
+     * PageSize : 6r
      * IsCalendar : 7
      * Day : 8
      */
@@ -27,5 +27,5 @@ public class ActivityReqEntity extends BaseReqEntity {
     public int PageIndex;
     public int PageSize = Constant.DEFAULT_PAGE_SIZE;
     public int IsCalendar;
-    public int Day;
+    public Integer Day;
 }

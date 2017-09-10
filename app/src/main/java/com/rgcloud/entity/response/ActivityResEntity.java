@@ -29,6 +29,7 @@ public class ActivityResEntity extends BaseResEntity {
         public String WeekDay;
         public int ShowDay;
         public int PostDay;
+        public boolean hasSelected;
     }
 
     public int PageIndex;
