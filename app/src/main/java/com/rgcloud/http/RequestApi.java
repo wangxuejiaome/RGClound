@@ -5,6 +5,7 @@ import com.rgcloud.entity.request.ActivityDetailReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
+import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
@@ -107,6 +108,14 @@ public class RequestApi {
      */
     public static void getActivityDetail(ActivityDetailReqEntity activityDetailReqEntity, ResponseCallBack responseCallBack) {
         Call<ActivityDetailResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivityDetail(activityDetailReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取门票
+     */
+    public static void getTicket(GetTicketReqEntity getTicketReqEntity, ResponseCallBack responseCallBack) {
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getTicket(getTicketReqEntity);
         call.enqueue(responseCallBack);
     }
 

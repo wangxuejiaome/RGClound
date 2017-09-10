@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import com.rgcloud.R;
 import com.rgcloud.entity.request.ActivityDetailReqEntity;
+import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.GlideUtil;
+import com.rgcloud.util.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -92,6 +94,18 @@ public class ActivityDetailActivity extends BaseActivity {
         });
     }
 
+    private void getTicket(){
+        RequestApi.getTicket(new GetTicketReqEntity(mActivityId),new ResponseCallBack(mContext){
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+                ToastUtil.showShortToast("获取门票成功");
+                btnGetTicket.setText("已获门票");
+            }
+        });
+    }
+
     public static void startActivityDetail(Context context, int activityId) {
         Intent intent = new Intent(context, ActivityDetailActivity.class);
         intent.putExtra("activityId", activityId);
@@ -112,6 +126,9 @@ public class ActivityDetailActivity extends BaseActivity {
             case R.id.iv_share_activity_detail:
                 break;
             case R.id.btn_get_ticket:
+                if(btnGetTicket.getText().toString().equals("我要领票")){
+                    getTicket();
+                }
                 break;
         }
     }

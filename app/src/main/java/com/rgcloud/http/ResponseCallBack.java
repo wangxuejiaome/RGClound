@@ -24,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.tencent.qalsdk.base.a.ca;
+import static com.tencent.qalsdk.base.a.e;
 
 /**
  * Created by play on 2016/6/21.
@@ -94,7 +95,11 @@ public class ResponseCallBack<T> implements Callback<T> {
                     }
                     break;
                     default:
-                        ToastUtil.showShortToast("服务器异常，请稍候再试");
+                        if(mContext != null && !TextUtils.isEmpty(resEntity.Message)){
+                            ToastUtil.showShortToast(resEntity.Message);
+                        }else {
+                            ToastUtil.showShortToast("服务器异常，请稍候再试");
+                        }
                         break;
                 }
             }

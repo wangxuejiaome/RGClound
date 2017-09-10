@@ -5,6 +5,7 @@ import com.rgcloud.entity.request.ActivityDetailReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
+import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
@@ -87,6 +88,13 @@ public interface RGCloudServices {
      */
     @POST("activeManageApi/recieveActiveDetail")
     Call<ActivityDetailResEntity> getActivityDetail(@Body ActivityDetailReqEntity activityDetailReqEntity);
+
+
+    /**
+     * 获取门票
+     */
+    @POST("activeManageApi/exchangeTicket")
+    Call<BaseResEntity> getTicket(@Body GetTicketReqEntity getTicketReqEntity);
 
 
     /**
