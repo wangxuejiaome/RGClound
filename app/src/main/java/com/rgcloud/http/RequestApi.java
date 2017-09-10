@@ -4,6 +4,8 @@ import com.rgcloud.entity.BaseResEntity;
 import com.rgcloud.entity.request.ActivityDetailReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.request.CollectCancelReqEntity;
+import com.rgcloud.entity.request.CollectReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
@@ -109,6 +111,22 @@ public class RequestApi {
      */
     public static void getActivityDetail(ActivityDetailReqEntity activityDetailReqEntity, ResponseCallBack responseCallBack) {
         Call<ActivityDetailResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivityDetail(activityDetailReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 收藏
+     */
+    public static void collect(CollectReqEntity collectReqEntity, ResponseCallBack responseCallBack) {
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).collect(collectReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 取消收藏
+     */
+    public static void collectCancel(CollectCancelReqEntity collectCancelReqEntity, ResponseCallBack responseCallBack) {
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).collectCancel(collectCancelReqEntity);
         call.enqueue(responseCallBack);
     }
 

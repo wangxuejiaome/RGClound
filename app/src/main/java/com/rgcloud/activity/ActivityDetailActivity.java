@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.rgcloud.R;
 import com.rgcloud.entity.request.ActivityDetailReqEntity;
+import com.rgcloud.entity.request.CollectCancelReqEntity;
+import com.rgcloud.entity.request.CollectReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.http.RequestApi;
@@ -94,14 +96,38 @@ public class ActivityDetailActivity extends BaseActivity {
         });
     }
 
-    private void getTicket(){
-        RequestApi.getTicket(new GetTicketReqEntity(mActivityId),new ResponseCallBack(mContext){
+    private void getTicket() {
+        RequestApi.getTicket(new GetTicketReqEntity(mActivityId), new ResponseCallBack(mContext) {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("获取门票成功");
                 btnGetTicket.setText("已获门票");
+            }
+        });
+    }
+
+    private void collect() {
+        RequestApi.collect(new CollectReqEntity(mActivityId), new ResponseCallBack(mContext) {
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+                ToastUtil.showShortToast("收藏成功");
+                ivCollect.setImageResource(R.mipmap.ic_has_collect);
+            }
+        });
+    }
+
+    private void collectCancel() {
+        RequestApi.collectCancel(new CollectCancelReqEntity(mActivityId), new ResponseCallBack(mContext) {
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+                ToastUtil.showShortToast("取消收藏成功");
+                ivCollect.setImageResource(R.mipmap.ic_collect);
             }
         });
     }
@@ -115,7 +141,7 @@ public class ActivityDetailActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             wvActivityDetail.reload();
         }
     }
@@ -128,16 +154,18 @@ public class ActivityDetailActivity extends BaseActivity {
             case R.id.tv_phone_activity_detail:
                 break;
             case R.id.tv_comment_activity_detail:
-                Intent commentIntent = new Intent(mContext,PostCommentActivity.class);
-                commentIntent.putExtra("activityId",mActivityId);
-                startActivityForResult(commentIntent,0);
+                Intent commentIntent = new Intent(mContext, PostCommentActivity.class);
+                commentIntent.putExtra("activityId", mActivityId);
+                startActivityForResult(commentIntent, 0);
                 break;
             case R.id.iv_collect_activity_detail:
+                // collect();
+                collectCancel();
                 break;
             case R.id.iv_share_activity_detail:
                 break;
             case R.id.btn_get_ticket:
-                if(btnGetTicket.getText().toString().equals("我要领票")){
+                if (btnGetTicket.getText().toString().equals("我要领票")) {
                     getTicket();
                 }
                 break;

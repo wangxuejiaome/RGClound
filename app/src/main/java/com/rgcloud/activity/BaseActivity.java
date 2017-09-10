@@ -40,7 +40,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
 
         //启动activity动画,从右到左
         if (hasActivityAnim)
-            overridePendingTransition(R.anim.anim_slice_in_right, R.anim.anim_slice_out_right);
+            overridePendingTransition(R.anim.anim_slide_100to0, R.anim.anim_slide_0tonegative100);
         setStatusBar();
     }
 
@@ -99,16 +99,16 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void finish(boolean hasActivityAnim) {
-        overridePendingTransition(R.anim.anim_slice_in_left,
-                R.anim.anim_slice_out_right);
+        overridePendingTransition(R.anim.anim_slide_negative100to0,
+                R.anim.anim_slide_0to100);
     }
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
         //从当前界面返回，从左到右
-        overridePendingTransition(R.anim.anim_slice_in_left,
-                R.anim.anim_slice_out_right);
+        overridePendingTransition(R.anim.anim_slide_negative100to0,
+                R.anim.anim_slide_0to100);
     }
 
     @Override

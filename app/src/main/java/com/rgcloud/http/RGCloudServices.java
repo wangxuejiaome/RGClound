@@ -4,6 +4,8 @@ import com.rgcloud.entity.BaseResEntity;
 import com.rgcloud.entity.request.ActivityDetailReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.request.CollectCancelReqEntity;
+import com.rgcloud.entity.request.CollectReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
@@ -89,6 +91,18 @@ public interface RGCloudServices {
      */
     @POST("activeManageApi/recieveActiveDetail")
     Call<ActivityDetailResEntity> getActivityDetail(@Body ActivityDetailReqEntity activityDetailReqEntity);
+
+    /**
+     * 收藏
+     */
+    @POST("activeManageApi/memberCollect")
+    Call<BaseResEntity> collect(@Body CollectReqEntity collectReqEntity);
+
+    /**
+     * 取消收藏
+     */
+    @POST("activeManageApi/memberCancelCollect")
+    Call<BaseResEntity> collectCancel(@Body CollectCancelReqEntity collectCancelReqEntity);
 
     /**
      * 发表评论
