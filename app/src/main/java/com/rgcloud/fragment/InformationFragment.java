@@ -8,17 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
-import com.rgcloud.activity.ActivityDetailActivity;
-import com.rgcloud.adapter.ActivitySpaceAdapter;
+import com.rgcloud.adapter.InformationAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.request.ActivityReqEntity;
-import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -40,12 +37,10 @@ public class InformationFragment extends Fragment {
 
     @Bind(R.id.ptr_classic_frame_layout)
     PtrClassicFrameLayout ptrClassicFrameLayout;
-    @Bind(R.id.iv_search)
-    ImageView ivSearch;
-    @Bind(R.id.rv_activity_space)
-    RecyclerView rvActivitySpace;
+    @Bind(R.id.rv_information)
+    RecyclerView rvInformation;
 
-    private ActivitySpaceAdapter mActivitySpaceAdapter;
+    private InformationAdapter mInformationAdapter;
 
     private boolean mIsEnd;
     private int mPageIndex = 1;
@@ -53,7 +48,7 @@ public class InformationFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_activity_space, container, false);
+        View view = inflater.inflate(R.layout.fragment_information, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -66,12 +61,12 @@ public class InformationFragment extends Fragment {
     }
 
     private void initView() {
-        rvActivitySpace.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvActivitySpace.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
-        mActivitySpaceAdapter = new ActivitySpaceAdapter(null);
-        rvActivitySpace.setAdapter(mActivitySpaceAdapter);
+        rvInformation.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvInformation.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
+        mInformationAdapter = new InformationAdapter(null);
+        rvInformation.setAdapter(mInformationAdapter);
 
-        rvActivitySpace.addOnItemTouchListener(new OnItemClickListener() {
+        rvInformation.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 //ActivityResBean activityResBean = mActivitySpaceAdapter.getItem(position);
@@ -87,14 +82,14 @@ public class InformationFragment extends Fragment {
             }
         });
 
-        mActivitySpaceAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+        mInformationAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                rvActivitySpace.post(new Runnable() {
+                rvInformation.post(new Runnable() {
                     @Override
                     public void run() {
                         if (mIsEnd) {
-                            mActivitySpaceAdapter.loadMoreEnd(true);
+                            mInformationAdapter.loadMoreEnd(true);
                             ToastUtil.showShortToast("没有更多了");
                         } else {
                             mPageIndex++;
@@ -112,31 +107,31 @@ public class InformationFragment extends Fragment {
     }
 
     private void getActivities() {
-     /*   ActivityReqEntity activityReqEntity = new ActivityReqEntity();
+        ActivityReqEntity activityReqEntity = new ActivityReqEntity();
         activityReqEntity.ActiveType = 2;
         RequestApi.getActivity(activityReqEntity, new ResponseCallBack(getActivity()) {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
                 if (resEntity == null) return;
-
+                ActivityResEntity activityResEntity = (ActivityResEntity) resEntity;
                 if (mPageIndex == 1) {
-                    mActivitySpaceAdapter.setNewData(ActivityResEntity.ActiveList);
+                    mInformationAdapter.setNewData(activityResEntity.ActiveList);
                     ptrClassicFrameLayout.refreshComplete();
-                    mActivityAdapter.disableLoadMoreIfNotFullPage(rvActivity);
+                    mInformationAdapter.disableLoadMoreIfNotFullPage(rvInformation);
                 } else {
-                    mActivityAdapter.addData(mActivityResEntity.ActiveList);
-                    mActivityAdapter.loadMoreComplete();
+                    mInformationAdapter.addData(activityResEntity.ActiveList);
+                    mInformationAdapter.loadMoreComplete();
                 }
 
-                mIsEnd = mActivityResEntity.ActiveList.size() < Constant.DEFAULT_PAGE_SIZE;
+                mIsEnd = activityResEntity.ActiveList.size() < Constant.DEFAULT_PAGE_SIZE;
 
-                if (mActivityAdapter.getItemCount() == 0) {
+                if (mInformationAdapter.getItemCount() == 0) {
                     ToastUtil.showShortToast("暂无数据");
                 }
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
             }
-        });*/
+        });
     }
 
     @Override
@@ -145,7 +140,4 @@ public class InformationFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.iv_search)
-    public void onViewClicked() {
-    }
 }
