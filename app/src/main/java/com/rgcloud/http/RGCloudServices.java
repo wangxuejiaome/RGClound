@@ -8,6 +8,7 @@ import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
+import com.rgcloud.entity.request.PostCommentReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
@@ -89,6 +90,11 @@ public interface RGCloudServices {
     @POST("activeManageApi/recieveActiveDetail")
     Call<ActivityDetailResEntity> getActivityDetail(@Body ActivityDetailReqEntity activityDetailReqEntity);
 
+    /**
+     * 发表评论
+     */
+    @POST("activeManageApi/activeComment")
+    Call<BaseResEntity> postComment(@Body PostCommentReqEntity postCommentReqEntity);
 
     /**
      * 获取门票

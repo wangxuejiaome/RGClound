@@ -8,6 +8,7 @@ import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
+import com.rgcloud.entity.request.PostCommentReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
@@ -108,6 +109,14 @@ public class RequestApi {
      */
     public static void getActivityDetail(ActivityDetailReqEntity activityDetailReqEntity, ResponseCallBack responseCallBack) {
         Call<ActivityDetailResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivityDetail(activityDetailReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 发表评论
+     */
+    public static void postComment(PostCommentReqEntity postCommentReqEntity, ResponseCallBack responseCallBack) {
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).postComment(postCommentReqEntity);
         call.enqueue(responseCallBack);
     }
 

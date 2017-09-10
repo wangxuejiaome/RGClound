@@ -112,6 +112,14 @@ public class ActivityDetailActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            wvActivityDetail.reload();
+        }
+    }
+
     @OnClick({R.id.ll_location, R.id.tv_phone_activity_detail, R.id.tv_comment_activity_detail, R.id.iv_collect_activity_detail, R.id.iv_share_activity_detail, R.id.btn_get_ticket})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -120,6 +128,9 @@ public class ActivityDetailActivity extends BaseActivity {
             case R.id.tv_phone_activity_detail:
                 break;
             case R.id.tv_comment_activity_detail:
+                Intent commentIntent = new Intent(mContext,PostCommentActivity.class);
+                commentIntent.putExtra("activityId",mActivityId);
+                startActivityForResult(commentIntent,0);
                 break;
             case R.id.iv_collect_activity_detail:
                 break;
