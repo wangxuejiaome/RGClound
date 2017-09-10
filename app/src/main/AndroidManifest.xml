@@ -316,6 +316,8 @@
         </activity>
         <activity android:name=".activity.ActivityDetailActivity">
         </activity>
+        <activity android:name=".activity.ActivitiesActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -12,11 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
+import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.activity.CalendarActivity;
 import com.rgcloud.activity.Main2Activity;
 import com.rgcloud.activity.OrderActivity;
@@ -27,7 +26,6 @@ import com.rgcloud.adapter.FunctionNavigationAdapter;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.FunctionEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
-import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -94,6 +92,15 @@ public class HomeFragment extends Fragment {
         mFunctionNavigationAdapter = new FunctionNavigationAdapter(null);
         rvFunctionNavigation.setAdapter(mFunctionNavigationAdapter);
 
+        rvFunctionNavigation.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                HomeResEntity.IconListBean iconListBean = (HomeResEntity.IconListBean) adapter.getItem(position);
+                ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId,0);
+            }
+        });
+
+
         rvFunction.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvFunction.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x20).build());
         List<FunctionEntity> functionEntityList = new ArrayList<>();
@@ -110,7 +117,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 FunctionEntity functionEntity = mFunctionAdapter.getItem(position);
-                switch (functionEntity.name){
+                switch (functionEntity.name) {
                     case "我爱直播":
 
                         break;

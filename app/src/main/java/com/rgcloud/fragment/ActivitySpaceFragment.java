@@ -13,23 +13,16 @@ import android.widget.ImageView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
-import com.rgcloud.activity.ActivityDetailActivity;
-import com.rgcloud.adapter.ActivityAdapter;
+import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.adapter.ActivitySpaceAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
-import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
-import com.rgcloud.entity.response.ActivityResBean;
-import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.ToastUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -80,6 +73,8 @@ public class ActivitySpaceFragment extends Fragment {
         rvActivitySpace.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ActivitySpaceResEntity.ActivitySpaceBean activitySpaceBean = (ActivitySpaceResEntity.ActivitySpaceBean) adapter.getItem(position);
+                ActivitiesActivity.startActivitiesActivity(getActivity(),1,0,activitySpaceBean.Id);
                 //ActivityResBean activityResBean = mActivitySpaceAdapter.getItem(position);
                 // ActivityDetailActivity.startActivityDetail(getActivity(),activityResBean.ActiveId);
             }
