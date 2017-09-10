@@ -1,6 +1,7 @@
 package com.rgcloud.http;
 
 import com.rgcloud.entity.BaseResEntity;
+import com.rgcloud.entity.request.ActivityDetailReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
@@ -9,6 +10,7 @@ import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
+import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
@@ -97,6 +99,14 @@ public class RequestApi {
 
     public static void getActivity(ActivityReqEntity activityReqEntity, ResponseCallBack responseCallBack) {
         Call<ActivityResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivity(activityReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 活动详情
+     */
+    public static void getActivityDetail(ActivityDetailReqEntity activityDetailReqEntity, ResponseCallBack responseCallBack) {
+        Call<ActivityDetailResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivityDetail(activityDetailReqEntity);
         call.enqueue(responseCallBack);
     }
 

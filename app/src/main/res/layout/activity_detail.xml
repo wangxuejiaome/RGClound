@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.rgcloud.activity.ActivityDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_activity_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y360"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/tv_name_activity_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/x20"
+                android:paddingTop="@dimen/y10"
+                android:text="第一届水绘园旗袍秀"
+                android:textColor="@color/grey900"
+                android:textSize="12sp"
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y100"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20">
+
+                <TextView
+                    android:id="@+id/tv_address_activity_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_location_detail"
+                    android:drawablePadding="@dimen/x8"
+                    android:text="南通市如皋市水绘园路1号"
+                    android:textColor="@color/grey900"
+                    android:textSize="10sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/ic_arrow_forward"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dline"
+                android:background="@color/colorDivider"/>
+
+            <TextView
+                android:id="@+id/tv_time_activity_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y100"
+                android:background="@color/white"
+                android:drawableLeft="@mipmap/ic_time"
+                android:drawablePadding="@dimen/x8"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x20"
+                android:text="09:00-17:00"
+                android:textColor="@color/grey900"
+                android:textSize="10sp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dline"
+                android:background="@color/colorDivider"/>
+
+            <TextView
+                android:id="@+id/tv_phone_activity_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y100"
+                android:background="@color/white"
+                android:drawableLeft="@mipmap/ic_phone"
+                android:drawablePadding="@dimen/x8"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x20"
+                android:text="0513-8765252"
+                android:textColor="@color/grey900"
+                android:textSize="10sp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/x20"
+                android:paddingTop="@dimen/y10"
+                android:paddingBottom="@dimen/y10"
+                android:text="活动详情"
+                android:textColor="@color/grey900"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/y20"
+                />
+
+            <WebView
+                android:id="@+id/wv_activity_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y118"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_comment_activity_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/ic_pencial"
+            android:gravity="center"
+            android:paddingLeft="@dimen/x20"
+            android:text="评论"
+            android:textColor="@color/grey900"
+            android:textSize="10sp"/>
+
+        <View
+            android:layout_width="@dimen/dline"
+            android:layout_height="@dimen/y70"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorDivider"/>
+
+        <ImageView
+            android:id="@+id/iv_collect_activity_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_collect"/>
+
+        <View
+            android:layout_width="@dimen/dline"
+            android:layout_height="@dimen/y70"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorDivider"/>
+
+        <ImageView
+            android:id="@+id/iv_share_activity_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_share"/>
+
+
+        <Button
+            android:id="@+id/btn_get_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#2765b3"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x20"
+            android:text="我要领票"
+            android:textColor="@color/white"
+            android:textSize="28sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

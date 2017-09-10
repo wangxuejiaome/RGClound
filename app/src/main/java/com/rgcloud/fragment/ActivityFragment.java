@@ -14,13 +14,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import com.rgcloud.R;
+import com.rgcloud.activity.ActivityDetailActivity;
 import com.rgcloud.activity.PostCommentActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.ActivityNavigationAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
-import com.rgcloud.entity.ActivityNavigationEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
+import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -98,6 +99,14 @@ public class ActivityFragment extends Fragment {
         rvActivity.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
         mActivityAdapter = new ActivityAdapter(null);
         rvActivity.setAdapter(mActivityAdapter);
+
+        rvActivity.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ActivityResBean activityResBean = mActivityAdapter.getItem(position);
+                ActivityDetailActivity.startActivityDetail(getActivity(),activityResBean.ActiveId);
+            }
+        });
 
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
