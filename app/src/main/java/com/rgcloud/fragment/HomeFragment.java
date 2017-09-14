@@ -33,6 +33,7 @@ import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.GlideUtil;
 import com.stx.xhb.mylibrary.XBanner;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 HomeResEntity.IconListBean iconListBean = (HomeResEntity.IconListBean) adapter.getItem(position);
-                ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId,0);
+                ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId, 0);
             }
         });
 
@@ -195,7 +196,11 @@ public class HomeFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
-                startActivity(new Intent(getActivity(), SearchActivity.class));
+                if (mHomeResEntity != null) {
+                    Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
+                    searchIntent.putExtra("hotSearchKeys", (Serializable) mHomeResEntity.HotSearchKeyWords);
+                    startActivity(searchIntent);
+                }
                 break;
         }
     }

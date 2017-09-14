@@ -1,6 +1,7 @@
 package com.rgcloud.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +16,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
 import com.rgcloud.adapter.SearchAdapter;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
-import com.rgcloud.divider.VerticalDividerItemDecoration;
-import com.rgcloud.util.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -34,7 +32,6 @@ public class SearchActivity extends BaseActivity {
     @Bind(R.id.rv_search)
     RecyclerView rvSearch;
 
-    List<String> mSearchResEntityList = new ArrayList<>();
     SearchAdapter mSearchAdapter;
 
     @Override
@@ -43,26 +40,25 @@ public class SearchActivity extends BaseActivity {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         initView();
-        setStatusBar();
+        initData();
     }
+
 
     private void initView() {
         initTitleBar(R.id.tb_search, "搜索");
 
         rvSearch.setLayoutManager(new LinearLayoutManager(mContext));
         rvSearch.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext).spaceResId(R.dimen.y20).build());
-        mSearchResEntityList.add("演出");
-        mSearchResEntityList.add("讲座");
-        mSearchResEntityList.add("喜剧");
-        mSearchAdapter = new SearchAdapter(R.layout.item_search, mSearchResEntityList);
+        mSearchAdapter = new SearchAdapter(R.layout.item_search, null);
         rvSearch.setAdapter(mSearchAdapter);
 
         rvSearch.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-               /* Intent intent = new Intent(mContext,SearchResultActivity.class);
-                intent.putExtra("keyword",mSearchResEntityList.get(position));
-                startActivity(intent);*/
+                String searchKey = (String) adapter.getItem(position);
+                Intent searchResultIntent = new Intent(mContext, SearchResultActivity.class);
+                searchResultIntent.putExtra("searchKey", searchKey);
+                startActivity(searchResultIntent);
             }
         });
 
@@ -74,8 +70,9 @@ public class SearchActivity extends BaseActivity {
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (imm.isActive()) {
                         imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
-                        //search();
-                        ToastUtil.showShortToast("搜索");
+                        Intent searchResultIntent = new Intent(mContext, SearchResultActivity.class);
+                        searchResultIntent.putExtra("searchKey", etSearch.getText().toString().trim());
+                        startActivity(searchResultIntent);
                     }
                     return true;
                 }
@@ -84,20 +81,10 @@ public class SearchActivity extends BaseActivity {
         });
     }
 
-
-    /*private void getSystemInfo(){
-        RequestApi.getSystemInfo(new ResponseCallBack<SystemInfoResEntity>(mContext){
-            @Override
-            public void onObjectEntityResponse(SystemInfoResEntity object) {
-                super.onObjectEntityResponse(object);
-                String hotKeyWord = object.searchKeyWords;
-                String[] hotKeyWords = hotKeyWord.split(",");
-                mSearchResEntityList.addAll(Arrays.asList(hotKeyWords));
-                mSearchAdapter.notifyDataSetChanged();
-                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
-            }
-        });
-    }*/
+    private void initData() {
+        List<String> hotSearchKeyList = (List<String>) getIntent().getSerializableExtra("hotSearchKeys");
+        mSearchAdapter.setNewData(hotSearchKeyList);
+    }
 
     @OnClick({R.id.iv_clear_search_result, R.id.iv_search})
     public void onClick(View view) {

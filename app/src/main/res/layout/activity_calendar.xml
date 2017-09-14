@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/iv_back"
             android:src="@mipmap/ic_back"
-            android:padding="@dimen/x30"
+            android:padding="@dimen/x20"
             android:layout_centerVertical="true"/>
 
         <TextView

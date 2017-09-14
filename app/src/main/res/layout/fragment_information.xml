@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:background="@color/white"
               android:orientation="vertical">
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/x32"
+            android:padding="@dimen/x24"
             android:src="@mipmap/ic_search"/>
     </RelativeLayout>
 
@@ -33,20 +33,20 @@
         android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/x10"
         app:ptr_duration_to_close="200"
         app:ptr_duration_to_close_header="1000"
         app:ptr_keep_header_when_refresh="true"
         app:ptr_pull_to_fresh="false"
         app:ptr_ratio_of_header_height_to_refresh="1.2"
-        app:ptr_resistance="1.7"
-        android:layout_margin="@dimen/x10">
+        app:ptr_resistance="1.7">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x10"
-        android:layout_marginTop="@dimen/y10"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y10"/>
 
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 

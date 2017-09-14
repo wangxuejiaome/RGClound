@@ -15,6 +15,7 @@ import com.rgcloud.adapter.CalendarAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.request.ActivityReqEntity;
+import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -84,6 +85,14 @@ public class CalendarActivity extends BaseActivity {
         rvCalendarActivity.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext).spaceResId(R.dimen.x10).showLastDivider().build());
         mActivityAdapter = new ActivityAdapter(null);
         rvCalendarActivity.setAdapter(mActivityAdapter);
+
+        rvCalendarActivity.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ActivityResBean activityResBean = mActivityAdapter.getItem(position);
+                ActivityDetailActivity.startActivityDetail(mContext, activityResBean.ActiveId);
+            }
+        });
 
         ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override

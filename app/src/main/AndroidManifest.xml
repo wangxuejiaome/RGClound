@@ -69,13 +69,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
 
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            -->
         </activity>
 
         <!-- 消息收发service -->
@@ -294,11 +292,11 @@
         <activity android:name=".activity.LoginActivity">
         </activity>
         <activity android:name=".activity.Main2Activity">
-            <intent-filter>
+        <!--    <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity android:name=".activity.ForgetPasswordActivity">
         </activity>
@@ -317,6 +315,8 @@
         <activity android:name=".activity.ActivityDetailActivity">
         </activity>
         <activity android:name=".activity.ActivitiesActivity">
+        </activity>
+        <activity android:name=".activity.SearchResultActivity">
         </activity>
     </application>
 

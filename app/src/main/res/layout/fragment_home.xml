@@ -3,8 +3,9 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-    android:background="@color/white">
+              android:background="@color/white"
+              android:orientation="vertical">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="@dimen/x32"
+            android:padding="@dimen/x24"
             android:src="@mipmap/ic_search"
             />
     </RelativeLayout>
@@ -64,13 +65,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="猜你喜欢"
-                android:textSize="12sp"
-                android:textColor="#659bc1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y20"
                 android:drawableLeft="@mipmap/ic_recommend"
                 android:drawablePadding="@dimen/x6"
-                android:layout_marginTop="@dimen/y20"
-                android:layout_gravity="center_horizontal"/>
+                android:text="猜你喜欢"
+                android:textColor="#659bc1"
+                android:textSize="12sp"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_recommend"

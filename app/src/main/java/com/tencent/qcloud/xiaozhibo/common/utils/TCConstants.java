@@ -9,12 +9,12 @@ public class TCConstants {
     //小直播相关配置请参考:https://www.qcloud.com/document/product/454/7999
     //************在腾讯云开通各项服务后，将您的配置替换到如下的几个定义中************
     //云通信服务相关配置
-    public static final int IMSDK_ACCOUNT_TYPE = 0;
+    public static final int IMSDK_ACCOUNT_TYPE = 17627;
     public static final int IMSDK_APPID = 1400039709;
 
     //COS存储服务相关配置
     public static final String COS_BUCKET = "rgcloud";
-    public static final String COS_APPID  = "0";
+    public static final String COS_APPID  = "1251113002";
     //COS服务配置的机房区域，从COS的管理控制台https://console.qcloud.com/cos4/bucket进入Bucket列表后，选择您所创建的Bucket->基础配置->所属地区，查到所属地区后，根据如下
     //对应关系填入，如是“华南”请填写COSEndPoint.COS_GZ，“华北”请填写COSEndPoint.COS_TJ，“华东”请填写COSEndPoint.COS_SH
     public static final COSEndPoint COS_REGION = COSEndPoint.COS_SH;
@@ -23,7 +23,7 @@ public class TCConstants {
     public static final String CLOUD_API_SECRETID = "";
 
     //业务Server的Http配置
-    public static final String SVR_POST_URL = "";
+    public static final String SVR_POST_URL = "http://123.206.238.100/callback/Live_callback.php";
 
     //直播分享页面的跳转地址，分享到微信、手Q后点击观看将会跳转到这个地址，请参考https://www.qcloud.com/document/product/454/8046 文档部署html5的代码后，替换成相应的页面地址
     public static final String SVR_LivePlayShare_URL = "";
@@ -40,7 +40,7 @@ public class TCConstants {
     public static final String QQZONE_SHARE_SECRECT = "";
 
     //小直播appid
-    public static final int XIAOZHIBO_APPID = 0;
+    public static final int XIAOZHIBO_APPID = 1251113002  ;
 
 
     //bugly组件Appid，bugly为腾讯提供的用于App Crash收集和分析的组件
@@ -176,7 +176,7 @@ public class TCConstants {
     public static final int NETTYPE_4G   = 4;
 
     //连麦开关
-    public static final boolean TX_ENABLE_LINK_MIC                          = true; //开启连麦标志位
+    public static final boolean TX_ENABLE_LINK_MIC                          = false; //开启连麦标志位
 
     //连麦消息类型
     public static final int LINKMIC_CMD_REQUEST                             = 10001;

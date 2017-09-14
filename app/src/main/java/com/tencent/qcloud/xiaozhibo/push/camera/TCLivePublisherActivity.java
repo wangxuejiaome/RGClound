@@ -178,7 +178,7 @@ public class TCLivePublisherActivity extends TCBaseActivity implements ITXLivePu
 
         Intent intent = getIntent();
         mUserId = intent.getStringExtra(TCConstants.USER_ID);
-        mPushUrl = intent.getStringExtra(TCConstants.PUBLISH_URL);
+       mPushUrl = intent.getStringExtra(TCConstants.PUBLISH_URL);
         mTitle = intent.getStringExtra(TCConstants.ROOM_TITLE);
         mCoverPicUrl = intent.getStringExtra(TCConstants.COVER_PIC);
         mHeadPicUrl = intent.getStringExtra(TCConstants.USER_HEADPIC);

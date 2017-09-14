@@ -159,8 +159,8 @@ public class ActivityDetailActivity extends BaseActivity {
                 startActivityForResult(commentIntent, 0);
                 break;
             case R.id.iv_collect_activity_detail:
-                // collect();
-                collectCancel();
+                collect();
+                // collectCancel();
                 break;
             case R.id.iv_share_activity_detail:
                 break;

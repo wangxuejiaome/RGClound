@@ -15,7 +15,9 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 
 import com.rgcloud.R;
 import com.rgcloud.activity.ActivityDetailActivity;
+import com.rgcloud.activity.Main2Activity;
 import com.rgcloud.activity.PostCommentActivity;
+import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.ActivityNavigationAdapter;
 import com.rgcloud.config.Constant;
@@ -28,6 +30,7 @@ import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.ToastUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,7 +107,7 @@ public class ActivityFragment extends Fragment {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ActivityResBean activityResBean = mActivityAdapter.getItem(position);
-                ActivityDetailActivity.startActivityDetail(getActivity(),activityResBean.ActiveId);
+                ActivityDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
             }
         });
 
@@ -151,7 +154,7 @@ public class ActivityFragment extends Fragment {
                 mActivityResEntity = (ActivityResEntity) resEntity;
                 if (mActiveTypeList.size() == 0) {
                     mActiveTypeList.addAll(mActivityResEntity.ActiveTypeList);
-                    mActiveTypeList.add(0,new ActivityResEntity.ActiveTypeListBean(0, "全部", true));
+                    mActiveTypeList.add(0, new ActivityResEntity.ActiveTypeListBean(0, "全部", true));
                     mActivityNavigationAdapter.setNewData(mActiveTypeList);
                 }
 
@@ -184,7 +187,12 @@ public class ActivityFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
-                startActivity(new Intent(getActivity(), PostCommentActivity.class));
+                Main2Activity main2Activity = (Main2Activity) getActivity();
+                if (main2Activity.getSearchKey() != null) {
+                    Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
+                    searchIntent.putExtra("hotSearchKeys", (Serializable) main2Activity.getSearchKey());
+                    startActivity(searchIntent);
+                }
                 break;
             case R.id.rv_activity_navigation:
                 break;
