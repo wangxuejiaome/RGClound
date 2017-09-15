@@ -23,7 +23,8 @@ public class TCConstants {
     public static final String CLOUD_API_SECRETID = "";
 
     //业务Server的Http配置
-    public static final String SVR_POST_URL = "http://123.206.238.100/callback/Live_callback.php";
+    //public static final String SVR_POST_URL = "http://123.206.238.100/callback/Live_callback.php";
+    public static final String SVR_POST_URL = "http://123.206.238.100/interface.php";
 
     //直播分享页面的跳转地址，分享到微信、手Q后点击观看将会跳转到这个地址，请参考https://www.qcloud.com/document/product/454/8046 文档部署html5的代码后，替换成相应的页面地址
     public static final String SVR_LivePlayShare_URL = "";
