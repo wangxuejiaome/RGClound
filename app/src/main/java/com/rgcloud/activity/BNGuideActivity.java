@@ -2,13 +2,17 @@ package com.rgcloud.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MapViewLayoutParams;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -36,9 +40,12 @@ import java.util.List;
  *
  * @author sunhao04
  */
-public class BNGuideActivity extends Activity {
+public class BNGuideActivity extends BaseActivity {
 
     private final String TAG = BNGuideActivity.class.getName();
+
+
+
     private BNRoutePlanNode mBNRoutePlanNode = null;
     private BaiduNaviCommonModule mBaiduNaviCommonModule = null;
 
@@ -52,6 +59,8 @@ public class BNGuideActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
         MapActivity.activityList.add(this);
         createHandler();
@@ -269,7 +278,7 @@ public class BNGuideActivity extends Activity {
                     return;
                 }
                 tvAddress.setText(result.getAddress());
-              /*  mProvince = result.getAddressDetail().province;
+               /* mProvince = result.getAddressDetail().province;
                 mCity = result.getAddressDetail().city;
                 mDistrict = result.getAddressDetail().district;
                 mAddress = result.getAddressDetail().street + result.getAddressDetail().streetNumber;*/

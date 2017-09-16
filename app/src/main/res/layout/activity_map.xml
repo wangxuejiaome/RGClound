@@ -20,6 +20,19 @@
         android:id="@+id/btn_go"
         android:text="去导航"/>
 
+    <CheckBox
+        android:id="@+id/animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dip"
+        android:layout_marginLeft="2dip"
+        android:layout_marginRight="2dip"
+        android:layout_marginTop="2dip"
+        android:layout_weight="1"
+        android:checked="true"
+        android:text="Marker添加动画"
+        android:layout_alignParentRight="true"/>
+
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/map_view"
