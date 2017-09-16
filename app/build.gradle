@@ -62,14 +62,11 @@ dependencies {
     compile(name: 'volley-1.0.0', ext: 'aar')
     compile 'com.facebook.fresco:fresco:0.7.0'
     compile(name: 'LiteAVSDK_Professional', ext: 'aar') {
-                exclude group:'com.squareup.okio'
+        exclude group: 'com.squareup.okio'
     }
-
-
-  /*  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })*/
-
+    /*  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })*/
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
@@ -79,11 +76,9 @@ dependencies {
     compile 'com.xhb:xbanner:1.2.8'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.12'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
-
-
-
-
-
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/BaiduNaviSDK_3.3.1.jar')
+    compile files('libs/httpmime-4.1.2.jar')
 }
 
 configurations {

@@ -18,6 +18,7 @@ import com.rgcloud.R;
 import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.activity.CalendarActivity;
 import com.rgcloud.activity.Main2Activity;
+import com.rgcloud.activity.MapActivity;
 import com.rgcloud.activity.OrderActivity;
 import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.ActivityAdapter;
@@ -129,6 +130,7 @@ public class HomeFragment extends Fragment {
                         startActivity(new Intent(getActivity(), CalendarActivity.class));
                         break;
                     case "文化地图":
+                        startActivity(new Intent(getActivity(), MapActivity.class));
                         break;
                     case "民营剧团":
                         break;
