@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.rgcloud.R;
 import com.rgcloud.entity.request.LoginReqEntity;
@@ -19,13 +20,17 @@ import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.view.TitleBar;
+import com.tencent.qcloud.xiaozhibo.common.utils.TCUtils;
+import com.tencent.qcloud.xiaozhibo.login.TCLoginMgr;
+import com.tencent.qcloud.xiaozhibo.userinfo.ITCUserInfoMgrListener;
+import com.tencent.qcloud.xiaozhibo.userinfo.TCUserInfoMgr;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 
-public class LoginActivity extends BaseActivity implements ResponseCallBack.LoginInterface {
+public class LoginActivity extends BaseActivity implements ResponseCallBack.LoginInterface, TCLoginMgr.TCLoginCallback {
 
     @Bind(R.id.tb_login)
     TitleBar tbLogin;
@@ -44,6 +49,9 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
     private int mLoginType;
     private PreferencesUtil mPreferencesUtil;
 
+    private TCLoginMgr mTCLoginMgr;
+    private TokenResEntity mTokenResEntity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
         ButterKnife.bind(this);
         mPreferencesUtil = new PreferencesUtil(mContext);
         ResponseCallBack.setLoginInterface(this);
+        mTCLoginMgr = TCLoginMgr.getInstance();
         initView();
         initData();
     }
@@ -61,6 +70,13 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
 
     private void initData() {
         mLoginType = getIntent().getIntExtra("loginType", 0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //设置登录回调,resume设置回调避免被registerActivity冲掉
+        mTCLoginMgr.setTCLoginCallback(this);
     }
 
     private boolean checkValidate() {
@@ -86,12 +102,11 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
-                TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
-                mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
-                mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
-                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
-                ToastUtil.showShortToast("登录成功");
-                startActivity(new Intent(mContext, Main2Activity.class));
+                mTokenResEntity = (TokenResEntity) resEntity;
+
+                mTCLoginMgr.setTCLoginCallback(LoginActivity.this);
+                //调用LoginHelper进行普通登录
+                mTCLoginMgr.pwdLogin(mTokenResEntity.MemberNickName, etPassword.getText().toString().trim());
             }
         });
     }
@@ -112,7 +127,47 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 .show();
     }
 
-    @OnClick({R.id.tv_forget_password, R.id.btn_login, R.id.btn_wx_login,R.id.btn_right_include_title})
+    @Override
+    public void onSuccess() {
+
+        TCUserInfoMgr.getInstance().setUserId(mTCLoginMgr.getLastUserInfo().identifier, new ITCUserInfoMgrListener() {
+            @Override
+            public void OnQueryUserInfo(int error, String errorMsg) {
+            }
+
+            @Override
+            public void OnSetUserInfo(int error, String errorMsg) {
+                if (0 != error)
+                    Toast.makeText(getApplicationContext(), "设置 User ID 失败" + errorMsg, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mTCLoginMgr.removeTCLoginCallback();
+        mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, mTokenResEntity.Token);
+        mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
+        CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+        ToastUtil.showShortToast("登录成功");
+        startActivity(new Intent(mContext, Main2Activity.class));
+    }
+
+    @Override
+    public void onFailure(int code, String msg) {
+
+        //被踢下线后弹窗显示被踢
+        if (6208 == code) {
+            TCUtils.showKickOutDialog(this);
+        }
+        Toast.makeText(getApplicationContext(), "登录失败" + msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //删除登录回调
+        mTCLoginMgr.removeTCLoginCallback();
+    }
+
+    @OnClick({R.id.tv_forget_password, R.id.btn_login, R.id.btn_wx_login, R.id.btn_right_include_title})
     public void onViewClicked(View view) {
         super.onClick(view);
         switch (view.getId()) {
@@ -120,7 +175,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 startActivity(new Intent(mContext, RegisterActivity.class));
                 break;
             case R.id.tv_forget_password:
-                mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN,false);
+                mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, false);
                 startActivity(new Intent(mContext, ForgetPasswordActivity.class));
                 break;
             case R.id.btn_login:
@@ -131,5 +186,6 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
 
         }
     }
+
 
 }

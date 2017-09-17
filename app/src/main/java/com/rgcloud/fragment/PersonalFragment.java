@@ -18,6 +18,7 @@ import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
+import com.tencent.qcloud.xiaozhibo.mainui.TCMainActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,8 +65,8 @@ public class PersonalFragment extends Fragment {
         getPersonalInfo();
     }
 
-    private void getPersonalInfo(){
-        RequestApi.getPersonalInfo(new BaseReqEntity(),new ResponseCallBack(getActivity()){
+    private void getPersonalInfo() {
+        RequestApi.getPersonalInfo(new BaseReqEntity(), new ResponseCallBack(getActivity()) {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
@@ -94,6 +95,9 @@ public class PersonalFragment extends Fragment {
             case R.id.tv_comment_personal:
                 break;
             case R.id.ll_live_personal:
+                Intent intent = new Intent(getActivity(), TCMainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 break;
             case R.id.ll_point_personal:
                 break;

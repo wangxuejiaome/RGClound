@@ -60,6 +60,8 @@ public class ForgetPasswordActivity extends BaseActivity {
         if (TextUtils.isEmpty(etNewPassword.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入新密码");
             return false;
+        }else if(etNewPassword.getText().toString().trim().length() < 8){
+            ToastUtil.showShortToast("密码长度不能小于8");
         }
         return true;
     }

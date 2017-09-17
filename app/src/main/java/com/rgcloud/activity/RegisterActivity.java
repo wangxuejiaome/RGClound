@@ -3,9 +3,11 @@ package com.rgcloud.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.rgcloud.R;
 import com.rgcloud.entity.request.RegisterReqEntity;
@@ -19,6 +21,10 @@ import com.rgcloud.util.CountDownUtil;
 import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.view.TitleBar;
+import com.tencent.qcloud.xiaozhibo.login.TCLoginMgr;
+import com.tencent.qcloud.xiaozhibo.login.TCRegisterMgr;
+import com.tencent.qcloud.xiaozhibo.userinfo.TCUserInfoMgr;
+import com.tencent.rtmp.TXLog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,7 +32,7 @@ import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements TCRegisterMgr.TCRegisterCallback {
 
     @Bind(R.id.tb_register)
     TitleBar tbRegister;
@@ -43,11 +49,17 @@ public class RegisterActivity extends BaseActivity {
     @Bind(R.id.btn_register)
     Button btnRegister;
 
+    private TCRegisterMgr mTCRegisterMgr;
+    private TokenResEntity mTokenResEntity;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
         ButterKnife.bind(this);
+        mTCRegisterMgr = TCRegisterMgr.getInstance();
+        mTCRegisterMgr.setTCRegisterCallback(this);
         initView();
         initData();
     }
@@ -68,10 +80,15 @@ public class RegisterActivity extends BaseActivity {
         if (TextUtils.isEmpty(etNickName.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入昵称");
             return false;
+        } else if (etNickName.getText().toString().trim().length() < 4) {
+            ToastUtil.showShortToast("昵称不能小于4位");
+            return false;
         }
         if (TextUtils.isEmpty(etPassword.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入密码");
             return false;
+        } else if (etPassword.getText().toString().trim().length() < 8) {
+            ToastUtil.showShortToast("长度不能小于8位");
         }
         if (TextUtils.isEmpty(etVerifyCode.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入验证码");
@@ -100,9 +117,10 @@ public class RegisterActivity extends BaseActivity {
             }
         });
     }
+
     private void register() {
         if (!checkedValidate()) return;
-        RegisterReqEntity registerReqEntity = new RegisterReqEntity();
+        final RegisterReqEntity registerReqEntity = new RegisterReqEntity();
         registerReqEntity.LoginPhone = etPhone.getText().toString().trim();
         registerReqEntity.NickName = etNickName.getText().toString().trim();
         registerReqEntity.setPassword(etPassword.getText().toString().trim());
@@ -113,15 +131,54 @@ public class RegisterActivity extends BaseActivity {
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
                 if (resEntity == null) return;
-                TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
-                PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
-                preferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
-                preferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
-                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
-                ToastUtil.showShortToast("注册成功");
-                startActivity(new Intent(mContext, Main2Activity.class));
+                mTokenResEntity = (TokenResEntity) resEntity;
+                //在腾讯云上注册
+                mTCRegisterMgr.pwdRegist(registerReqEntity.NickName, etPassword.getText().toString());
             }
         });
+    }
+
+    @Override
+    public void onSuccess(final String identifier) {
+
+        //自动登录逻辑
+        final TCLoginMgr tcLoginMgr = TCLoginMgr.getInstance();
+        tcLoginMgr.setTCLoginCallback(new TCLoginMgr.TCLoginCallback() {
+            @Override
+            public void onSuccess() {
+                tcLoginMgr.removeTCLoginCallback();
+                TCUserInfoMgr.getInstance().setUserId(identifier, null);
+                TXLog.d("TCRegister", "login after regist success");
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                tcLoginMgr.removeTCLoginCallback();
+                TXLog.d("TCRegister", "login after regist fail, code:" + code + " msg:" + msg);
+            }
+        });
+
+        tcLoginMgr.pwdLogin(identifier, etPassword.getText().toString());
+        mTCRegisterMgr.removeTCRegisterCallback();
+
+        CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+        ToastUtil.showShortToast("注册成功");
+        PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
+        preferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, mTokenResEntity.Token);
+        preferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
+        startActivity(new Intent(mContext, Main2Activity.class));
+    }
+
+    @Override
+    public void onFailure(int code, String msg) {
+        Log.d("TCRegister", "regist fail, code:" + code + " msg:" + msg);
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mTCRegisterMgr.removeTCRegisterCallback();
     }
 
     @OnClick({R.id.btn_verify_code_register, R.id.btn_register})
@@ -135,4 +192,6 @@ public class RegisterActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }
