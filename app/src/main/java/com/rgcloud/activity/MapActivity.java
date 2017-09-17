@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -48,8 +49,11 @@ import com.baidu.navisdk.adapter.BNOuterTTSPlayerCallback;
 import com.baidu.navisdk.adapter.BNRoutePlanNode;
 import com.baidu.navisdk.adapter.BNaviSettingManager;
 import com.baidu.navisdk.adapter.BaiduNaviManager;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
-import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.adapter.SpaceMapNavigationAdapter;
+import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -123,7 +127,9 @@ public class MapActivity extends BaseActivity {
     private String mSDCardPath = null;
     private BNRoutePlanNode.CoordinateType mCoordinateType = BNRoutePlanNode.CoordinateType.BD09LL;
 
+    private SpaceMapNavigationAdapter mSpaceMapNavigationAdapter;
     List<Marker> mMarkerList = new ArrayList<>();
+    private int mSpaceType = 1;
 
     private double mCurrentLat;
     private double mCurrentLng;
@@ -174,6 +180,19 @@ public class MapActivity extends BaseActivity {
                 mSelectLng = marker.getPosition().longitude;
                 mSelectedSpaceId = bundle.getInt("spaceId");
                 return true;
+            }
+        });
+
+        rvSpaceNavigation.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mSpaceType = ((ActivitySpaceResEntity.SpaceTypeBean) adapter.getItem(position)).TypeId;
+                for (int i = 0; i < adapter.getItemCount(); i++) {
+                    ActivitySpaceResEntity.SpaceTypeBean spaceTypeBean = (ActivitySpaceResEntity.SpaceTypeBean) adapter.getItem(i);
+                    spaceTypeBean.hasSelected = i == position;
+                }
+                mSpaceMapNavigationAdapter.notifyDataSetChanged();
+                getActivitySpace();
             }
         });
     }
@@ -632,13 +651,25 @@ public class MapActivity extends BaseActivity {
 
 
     private void getActivitySpace() {
-        final BaseReqEntity baseReqEntity = new BaseReqEntity();
-        RequestApi.getActivitySpace(baseReqEntity, new ResponseCallBack(mContext) {
+        final SpaceReqEntity spaceReqEntity = new SpaceReqEntity();
+        spaceReqEntity.type = mSpaceType;
+        RequestApi.getActivitySpace(spaceReqEntity, new ResponseCallBack(mContext) {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
                 if (resEntity == null) return;
                 ActivitySpaceResEntity spaceResEntity = (ActivitySpaceResEntity) resEntity;
+
+                //只有第一次的时候才设置导航type，只需设置一次，默认第一个tab被选中
+                if (mSpaceMapNavigationAdapter == null) {
+                    rvSpaceNavigation.setLayoutManager(new GridLayoutManager(mContext, spaceResEntity.TypeData.size()));
+                    spaceResEntity.TypeData.get(0).hasSelected = true;
+                    mSpaceMapNavigationAdapter = new SpaceMapNavigationAdapter(spaceResEntity.TypeData);
+                    rvSpaceNavigation.setAdapter(mSpaceMapNavigationAdapter);
+                    initOverlay(spaceResEntity.DataList);
+                }
+
+                clearOverlay();
                 initOverlay(spaceResEntity.DataList);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
             }

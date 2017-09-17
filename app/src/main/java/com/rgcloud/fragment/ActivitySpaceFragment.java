@@ -18,6 +18,7 @@ import com.rgcloud.adapter.ActivitySpaceAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -113,8 +114,8 @@ public class ActivitySpaceFragment extends Fragment {
     }
 
     private void getActivitySpace() {
-        final BaseReqEntity baseReqEntity = new BaseReqEntity();
-        RequestApi.getActivitySpace(baseReqEntity, new ResponseCallBack(getActivity()) {
+        final SpaceReqEntity spaceReqEntity = new SpaceReqEntity();
+        RequestApi.getActivitySpace(spaceReqEntity, new ResponseCallBack(getActivity()) {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);

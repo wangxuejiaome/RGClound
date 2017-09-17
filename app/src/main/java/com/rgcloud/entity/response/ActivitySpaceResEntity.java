@@ -8,9 +8,17 @@ import java.util.List;
  * Created by wangxuejiao on 2017/9/7.
  */
 
-public class ActivitySpaceResEntity  extends BaseResEntity{
+public class ActivitySpaceResEntity extends BaseResEntity {
 
-    public List<ActivitySpaceBean>DataList;
+    public List<SpaceTypeBean> TypeData;
+    public List<ActivitySpaceBean> DataList;
+
+    public static class SpaceTypeBean {
+
+        public String TypeName;
+        public int TypeId;
+        public boolean hasSelected;
+    }
 
     /**
      * Id : 1
@@ -28,7 +36,7 @@ public class ActivitySpaceResEntity  extends BaseResEntity{
      * SpaceType : 13
      */
 
-    public static class ActivitySpaceBean{
+    public static class ActivitySpaceBean {
         public int Id;
         public String SpaceName;
         public String SpaceAddress;

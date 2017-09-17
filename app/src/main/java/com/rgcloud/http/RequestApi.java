@@ -12,6 +12,7 @@ import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.PostCommentReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
+import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
@@ -150,8 +151,8 @@ public class RequestApi {
     /**
      * 获取空间场地
      */
-    public static void getActivitySpace(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
-        Call<ActivitySpaceResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivitySpace(baseReqEntity);
+    public static void getActivitySpace(SpaceReqEntity spaceReqEntity, ResponseCallBack responseCallBack) {
+        Call<ActivitySpaceResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivitySpace(spaceReqEntity);
         call.enqueue(responseCallBack);
     }
 

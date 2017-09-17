@@ -3,10 +3,10 @@
           android:id="@+id/tv_navigation_item"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:paddingBottom="@dimen/y8"
-          android:paddingLeft="@dimen/x20"
-          android:paddingRight="@dimen/x20"
-          android:paddingTop="@dimen/y8"
+          android:paddingBottom="@dimen/y20"
+          android:paddingLeft="@dimen/x40"
+          android:paddingRight="@dimen/x40"
+          android:paddingTop="@dimen/y20"
           android:text="全部"
-          android:textSize="12sp">
+          android:textSize="14sp">
 </TextView>

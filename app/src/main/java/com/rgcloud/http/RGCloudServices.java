@@ -12,6 +12,7 @@ import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.PostCommentReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
+import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
@@ -122,7 +123,7 @@ public interface RGCloudServices {
      * 获取空间场地
      */
     @POST("activeManageApi/recieveAcitveSpaces")
-    Call<ActivitySpaceResEntity> getActivitySpace(@Body BaseReqEntity baseReqEntity);
+    Call<ActivitySpaceResEntity> getActivitySpace(@Body SpaceReqEntity spaceReqEntity);
 
     /**
      * 获取个人信息
