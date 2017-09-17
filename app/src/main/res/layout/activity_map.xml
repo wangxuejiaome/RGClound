@@ -9,37 +9,130 @@
 
 
     <com.rgcloud.view.TitleBar
+        android:id="@+id/tb_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_space_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tb_map"/>
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_go"
-        android:text="去导航"/>
-
-    <CheckBox
-        android:id="@+id/animation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dip"
-        android:layout_marginLeft="2dip"
-        android:layout_marginRight="2dip"
-        android:layout_marginTop="2dip"
-        android:layout_weight="1"
-        android:checked="true"
-        android:text="Marker添加动画"
-        android:layout_alignParentRight="true"/>
-
+        android:layout_below="@+id/tb_map"
+        />
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" />
+        android:layout_below="@+id/rv_space_navigation"
+        android:clickable="true"/>
 
 
+    <LinearLayout
+        android:id="@+id/ll_space_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_name_space"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_weight="1"
+                android:text="文化馆"
+                android:textColor="@color/grey900"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="@dimen/x62"
+                android:layout_height="@dimen/x52"
+                android:paddingRight="@dimen/x10"
+                android:src="@drawable/close"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/y8"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x20"
+            android:paddingTop="@dimen/y8">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_address_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/ic_location_detail"
+                    android:drawablePadding="@dimen/x8"
+                    android:text="地址：如皋文化场所"
+                    android:textColor="@color/grey900"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:id="@+id/tv_phone_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y4"
+                    android:drawableLeft="@mipmap/ic_phone"
+                    android:drawablePadding="@dimen/x4"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="电话：52394329"
+                    android:textColor="@color/grey900"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_go_space"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/y60"
+                android:layout_marginLeft="@dimen/x10"
+                android:background="@color/btn_blue"
+                android:text="场馆详情"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
+
+            <Button
+                android:id="@+id/btn_go_navigation"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/y60"
+                android:layout_marginLeft="@dimen/x10"
+                android:background="@color/btn_blue"
+                android:text="到这去>>"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dline"
+            android:background="@color/colorDivider"/>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -262,35 +262,6 @@ public class BNGuideActivity extends BaseActivity {
         }
     }
 
-    //将经纬度转换成地址
-    private void latlngToAddress(LatLng latlng, final TextView tvAddress) {
-        GeoCoder geoCoder = GeoCoder.newInstance();
-        geoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(latlng));
-        // 设置反地理经纬度坐标,请求位置时,需要一个经纬度
-        geoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(latlng));
-        //设置地址或经纬度反编译后的监听,这里有两个回调方法,
-        geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
-
-            //经纬度转换成地址
-            @Override
-            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
-                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-                    return;
-                }
-                tvAddress.setText(result.getAddress());
-               /* mProvince = result.getAddressDetail().province;
-                mCity = result.getAddressDetail().city;
-                mDistrict = result.getAddressDetail().district;
-                mAddress = result.getAddressDetail().street + result.getAddressDetail().streetNumber;*/
-            }
-
-            @Override
-            public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
-
-            }
-        });
-    }
-
     private OnNavigationListener mOnNavigationListener = new OnNavigationListener() {
 
         @Override

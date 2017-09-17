@@ -4,18 +4,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.SeekBar;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -25,13 +26,9 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.GroundOverlayOptions;
-import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MapViewLayoutParams;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
@@ -39,9 +36,12 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
-import com.baidu.mapapi.search.poi.PoiAddrInfo;
-import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.baidu.navisdk.adapter.BNCommonSettingParam;
 import com.baidu.navisdk.adapter.BNOuterLogUtil;
 import com.baidu.navisdk.adapter.BNOuterTTSPlayerCallback;
@@ -49,98 +49,99 @@ import com.baidu.navisdk.adapter.BNRoutePlanNode;
 import com.baidu.navisdk.adapter.BNaviSettingManager;
 import com.baidu.navisdk.adapter.BaiduNaviManager;
 import com.rgcloud.R;
+import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.response.ActivitySpaceResEntity;
+import com.rgcloud.http.RequestApi;
+import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.BNEventHandler;
+import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.OverlayManager;
-import com.rgcloud.util.PoiOverlay;
+import com.rgcloud.util.ToastUtil;
+import com.rgcloud.view.TitleBar;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MapActivity extends BaseActivity {
 
-    public static List<Activity> activityList = new LinkedList<Activity>();
-
     private static final String APP_FOLDER_NAME = "BNSDKSimpleDemo";
-
-
-    // 定位相关
-    LocationClient mLocClient;
-    public MyLocationListener myListener = new MyLocationListener();
-    private MyLocationConfiguration.LocationMode mLocationMode;
-    BitmapDescriptor mCurrentMarker;
-
-    boolean isFirstLoc = true; // 是否首次定位
-
-
-    MapView mapView;
-
-    BitmapDescriptor bdMark = BitmapDescriptorFactory
-            .fromResource(R.mipmap.float_logo);
-    private BaiduMap mBaiduMap;
-
-    private Marker mMarkerA;
-    private Marker mMarkerB;
-    private Marker mMarkerC;
-    private Marker mMarkerD;
-    private InfoWindow mInfoWindow;
-    private SeekBar alphaSeekBar = null;
-    private CheckBox animationBox = null;
-
-    // 初始化全局 bitmap 信息，不用时及时 recycle
-    BitmapDescriptor bdA = BitmapDescriptorFactory
-            .fromResource(R.mipmap.float_logo);
-    BitmapDescriptor bdB = BitmapDescriptorFactory
-            .fromResource(R.mipmap.float_logo);
-    BitmapDescriptor bdC = BitmapDescriptorFactory
-            .fromResource(R.mipmap.float_logo);
-    BitmapDescriptor bdD = BitmapDescriptorFactory
-            .fromResource(R.mipmap.float_logo);
-    BitmapDescriptor bd = BitmapDescriptorFactory
-            .fromResource(R.mipmap.float_logo);
-    BitmapDescriptor bdGround = BitmapDescriptorFactory
-            .fromResource(R.mipmap.float_logo);
-
-
-    private Button mWgsNaviBtn = null;
-    private Button mGcjNaviBtn = null;
-    private Button mBdmcNaviBtn = null;
-    private Button mDb06ll = null;
-    private String mSDCardPath = null;
-
     public static final String ROUTE_PLAN_NODE = "routePlanNode";
-    public static final String SHOW_CUSTOM_ITEM = "showCustomItem";
-    public static final String RESET_END_NODE = "resetEndNode";
-    public static final String VOID_MODE = "voidMode";
 
-    private final static String authBaseArr[] =
-            {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION};
+    @Bind(R.id.tb_map)
+    TitleBar tbMap;
+    @Bind(R.id.rv_space_navigation)
+    RecyclerView rvSpaceNavigation;
+    @Bind(R.id.map_view)
+    MapView mapView;
+    @Bind(R.id.tv_name_space)
+    TextView tvNameSpace;
+    @Bind(R.id.iv_close)
+    ImageView ivClose;
+    @Bind(R.id.btn_go_navigation)
+    Button btnGoNavigation;
+    @Bind(R.id.tv_address_space)
+    TextView tvAddressSpace;
+    @Bind(R.id.tv_phone_space)
+    TextView tvPhoneSpace;
+    @Bind(R.id.btn_go_space)
+    Button btnGoSpace;
+    @Bind(R.id.ll_space_information)
+    LinearLayout llSpaceInformation;
+    @Bind(R.id.activity_map)
+    RelativeLayout activityMap;
+
+
+    private final static String authBaseArr[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION};
     private final static String authComArr[] = {Manifest.permission.READ_PHONE_STATE};
     private final static int authBaseRequestCode = 1;
     private final static int authComRequestCode = 2;
-
     private boolean hasInitSuccess = false;
     private boolean hasRequestComAuth = false;
+
+    // 定位相关
+    private BaiduMap mBaiduMap;
+    private LocationClient mLocClient;
+    public MyLocationListener myListener = new MyLocationListener();
+    private MyLocationConfiguration.LocationMode mLocationMode;
+    private BitmapDescriptor mCurrentMarker;
+    private boolean isFirstLoc = true; // 是否首次定位
+
+    public static List<Activity> activityList = new LinkedList<Activity>();
+
+
+    // 初始化全局 bitmap 信息，不用时及时 recycle
+
+    BitmapDescriptor mBDMark = BitmapDescriptorFactory
+            .fromResource(R.mipmap.ic_location_red_128);
+
+    private String mSDCardPath = null;
+    private BNRoutePlanNode.CoordinateType mCoordinateType = BNRoutePlanNode.CoordinateType.BD09LL;
+
+    List<Marker> mMarkerList = new ArrayList<>();
+
+    private double mCurrentLat;
+    private double mCurrentLng;
+    private double mSelectedLat;
+    private double mSelectLng;
+    private int mSelectedSpaceId;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        setContentView(R.layout.activity_map);
+        ButterKnife.bind(this);
+        mBaiduMap = mapView.getMap();
+        BNOuterLogUtil.setLogSwitcher(true);
         activityList.add(this);
 
-        setContentView(R.layout.activity_map);
-
-        mapView = (MapView) findViewById(R.id.map_view);
-
-        animationBox = (CheckBox) findViewById(R.id.animation);
-
-        mBaiduMap = mapView.getMap();
-        //MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
-        //mBaiduMap.setMapStatus(msu);
-        //initOverlay();
+        initTitleBar(R.id.tb_map, "文化地图");
 
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
@@ -153,257 +154,77 @@ public class MapActivity extends BaseActivity {
         option.setScanSpan(1000);
         mLocClient.setLocOption(option);
         mLocClient.start();
-
         mLocationMode = MyLocationConfiguration.LocationMode.NORMAL;
         mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(mLocationMode, true, mCurrentMarker));
 
-     /*   mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
-            @Override
-            public void onMapStatusChangeStart(MapStatus mapStatus) {
-
-            }
-
-            @Override
-            public void onMapStatusChange(MapStatus mapStatus) {
-
-            }
-
-            @Override
-            public void onMapStatusChangeFinish(MapStatus mapStatus) {
-
-            }
-        });*/
-
-/*
-        final MyPoiOverlay poiOverlay = new MyPoiOverlay(mBaiduMap);
-
-        final LatLng llA = new LatLng(118.800173, 31.946546);
-        final LatLng llB = new LatLng(118.806767, 31.946807);
-        final LatLng llC = new LatLng(118.806839, 31.946271);
-        final LatLng llD = new LatLng(118.805204, 31.936803);
-
-        final PoiResult poiResult = new PoiResult();
-
-        final PoiAddrInfo poiAddrInfo = new PoiAddrInfo();
-        poiAddrInfo.location = llA;
-        poiAddrInfo.address = "天平花苑";
-
-        final PoiAddrInfo poiAddrInfo1 = new PoiAddrInfo();
-        poiAddrInfo.location = llB;
-        poiAddrInfo.address = "天平花苑1";
-
-        final PoiAddrInfo poiAddrInfo2 = new PoiAddrInfo();
-        poiAddrInfo.location = llC;
-        poiAddrInfo.address = "天平花苑2";
-
-        final PoiAddrInfo poiAddrInfo3 = new PoiAddrInfo();
-        poiAddrInfo.location = llD;
-        poiAddrInfo.address = "天平花苑3";
-
-        List<PoiAddrInfo> poiAddrInfoList = new ArrayList<>();
-        poiAddrInfoList.add(poiAddrInfo);
-        poiAddrInfoList.add(poiAddrInfo1);
-        poiAddrInfoList.add(poiAddrInfo2);
-        poiAddrInfoList.add(poiAddrInfo3);
-        poiResult.setAddrInfo(poiAddrInfoList);
-        poiOverlay.setData(poiResult);// 设置POI数据  ;
-
-        mBaiduMap.setOnMarkerClickListener(poiOverlay);
-        poiOverlay.addToMap();// 将所有的overlay添加到地图上
-        poiOverlay.zoomToSpan();*/
-
-
-        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            public boolean onMarkerClick(final Marker marker) {
-                Button button = new Button(getApplicationContext());
-                button.setBackgroundResource(R.mipmap.float_logo);
-                InfoWindow.OnInfoWindowClickListener listener = null;
-                if (marker == mMarkerA || marker == mMarkerD) {
-                    button.setText("更改位置");
-                    button.setTextColor(Color.BLACK);
-                    button.setWidth(300);
-
-                    listener = new InfoWindow.OnInfoWindowClickListener() {
-                        public void onInfoWindowClick() {
-                            LatLng ll = marker.getPosition();
-                            LatLng llNew = new LatLng(ll.latitude + 0.005,
-                                    ll.longitude + 0.005);
-                            marker.setPosition(llNew);
-                            mBaiduMap.hideInfoWindow();
-                        }
-                    };
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(button), ll, -47, listener);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-                } else if (marker == mMarkerB) {
-                    button.setText("更改图标");
-                    button.setTextColor(Color.BLACK);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            marker.setIcon(bd);
-                            mBaiduMap.hideInfoWindow();
-                        }
-                    });
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(button, ll, -47);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-                } else if (marker == mMarkerC) {
-                    button.setText("删除");
-                    button.setTextColor(Color.BLACK);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            marker.remove();
-                            mBaiduMap.hideInfoWindow();
-                        }
-                    });
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(button, ll, -47);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-                }
-                return true;
-            }
-        });
-
-
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                String name = Thread.currentThread().getName();
-                Log.i("crug", name);
-                delayTest();
-            }
-        }, 500);
-
-        BNOuterLogUtil.setLogSwitcher(true);
-
-        Button button = (Button) findViewById(R.id.btn_go);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //routeplanToNavi(BNRoutePlanNode.CoordinateType.WGS84);
-
-                showFlag();
-
-
-               /* PoiAddrInfo poiAddrInfo = new PoiAddrInfo();
-                poiAddrInfo.location = llA;
-                poiAddrInfo.address = "天平花苑";
-
-                PoiAddrInfo poiAddrInfo1 = new PoiAddrInfo();
-                poiAddrInfo.location = llB;
-                poiAddrInfo.address = "天平花苑1";
-
-                PoiAddrInfo poiAddrInfo2 = new PoiAddrInfo();
-                poiAddrInfo.location = llC;
-                poiAddrInfo.address = "天平花苑2";
-
-                PoiAddrInfo poiAddrInfo3 = new PoiAddrInfo();
-                poiAddrInfo.location = llD;
-                poiAddrInfo.address = "天平花苑3";
-
-                List<PoiAddrInfo> poiAddrInfoList = new ArrayList<>();
-                poiAddrInfoList.add(poiAddrInfo);
-                poiAddrInfoList.add(poiAddrInfo1);
-                poiAddrInfoList.add(poiAddrInfo2);
-                poiAddrInfoList.add(poiAddrInfo3);
-                poiResult.setAddrInfo(poiAddrInfoList);
-                poiOverlay.setData(poiResult);// 设置POI数据  ;
-
-                mBaiduMap.setOnMarkerClickListener(poiOverlay);
-                poiOverlay.addToMap();// 将所有的overlay添加到地图上
-                poiOverlay.zoomToSpan();*/
-            }
-        });
-
-        //  initListener();
         if (initDirs()) {
             initNavi();
         }
 
+        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            public boolean onMarkerClick(final Marker marker) {
+                if (llSpaceInformation.getVisibility() == View.GONE) {
+                    llSpaceInformation.setVisibility(View.VISIBLE);
+                }
+                Bundle bundle = marker.getExtraInfo();
+                tvNameSpace.setText(bundle.getString("spaceName"));
+                tvAddressSpace.setText(bundle.getString("spaceAddress"));
+                // latlngToAddress(marker.getPosition(), tvAddressSpace);
+                mSelectedLat = marker.getPosition().latitude;
+                mSelectLng = marker.getPosition().longitude;
+                mSelectedSpaceId = bundle.getInt("spaceId");
+                return true;
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        mapView.onResume();
     }
 
-    public void initOverlay() {
-        // add marker overlay
-        LatLng llA = new LatLng(31.946546, 118.800173);
-        LatLng llB = new LatLng(31.946807, 118.806767);
-        LatLng llC = new LatLng(31.946271, 118.806839);
-        LatLng llD = new LatLng(31.936803, 118.805204);
-
-      /*  LatLng llA = new LatLng(39.963175, 116.400244);
-        LatLng llB = new LatLng(39.942821, 116.369199);
-        LatLng llC = new LatLng(39.939723, 116.425541);
-        LatLng llD = new LatLng(39.906965, 116.401394);*/
+    public void initOverlay(List<ActivitySpaceResEntity.ActivitySpaceBean> spaceBeanList) {
 
 
-        MarkerOptions ooA = new MarkerOptions().position(llA).icon(bdA)
-                .zIndex(9).draggable(true);
-        if (animationBox.isChecked()) {
-            // 掉下动画
-            ooA.animateType(MarkerOptions.MarkerAnimateType.drop);
+        MarkerOptions markerOptions;
+
+        for (int i = 0; i < spaceBeanList.size(); i++) {
+            ActivitySpaceResEntity.ActivitySpaceBean spaceBean = spaceBeanList.get(i);
+            markerOptions = new MarkerOptions().position(new LatLng(spaceBean.Longitude, spaceBean.Latitude)).icon(mBDMark).zIndex(9);
+            markerOptions.animateType(MarkerOptions.MarkerAnimateType.drop);
+            mBaiduMap.addOverlay(markerOptions);
+            Marker marker = (Marker) mBaiduMap.addOverlay(markerOptions);
+            Bundle bundle = new Bundle();
+            bundle.putInt("spaceId", spaceBean.Id);
+            bundle.putString("spaceName", spaceBean.SpaceName);
+            bundle.putString("spaceAddress", spaceBean.SpaceAddress);
+            marker.setExtraInfo(bundle);
+            mMarkerList.add(marker);
         }
-        mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
-        MarkerOptions ooB = new MarkerOptions().position(llB).icon(bdB)
-                .zIndex(5);
-        if (animationBox.isChecked()) {
-            // 掉下动画
-            ooB.animateType(MarkerOptions.MarkerAnimateType.drop);
-        }
-        mMarkerB = (Marker) (mBaiduMap.addOverlay(ooB));
-        MarkerOptions ooC = new MarkerOptions().position(llC).icon(bdC)
-                .perspective(false).anchor(0.5f, 0.5f).rotate(30).zIndex(7);
-        if (animationBox.isChecked()) {
-            // 生长动画
-            ooC.animateType(MarkerOptions.MarkerAnimateType.grow);
-        }
-        mMarkerC = (Marker) (mBaiduMap.addOverlay(ooC));
-        ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-        giflist.add(bdA);
-        giflist.add(bdB);
-        giflist.add(bdC);
-        MarkerOptions ooD = new MarkerOptions().position(llD).icons(giflist)
-                .zIndex(0).period(10);
-        if (animationBox.isChecked()) {
-            // 生长动画
-            ooD.animateType(MarkerOptions.MarkerAnimateType.grow);
-        }
-        mMarkerD = (Marker) (mBaiduMap.addOverlay(ooD));
 
-        // add ground overlay
-        // LatLng southwest = new LatLng(39.92235, 116.380338);
-        // LatLng northeast = new LatLng(39.947246, 116.414977);
-        //LatLngBounds bounds = new LatLngBounds.Builder().include(northeast)
-        //       .include(southwest).build();
 
-        //OverlayOptions ooGround = new GroundOverlayOptions()
-        //        .positionFromBounds(bounds).image(bdGround).transparency(0.8f);
-        //mBaiduMap.addOverlay(ooGround);
-
-        // MapStatusUpdate u = MapStatusUpdateFactory
-        //        .newLatLng(bounds.getCenter());
-        // mBaiduMap.setMapStatus(u);
-
-        mBaiduMap.setOnMarkerDragListener(new BaiduMap.OnMarkerDragListener() {
-            public void onMarkerDrag(Marker marker) {
+       /* for (int i = 0; i < 4; i++) {
+            if (i == 0) {
+                markerOptions = new MarkerOptions().position(new LatLng(31.946546, 118.800173)).icon(mBDMark).zIndex(9);
+            } else if (i == 1) {
+                markerOptions = new MarkerOptions().position(new LatLng(31.946807, 118.806767)).icon(mBDMark).zIndex(9);
+            } else if (i == 2) {
+                markerOptions = new MarkerOptions().position(new LatLng(31.946271, 118.806839)).icon(mBDMark).zIndex(9);
+            } else {
+                markerOptions = new MarkerOptions().position(new LatLng(31.936803, 118.805204)).icon(mBDMark).zIndex(9);
             }
 
-            public void onMarkerDragEnd(Marker marker) {
-                Toast.makeText(
-                        MapActivity.this,
-                        "拖拽结束，新位置：" + marker.getPosition().latitude + ", "
-                                + marker.getPosition().longitude,
-                        Toast.LENGTH_LONG).show();
-            }
-
-            public void onMarkerDragStart(Marker marker) {
-            }
-        });
+            markerOptions.animateType(MarkerOptions.MarkerAnimateType.drop);
+            mBaiduMap.addOverlay(markerOptions);
+            Marker marker = (Marker) mBaiduMap.addOverlay(markerOptions);
+            Bundle bundle = new Bundle();
+            bundle.putString("spaceId", "1");
+            bundle.putString("spaceName", "太平花苑");
+            bundle.putString("spaceAddress", "静淮街18号");
+            marker.setExtraInfo(bundle);
+            mMarkerList.add(marker);
+        }*/
 
         OverlayManager overlayManager = new OverlayManager(mBaiduMap) {
             @Override
@@ -426,21 +247,40 @@ public class MapActivity extends BaseActivity {
 
     }
 
-
-    private void showFlag() {
-
-
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(R.mipmap.float_logo);
-        Point mapCenterPoint = new Point(mapView.getWidth() / 2, mapView.getHeight() / 2);
-        MapViewLayoutParams params = new MapViewLayoutParams.Builder()
-                .layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode)
-                .point(mapCenterPoint)
-                .build();
-        mapView.addView(imageView, params);
-        mapView.refreshDrawableState();
+    /**
+     * 清除所有Overlay
+     */
+    public void clearOverlay() {
+        mBaiduMap.clear();
+        mMarkerList.clear();
     }
 
+    //将经纬度转换成地址
+    private void latlngToAddress(LatLng latlng, final TextView tvAddress) {
+        GeoCoder geoCoder = GeoCoder.newInstance();
+
+        //设置地址或经纬度反编译后的监听,这里有两个回调方法,
+        geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
+            //经纬度转换成地址
+            @Override
+            public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
+                if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+                    Log.d("onGetGeoCodeResult", result.toString());
+                    return;
+                }
+                tvAddress.setText(result.getAddress());
+
+                Log.d("onGetGeoCodeResult", result.getAddressDetail().toString());
+            }
+
+            @Override
+            public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
+                ToastUtil.showShortToast("获取地址失败");
+            }
+        });
+        // 设置反地理经纬度坐标,请求位置时,需要一个经纬度
+        geoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(latlng));
+    }
 
     /**
      * 定位SDK监听函数
@@ -460,95 +300,21 @@ public class MapActivity extends BaseActivity {
                     .direction(100).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             mBaiduMap.setMyLocationData(locData);
-
-           /* LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-            MapStatus.Builder builder = new MapStatus.Builder();
-            builder.target(ll).zoom(18.0f);
-            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));*/
+            mCurrentLat = location.getLatitude();
+            mCurrentLng = location.getLongitude();
 
             if (isFirstLoc) {
                 isFirstLoc = false;
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
-                //builder.target(ll).zoom(18.0f);
-                builder.target(ll);
+                builder.target(ll).zoom(18.0f);
+                //builder.target(ll);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
-                initOverlay();
+                getActivitySpace();
             }
-
-
-            // MapStatus.Builder builder = new MapStatus.Builder();
-            //builder.target(ll).zoom(18.0f);
-            // mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-
         }
     }
 
-
-    public void delayTest() {
-        // SDKInitializer.initialize(BNDemoMainActivity.this.getApplication());
-//        new Thread(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                Looper.prepare();
-//                SDKInitializer.initialize(BNDemoMainActivity.this.getApplication());
-//            }
-//        }).start();
-    }
-
-    private void initListener() {
-
-        if (mWgsNaviBtn != null) {
-            mWgsNaviBtn.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    if (BaiduNaviManager.isNaviInited()) {
-                        routeplanToNavi(BNRoutePlanNode.CoordinateType.WGS84);
-                    }
-                }
-
-            });
-        }
-        if (mGcjNaviBtn != null) {
-            mGcjNaviBtn.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    if (BaiduNaviManager.isNaviInited()) {
-                        routeplanToNavi(BNRoutePlanNode.CoordinateType.GCJ02);
-                    }
-                }
-
-            });
-        }
-        if (mBdmcNaviBtn != null) {
-            mBdmcNaviBtn.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-
-                    if (BaiduNaviManager.isNaviInited()) {
-                        routeplanToNavi(BNRoutePlanNode.CoordinateType.BD09_MC);
-                    }
-                }
-            });
-        }
-
-        if (mDb06ll != null) {
-            mDb06ll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View arg0) {
-                    if (BaiduNaviManager.isNaviInited()) {
-                        routeplanToNavi(BNRoutePlanNode.CoordinateType.BD09LL);
-                    }
-                }
-            });
-        }
-
-    }
 
     private boolean initDirs() {
         mSDCardPath = getSdcardDir();
@@ -606,18 +372,8 @@ public class MapActivity extends BaseActivity {
         }
     };
 
-    public void showToastMsg(final String msg) {
-        MapActivity.this.runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                Toast.makeText(MapActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     private boolean hasBasePhoneAuth() {
-        // TODO Auto-generated method stub
 
         PackageManager pm = this.getPackageManager();
         for (String auth : authBaseArr) {
@@ -629,7 +385,6 @@ public class MapActivity extends BaseActivity {
     }
 
     private boolean hasCompletePhoneAuth() {
-        // TODO Auto-generated method stub
 
         PackageManager pm = this.getPackageManager();
         for (String auth : authComArr) {
@@ -642,10 +397,8 @@ public class MapActivity extends BaseActivity {
 
     private void initNavi() {
 
-        BNOuterTTSPlayerCallback ttsCallback = null;
-
         // 申请权限
-        if (android.os.Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 23) {
 
             if (!hasBasePhoneAuth()) {
 
@@ -697,15 +450,13 @@ public class MapActivity extends BaseActivity {
         return null;
     }
 
-    private BNRoutePlanNode.CoordinateType mCoordinateType = null;
 
-    private void routeplanToNavi(BNRoutePlanNode.CoordinateType coType) {
-        mCoordinateType = coType;
+    private void routeplanToNavi() {
         if (!hasInitSuccess) {
             Toast.makeText(MapActivity.this, "还未初始化!", Toast.LENGTH_SHORT).show();
         }
         // 权限申请
-        if (android.os.Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 23) {
             // 保证导航功能完备
             if (!hasCompletePhoneAuth()) {
                 if (!hasRequestComAuth) {
@@ -720,32 +471,11 @@ public class MapActivity extends BaseActivity {
         }
         BNRoutePlanNode sNode = null;
         BNRoutePlanNode eNode = null;
-        switch (coType) {
-            case GCJ02: {
-                sNode = new BNRoutePlanNode(116.30142, 40.05087, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(116.39750, 39.90882, "北京天安门", null, coType);
-                break;
-            }
-            case WGS84: {
-                // sNode = new BNRoutePlanNode(116.300821, 40.050969, "百度大厦", null, coType);
-                // eNode = new BNRoutePlanNode(116.397491, 39.908749, "北京天安门", null, coType);118.800173,31.946546
-                sNode = new BNRoutePlanNode(118.800173, 31.946546, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(118.806767, 31.946807, "北京天安门", null, coType);
-                break;
-            }
-            case BD09_MC: {
-                sNode = new BNRoutePlanNode(12947471, 4846474, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(12958160, 4825947, "北京天安门", null, coType);
-                break;
-            }
-            case BD09LL: {
-                sNode = new BNRoutePlanNode(116.30784537597782, 40.057009624099436, "百度大厦", null, coType);
-                eNode = new BNRoutePlanNode(116.40386525193937, 39.915160800132085, "北京天安门", null, coType);
-                break;
-            }
-            default:
-                ;
-        }
+
+        sNode = new BNRoutePlanNode(mCurrentLng, mCurrentLat, "", null, mCoordinateType);
+        eNode = new BNRoutePlanNode(mSelectLng, mSelectedLat, "", null, mCoordinateType);
+
+
         if (sNode != null && eNode != null) {
             List<BNRoutePlanNode> list = new ArrayList<BNRoutePlanNode>();
             list.add(sNode);
@@ -753,8 +483,7 @@ public class MapActivity extends BaseActivity {
 
             // 开发者可以使用旧的算路接口，也可以使用新的算路接口,可以接收诱导信息等
             // BaiduNaviManager.getInstance().launchNavigator(this, list, 1, true, new DemoRoutePlanListener(sNode));
-            BaiduNaviManager.getInstance().launchNavigator(this, list, 1, true, new DemoRoutePlanListener(sNode),
-                    eventListerner);
+            BaiduNaviManager.getInstance().launchNavigator(this, list, 1, true, new DemoRoutePlanListener(sNode), eventListerner);
         }
     }
 
@@ -896,8 +625,56 @@ public class MapActivity extends BaseActivity {
                     continue;
                 }
             }
-            routeplanToNavi(mCoordinateType);
+            routeplanToNavi();
         }
 
+    }
+
+
+    private void getActivitySpace() {
+        final BaseReqEntity baseReqEntity = new BaseReqEntity();
+        RequestApi.getActivitySpace(baseReqEntity, new ResponseCallBack(mContext) {
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                if (resEntity == null) return;
+                ActivitySpaceResEntity spaceResEntity = (ActivitySpaceResEntity) resEntity;
+                initOverlay(spaceResEntity.DataList);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+            }
+        });
+    }
+
+
+    @Override
+    protected void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        // 退出时销毁定位
+        mLocClient.stop();
+        // 关闭定位图层
+        mBaiduMap.setMyLocationEnabled(false);
+        mapView.onDestroy();
+        mapView = null;
+        super.onDestroy();
+    }
+
+
+    @OnClick({R.id.iv_close, R.id.btn_go_navigation, R.id.btn_go_space})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_close:
+                llSpaceInformation.setVisibility(View.GONE);
+                break;
+            case R.id.btn_go_navigation:
+                routeplanToNavi();
+                break;
+            case R.id.btn_go_space:
+                break;
+        }
     }
 }
