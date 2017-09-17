@@ -106,7 +106,8 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
 
                 mTCLoginMgr.setTCLoginCallback(LoginActivity.this);
                 //调用LoginHelper进行普通登录
-                mTCLoginMgr.pwdLogin(mTokenResEntity.MemberNickName, etPassword.getText().toString().trim());
+                // mTCLoginMgr.pwdLogin(mTokenResEntity.MemberNickName, etPassword.getText().toString().trim());
+                mTCLoginMgr.pwdLogin(mTokenResEntity.MemberNickName, "12345678");
             }
         });
     }

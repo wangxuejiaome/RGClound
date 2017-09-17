@@ -41,7 +41,7 @@ public class PersonalFragment extends Fragment {
     @Bind(R.id.tv_comment_personal)
     TextView tvComment;
     @Bind(R.id.ll_live_personal)
-    LinearLayout llLivel;
+    LinearLayout llLive;
     @Bind(R.id.ll_point_personal)
     LinearLayout llPoint;
     @Bind(R.id.tv_available_point)
@@ -71,6 +71,9 @@ public class PersonalFragment extends Fragment {
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
                 PersonalInfoResEntity personalInfoResEntity = (PersonalInfoResEntity) resEntity;
+                if (personalInfoResEntity.CanDirectSeeding == 1) {
+                    llLive.setVisibility(View.VISIBLE);
+                }
                 tvAvailablePoint.setText(personalInfoResEntity.RemindPoint + "积分");
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
             }

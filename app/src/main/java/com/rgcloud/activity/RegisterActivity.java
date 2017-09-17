@@ -133,7 +133,8 @@ public class RegisterActivity extends BaseActivity implements TCRegisterMgr.TCRe
                 if (resEntity == null) return;
                 mTokenResEntity = (TokenResEntity) resEntity;
                 //在腾讯云上注册
-                mTCRegisterMgr.pwdRegist(registerReqEntity.NickName, etPassword.getText().toString());
+                // mTCRegisterMgr.pwdRegist(registerReqEntity.NickName, etPassword.getText().toString());
+                mTCRegisterMgr.pwdRegist(registerReqEntity.NickName, "12345678");
             }
         });
     }
@@ -158,7 +159,8 @@ public class RegisterActivity extends BaseActivity implements TCRegisterMgr.TCRe
             }
         });
 
-        tcLoginMgr.pwdLogin(identifier, etPassword.getText().toString());
+        //tcLoginMgr.pwdLogin(identifier, etPassword.getText().toString());
+        tcLoginMgr.pwdLogin(identifier, "12345678");
         mTCRegisterMgr.removeTCRegisterCallback();
 
         CirCleLoadingDialogUtil.dismissCircleProgressDialog();

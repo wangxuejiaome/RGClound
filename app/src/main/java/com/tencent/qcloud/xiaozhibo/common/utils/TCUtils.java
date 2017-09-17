@@ -48,6 +48,8 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.rgcloud.R;
+import com.rgcloud.activity.LoginActivity;
+import com.rgcloud.activity.Main2Activity;
 import com.tencent.TIMFriendGenderType;
 import com.tencent.qcloud.xiaozhibo.login.TCLoginMgr;
 import com.tencent.qcloud.xiaozhibo.login.TCLoginActivity;
@@ -66,15 +68,15 @@ public class TCUtils {
 
     /**
      * 判断手机号是否有效
+     *
      * @param phoneNum 手机号
      * @return 有效则返回true, 无效则返回false
-     * */
+     */
     public static boolean isPhoneNumValid(String phoneNum) {
         return phoneNum.length() == 11 && phoneNum.matches("[0-9]{1,}");
     }
 
     /**
-     *
      * @param password 用户输入密码
      * @return 有效则返回true, 无效则返回false
      */
@@ -83,7 +85,6 @@ public class TCUtils {
     }
 
     /**
-     *
      * @param username 用户名
      * @return 同上
      */
@@ -100,7 +101,6 @@ public class TCUtils {
     }
 
     /**
-     *
      * @param countryCode 国家码
      * @param phoneNumber 手机号
      * @return 返回拼接后的字符串
@@ -110,17 +110,17 @@ public class TCUtils {
     }
 
     // 根据原图绘制圆形图片
-    static public Bitmap createCircleImage(Bitmap source, int min){
+    static public Bitmap createCircleImage(Bitmap source, int min) {
         final Paint paint = new Paint();
         paint.setAntiAlias(true);
-        if (0 == min){
-            min = source.getHeight()>source.getWidth() ? source.getWidth() : source.getHeight();
+        if (0 == min) {
+            min = source.getHeight() > source.getWidth() ? source.getWidth() : source.getHeight();
         }
         Bitmap target = Bitmap.createBitmap(min, min, Bitmap.Config.ARGB_8888);
         // 创建画布
         Canvas canvas = new Canvas(target);
         // 绘圆
-        canvas.drawCircle(min/2, min/2, min/2, paint);
+        canvas.drawCircle(min / 2, min / 2, min / 2, paint);
         // 设置交叉模式
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         // 绘制图片
@@ -129,17 +129,17 @@ public class TCUtils {
     }
 
     // 字符串截断
-    public static String getLimitString(String source, int length){
-        if (null!=source && source.length()>length){
+    public static String getLimitString(String source, int length) {
+        if (null != source && source.length() > length) {
 //            int reallen = 0;
-            return source.substring(0, length)+"...";
+            return source.substring(0, length) + "...";
         }
         return source;
     }
 
     // 字符串截断
-    public static String getLimitStringWithoutNode(String source, int length){
-        if (null != source && source.length() > length){
+    public static String getLimitStringWithoutNode(String source, int length) {
+        if (null != source && source.length() > length) {
             return source.substring(0, length);
         }
         return source;
@@ -181,9 +181,9 @@ public class TCUtils {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
@@ -220,7 +220,7 @@ public class TCUtils {
      * represents a local file.
      *
      * @param context The context.
-     * @param uri The Uri to query.
+     * @param uri     The Uri to query.
      */
     @TargetApi(19)
     public static String getPath(final Context context, final Uri uri) {
@@ -265,7 +265,7 @@ public class TCUtils {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
@@ -291,16 +291,16 @@ public class TCUtils {
 
     /**
      * 在按钮上启动一个定时器
-     * @param tvVerifyCode 验证码控件
+     *
+     * @param tvVerifyCode  验证码控件
      * @param defaultString 按钮上默认的字符串
-     * @param max 失效时间（单位：s）
-     * @param interval 更新间隔（单位：s）
-     * */
+     * @param max           失效时间（单位：s）
+     * @param interval      更新间隔（单位：s）
+     */
     public static void startTimer(final WeakReference<TextView> tvVerifyCode,
                                   final String defaultString,
                                   int max,
-                                  int interval)
-    {
+                                  int interval) {
         tvVerifyCode.get().setEnabled(false);
 
         // 由于CountDownTimer并不是准确计时，在onTick方法调用的时候，time会有1-10ms左右的误差，这会导致最后一秒不会调用onTick()
@@ -311,7 +311,7 @@ public class TCUtils {
             @Override
             public void onTick(long time) {
                 // 第一次调用会有1-10ms的误差，因此需要+15ms，防止第一个数不显示，第二个数显示2s
-                if(null == tvVerifyCode.get())
+                if (null == tvVerifyCode.get())
                     this.cancel();
                 else
                     tvVerifyCode.get().setText("" + ((time + 15) / 1000) + "s");
@@ -319,7 +319,7 @@ public class TCUtils {
 
             @Override
             public void onFinish() {
-                if(null == tvVerifyCode.get()) {
+                if (null == tvVerifyCode.get()) {
                     this.cancel();
                     return;
                 }
@@ -330,8 +330,8 @@ public class TCUtils {
         }.start();
     }
 
-    public static String EnumGenderToString (TIMFriendGenderType genderType) {
-        if (TIMFriendGenderType.Male == genderType)  return "男";
+    public static String EnumGenderToString(TIMFriendGenderType genderType) {
+        if (TIMFriendGenderType.Male == genderType) return "男";
         if (TIMFriendGenderType.Female == genderType) return "女";
 
         return "";
@@ -367,7 +367,7 @@ public class TCUtils {
 //        if (hs.equals("00")) {
 //            formatTime = ms + ":" + ss;
 //        } else {
-            formatTime = hs + ":" + ms + ":" + ss;
+        formatTime = hs + ":" + ms + ":" + ss;
 //        }
 
         return formatTime;
@@ -407,21 +407,21 @@ public class TCUtils {
     public static float sp2px(Context context, float spValue) {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, context.getResources().getDisplayMetrics());
     }
+
     /**
      * 圆角显示图片
      *
-     * @param context 一般为activtiy
-     * @param view 图片显示类
-     * @param url 图片url
+     * @param context  一般为activtiy
+     * @param view     图片显示类
+     * @param url      图片url
      * @param defResId 默认图 id
-     *
      */
     public static void showPicWithUrl(Context context, ImageView view, String url, int defResId) {
         if (context == null || view == null) {
             return;
         }
         try {
-            if (TextUtils.isEmpty(url)){
+            if (TextUtils.isEmpty(url)) {
                 view.setImageResource(defResId);
             } else {
                 RequestManager req = Glide.with(context);
@@ -446,24 +446,24 @@ public class TCUtils {
             view.setImageBitmap(blurBitmap(bitmap, context.getApplicationContext()));
         } else {
             Glide.with(context.getApplicationContext())
-                .load(url)
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL) {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-                        if (resource == null) {
-                            return;
-                        }
-
-                        final Bitmap bitmap = blurBitmap(resource, context.getApplicationContext());
-                        view.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                view.setImageBitmap(bitmap);
+                    .load(url)
+                    .asBitmap()
+                    .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
+                        @Override
+                        public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                            if (resource == null) {
+                                return;
                             }
-                        });
-                    }
-                });
+
+                            final Bitmap bitmap = blurBitmap(resource, context.getApplicationContext());
+                            view.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    view.setImageBitmap(bitmap);
+                                }
+                            });
+                        }
+                    });
         }
     }
 
@@ -474,7 +474,7 @@ public class TCUtils {
         Paint paint = new Paint();
         paint.setFlags(Paint.FILTER_BITMAP_FLAG | Paint.ANTI_ALIAS_FLAG);
         PorterDuffColorFilter filter =
-                new PorterDuffColorFilter( Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP);
+                new PorterDuffColorFilter(Color.TRANSPARENT, PorterDuff.Mode.SRC_ATOP);
         paint.setColorFilter(filter);
         canvas.drawBitmap(resource, 0, 0, paint);
 
@@ -500,11 +500,9 @@ public class TCUtils {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
             NetworkInfo info = connectivity.getActiveNetworkInfo();
-            if (info != null && info.isConnected())
-            {
+            if (info != null && info.isConnected()) {
                 // 当前网络是连接的
-                if (info.getState() == NetworkInfo.State.CONNECTED)
-                {
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
                     // 当前所连接的网络可用
                     return true;
                 }
@@ -512,7 +510,6 @@ public class TCUtils {
         }
         return false;
     }
-
 
 
     /**
@@ -553,6 +550,7 @@ public class TCUtils {
 
     /**
      * 网络是否正常
+     *
      * @param context Context
      * @return true 表示网络可用
      */
@@ -567,7 +565,7 @@ public class TCUtils {
                 return TCConstants.NETTYPE_WIFI;
             } else if (type.equalsIgnoreCase("MOBILE")) {
                 NetworkInfo mobileInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-                if(mobileInfo != null) {
+                if (mobileInfo != null) {
                     switch (mobileInfo.getType()) {
                         case ConnectivityManager.TYPE_MOBILE:// 手机网络
                             switch (mobileInfo.getSubtype()) {
@@ -602,6 +600,7 @@ public class TCUtils {
 
     /**
      * 显示被踢下线通知
+     *
      * @param context activity
      */
     public static void showKickOutDialog(final Context context) {
@@ -612,9 +611,12 @@ public class TCUtils {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 TCLoginMgr.getInstance().logout();
-                Intent intent = new Intent(context, TCLoginActivity.class);
+
+                context.startActivity(new Intent(context, LoginActivity.class));
+
+              /*  Intent intent = new Intent(context, TCLoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(intent);
+                context.startActivity(intent);*/
             }
         });
         builder.setNegativeButton("重新登录", new DialogInterface.OnClickListener() {
@@ -622,9 +624,10 @@ public class TCUtils {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 TCLoginMgr.getInstance().reLogin();
-                Intent intent = new Intent(context, TCMainActivity.class);
+               /* Intent intent = new Intent(context, TCMainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                context.startActivity(intent);
+                context.startActivity(intent);*/
+                context.startActivity(new Intent(context, Main2Activity.class));
             }
         });
 
@@ -635,8 +638,9 @@ public class TCUtils {
 
     /**
      * 根据比例转化实际数值为相对值
+     *
      * @param gear 档位
-     * @param max 最大值
+     * @param max  最大值
      * @param curr 当前值
      * @return 相对值
      */
@@ -647,6 +651,7 @@ public class TCUtils {
     /**
      * 悬浮窗权限检查
      * 当前仅对MIUI8作了适配，其余机型有待添加
+     *
      * @throws IOException
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -656,7 +661,7 @@ public class TCUtils {
         properties.load(new FileInputStream(new File(Environment.getRootDirectory(), "build.prop")));
 
         String versionmame = properties.getProperty("ro.miui.ui.version.name");
-        if(null != versionmame){
+        if (null != versionmame) {
             //miui8以上需要悬浮窗权限才能正常显示悬浮窗
             if (versionmame.equals("V8")) {
 
@@ -694,7 +699,8 @@ public class TCUtils {
 
     /**
      * 权限检查
-     * @param context context
+     *
+     * @param context    context
      * @param permission permission
      * @return true -- 当前拥有该权限  false -- 当前无权限
      */
@@ -742,7 +748,7 @@ public class TCUtils {
         }
 
         String strSubString = strStreamUrl.substring(index + strLive.length());
-        String [] strArrays = strSubString.split("[?.]");
+        String[] strArrays = strSubString.split("[?.]");
         if (strArrays.length > 0) {
             return strArrays[0];
         }
@@ -753,15 +759,15 @@ public class TCUtils {
     /**
      * 滤镜定义
      */
-    public static final int FILTERTYPE_NONE         = 0;    //无特效滤镜
-    public static final int FILTERTYPE_langman      = 1;    //浪漫滤镜
-    public static final int FILTERTYPE_qingxin      = 2;    //清新滤镜
-    public static final int FILTERTYPE_weimei       = 3;    //唯美滤镜
-    public static final int FILTERTYPE_fennen 		= 4;    //粉嫩滤镜
-    public static final int FILTERTYPE_huaijiu 		= 5;    //怀旧滤镜
-    public static final int FILTERTYPE_landiao 		= 6;    //蓝调滤镜
-    public static final int FILTERTYPE_qingliang 	= 7;    //清凉滤镜
-    public static final int FILTERTYPE_rixi 		= 8;    //日系滤镜
+    public static final int FILTERTYPE_NONE = 0;    //无特效滤镜
+    public static final int FILTERTYPE_langman = 1;    //浪漫滤镜
+    public static final int FILTERTYPE_qingxin = 2;    //清新滤镜
+    public static final int FILTERTYPE_weimei = 3;    //唯美滤镜
+    public static final int FILTERTYPE_fennen = 4;    //粉嫩滤镜
+    public static final int FILTERTYPE_huaijiu = 5;    //怀旧滤镜
+    public static final int FILTERTYPE_landiao = 6;    //蓝调滤镜
+    public static final int FILTERTYPE_qingliang = 7;    //清凉滤镜
+    public static final int FILTERTYPE_rixi = 8;    //日系滤镜
 
     private static Bitmap decodeResource(Resources resources, int id) {
         TypedValue value = new TypedValue();

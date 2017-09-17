@@ -6,7 +6,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_below="@id/tab_layout"
+        android:layout_below="@+id/tab_layout"
         android:background="#D8D8D8">
     </FrameLayout>
 
@@ -15,7 +15,7 @@
         android:id="@+id/swipe_refresh_layout_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tab_layout">
+        android:layout_below="@+id/tab_layout">
 
         <GridView
             android:id="@+id/live_list"

@@ -20,4 +20,5 @@ public class PersonalInfoResEntity extends BaseResEntity {
     public int UsedPoint;
     public int TotalPoint;
     public int ThirdPartyUserCnt;
+    public int CanDirectSeeding;
 }
