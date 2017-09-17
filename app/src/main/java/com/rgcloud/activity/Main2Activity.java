@@ -2,6 +2,7 @@ package com.rgcloud.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Process;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.rgcloud.fragment.ActivitySpaceFragment;
 import com.rgcloud.fragment.HomeFragment;
 import com.rgcloud.fragment.InformationFragment;
 import com.rgcloud.fragment.PersonalFragment;
+import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
 
 import java.util.List;
@@ -37,6 +39,8 @@ public class Main2Activity extends BaseActivity {
     @Bind(R.id.tv_personal_tab)
     TextView tvPersonalTab;
 
+    private PreferencesUtil mPreferencesUtil;
+
     private HomeFragment mHomeFragment;
     private InformationFragment mInformationFragment;
     private ActivityFragment mActivityFragment;
@@ -58,6 +62,7 @@ public class Main2Activity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
+        mPreferencesUtil = new PreferencesUtil(mContext);
         tvHomeTab.performClick();
     }
 
@@ -181,8 +186,12 @@ public class Main2Activity extends BaseActivity {
                 setTabSelected(3);
                 break;
             case R.id.tv_personal_tab:
-                setFragmentShow(4);
-                setTabSelected(4);
+                if (mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
+                    setFragmentShow(4);
+                    setTabSelected(4);
+                } else {
+                    startActivity(new Intent(mContext, LoginActivity.class));
+                }
                 break;
         }
     }

@@ -17,6 +17,8 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
 import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.activity.CalendarActivity;
+import com.rgcloud.activity.LiveActivity;
+import com.rgcloud.activity.LoginActivity;
 import com.rgcloud.activity.Main2Activity;
 import com.rgcloud.activity.MapActivity;
 import com.rgcloud.activity.OrderActivity;
@@ -32,6 +34,7 @@ import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.GlideUtil;
+import com.rgcloud.util.PreferencesUtil;
 import com.stx.xhb.mylibrary.XBanner;
 
 import java.io.Serializable;
@@ -59,6 +62,8 @@ public class HomeFragment extends Fragment {
     @Bind(R.id.rv_recommend)
     RecyclerView rvRecommend;
 
+    private PreferencesUtil mPreferencesUtil;
+
     private FunctionNavigationAdapter mFunctionNavigationAdapter;
     private ActivityAdapter mActivityAdapter;
     private HomeResEntity mHomeResEntity;
@@ -75,6 +80,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mPreferencesUtil = new PreferencesUtil(getActivity());
         initView();
         initData();
     }
@@ -121,7 +127,11 @@ public class HomeFragment extends Fragment {
                 FunctionEntity functionEntity = mFunctionAdapter.getItem(position);
                 switch (functionEntity.name) {
                     case "我爱直播":
-
+                        if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
+                            startActivity(new Intent(getActivity(), LoginActivity.class));
+                        } else {
+                            startActivity(new Intent(getActivity(), LiveActivity.class));
+                        }
                         break;
                     case "我要点单":
                         startActivity(new Intent(getActivity(), OrderActivity.class));

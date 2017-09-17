@@ -12,13 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rgcloud.R;
+import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.SettingActivity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
-import com.tencent.qcloud.xiaozhibo.mainui.TCMainActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -95,9 +95,9 @@ public class PersonalFragment extends Fragment {
             case R.id.tv_comment_personal:
                 break;
             case R.id.ll_live_personal:
-                Intent intent = new Intent(getActivity(), TCMainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                Intent liveIntent = new Intent(getActivity(), LiveActivity.class);
+                liveIntent.putExtra("isHost", true);
+                startActivity(liveIntent);
                 break;
             case R.id.ll_point_personal:
                 break;

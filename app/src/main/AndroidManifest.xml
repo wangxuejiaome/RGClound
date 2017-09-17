@@ -337,6 +337,8 @@
         </activity>
         <activity android:name=".activity.BNGuideActivity">
         </activity>
+        <activity android:name=".activity.LiveActivity">
+        </activity>
     </application>
 
 </manifest>
