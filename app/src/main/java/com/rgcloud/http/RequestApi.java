@@ -15,6 +15,7 @@ import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
+import com.rgcloud.entity.request.WXReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
@@ -23,8 +24,10 @@ import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
+import com.rgcloud.entity.response.WXOpenIdResEntity;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
@@ -55,6 +58,23 @@ public class RequestApi {
      */
     public static void login(LoginReqEntity loginReqEntity, ResponseCallBack responseCallBack) {
         Call<TokenResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).login(loginReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+
+    /**
+     * 获取微信的openid
+     */
+    public static void getWXOpenId(String urlStr, Callback<WXOpenIdResEntity> callback) {
+        Call<WXOpenIdResEntity> call = ServiceGenerator.createService(RGCloudServices.class).getWXOpenId(urlStr);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 微信登录
+     */
+    public static void wxLogin(WXReqEntity wxReqEntity, ResponseCallBack responseCallBack) {
+        Call<TokenResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).wxLogin(wxReqEntity);
         call.enqueue(responseCallBack);
     }
 

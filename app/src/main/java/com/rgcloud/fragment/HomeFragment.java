@@ -163,15 +163,17 @@ public class HomeFragment extends Fragment {
 
     private void setView() {
 
-        bannerHome.setData(mHomeResEntity.TopChangeImageUrl, null);
-        bannerHome.setmAdapter(new XBanner.XBannerAdapter() {
-            @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
-                ImageView imageView = (ImageView) view;
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                GlideUtil.displayWithPlaceHolder(getActivity(), (String) model, R.mipmap.banner_default, imageView);
-            }
-        });
+        if(mHomeResEntity.TopChangeImageUrl != null){
+            bannerHome.setData(mHomeResEntity.TopChangeImageUrl, null);
+            bannerHome.setmAdapter(new XBanner.XBannerAdapter() {
+                @Override
+                public void loadBanner(XBanner banner, Object model, View view, int position) {
+                    ImageView imageView = (ImageView) view;
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    GlideUtil.displayWithPlaceHolder(getActivity(), (String) model, R.mipmap.banner_default, imageView);
+                }
+            });
+        }
 
         mFunctionNavigationAdapter.setNewData(mHomeResEntity.IconList);
         mActivityAdapter.setNewData(mHomeResEntity.RecommendList);

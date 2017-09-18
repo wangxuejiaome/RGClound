@@ -15,6 +15,7 @@ import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
+import com.rgcloud.entity.request.WXReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
@@ -22,10 +23,13 @@ import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
+import com.rgcloud.entity.response.WXOpenIdResEntity;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 /**
  * Created by wangxuejiao on 2017/9/2.
@@ -50,6 +54,19 @@ public interface RGCloudServices {
      */
     @POST("memberApi/login")
     Call<TokenResEntity> login(@Body LoginReqEntity loginReqEntity);
+
+    /**
+     * 获取微信的openid
+     */
+    @GET()
+    Call<WXOpenIdResEntity> getWXOpenId(@Url String urlStr);
+
+
+    /**
+     * 微信登录
+     */
+    @POST("memberApi/WeChatLogin")
+    Call<TokenResEntity> wxLogin(@Body WXReqEntity wxReqEntity);
 
     /**
      * 忘记密码

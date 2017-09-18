@@ -12,14 +12,22 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.rgcloud.R;
+import com.rgcloud.application.AppActivityManager;
+import com.rgcloud.config.Constant;
 import com.rgcloud.entity.request.LoginReqEntity;
+import com.rgcloud.entity.request.WXReqEntity;
 import com.rgcloud.entity.response.TokenResEntity;
+import com.rgcloud.entity.response.WXOpenIdResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.view.TitleBar;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.qcloud.xiaozhibo.TCApplication;
 import com.tencent.qcloud.xiaozhibo.common.utils.TCUtils;
 import com.tencent.qcloud.xiaozhibo.login.TCLoginMgr;
 import com.tencent.qcloud.xiaozhibo.userinfo.ITCUserInfoMgrListener;
@@ -29,6 +37,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.rgcloud.wxapi.WXEntryActivity.code;
 
 public class LoginActivity extends BaseActivity implements ResponseCallBack.LoginInterface, TCLoginMgr.TCLoginCallback {
 
@@ -47,10 +60,13 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
      * 登录类型：0.普通登录；1.强制登录；2.token异常
      */
     private int mLoginType;
-    private PreferencesUtil mPreferencesUtil;
+    private static PreferencesUtil mPreferencesUtil;
 
     private TCLoginMgr mTCLoginMgr;
     private TokenResEntity mTokenResEntity;
+
+    // IWXAPI 是第三方app和微信通信的openapi接口
+    private IWXAPI api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +76,9 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
         mPreferencesUtil = new PreferencesUtil(mContext);
         ResponseCallBack.setLoginInterface(this);
         mTCLoginMgr = TCLoginMgr.getInstance();
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, Constant.WX_APP_ID, false);
+        api.registerApp(Constant.WX_APP_ID);
         initView();
         initData();
     }
@@ -111,6 +130,43 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
             }
         });
     }
+
+    public static void getWXOpenId() {
+        String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Constant.WX_APP_ID + "&secret=" + Constant.WX_APP_SECRET + "&code=" + code + "&grant_type=authorization_code";
+        RequestApi.getWXOpenId(url, new Callback<WXOpenIdResEntity>() {
+            @Override
+            public void onResponse(Call<WXOpenIdResEntity> call, Response<WXOpenIdResEntity> response) {
+                WXOpenIdResEntity wxOpenIdResEntity = response.body();
+                wxLogin(wxOpenIdResEntity);
+            }
+
+            @Override
+            public void onFailure(Call<WXOpenIdResEntity> call, Throwable t) {
+                ToastUtil.showShortToast("微信登录失败");
+            }
+        });
+    }
+
+    private static void wxLogin(WXOpenIdResEntity wxOpenIdResEntity) {
+        WXReqEntity wxReqEntity = new WXReqEntity();
+        wxReqEntity.OpenId = wxOpenIdResEntity.openid;
+        wxReqEntity.UnionId = wxOpenIdResEntity.unionid;
+        wxReqEntity.EquipmentId = JPushInterface.getRegistrationID(TCApplication.getApplication());
+        wxReqEntity.LoginType = 0;
+        RequestApi.wxLogin(wxReqEntity, new ResponseCallBack(TCApplication.getApplication()) {
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
+                mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
+                mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+                ToastUtil.showShortToast("登录成功");
+                AppActivityManager.getActivityManager().getCurrentActivity().startActivity(new Intent(TCApplication.getApplication(), Main2Activity.class));
+            }
+        });
+    }
+
 
     @Override
     public void loginAnyway() {
@@ -183,6 +239,15 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 login();
                 break;
             case R.id.btn_wx_login:
+                if (!api.isWXAppInstalled()) {
+                    ToastUtil.showShortToast("您还未安装微信客户端");
+                    return;
+                }
+                // send oauth request
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "wechat_sdk_android";
+                api.sendReq(req);
                 break;
 
         }

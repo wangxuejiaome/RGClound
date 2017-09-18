@@ -11,6 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6879a8fd-9633-49e1-b130-03cf809871f9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/request/WXReqEntity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/WXOpenIdResEntity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -19,19 +21,16 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterPath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/RegisterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/RegisterActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/PersonalInfoResEntity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/PersonalInfoResEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/common/utils/TCUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/common/utils/TCUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_live_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_live_list.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/config/Constant.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/config/Constant.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/HomeFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/HomeFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RGCloudServices.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RGCloudServices.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RequestApi.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RequestApi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/wxapi/WXEntryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/rgcloud/wxapi/WXEntryActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/summary.txt" afterPath="$PROJECT_DIR$/summary.txt" />
     </list>
     <ignored path="RGCloud.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,34 +62,12 @@
     <favorites_list name="RGCloud" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="PersonalFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="84" column="30" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/RegisterActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+            <state relative-caret-position="407">
+              <caret line="233" column="41" selection-start-line="233" selection-start-column="41" selection-end-line="233" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -98,83 +75,95 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fragment_personal.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_personal.xml">
+      <file leaf-file-name="WXEntryActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/wxapi/WXEntryActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PersonalInfoResEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/PersonalInfoResEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LiveActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LiveActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="143" column="26" selection-start-line="143" selection-start-column="26" selection-end-line="143" selection-end-column="26" />
+            <state relative-caret-position="1848">
+              <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
               <folding>
-                <element signature="e#2492#2897#0" expanded="true" />
-                <element signature="e#2896#2897#0" expanded="true" />
-                <element signature="e#5230#5231#0" expanded="true" />
-                <element signature="e#5277#5278#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TCUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/common/utils/TCUtils.java">
+      <file leaf-file-name="RequestApi.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RequestApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="620" column="11" selection-start-line="620" selection-start-column="11" selection-end-line="620" selection-end-column="11" />
-              <folding>
-                <element signature="e#21087#21634#0" expanded="true" />
-                <element signature="e#21633#21634#0" expanded="true" />
-                <element signature="e#21679#22224#0" expanded="true" />
-                <element signature="e#22223#22224#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ic_launcher.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ic_launcher.png" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_live_list.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_live_list.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="56" column="48" selection-start-line="56" selection-start-column="48" selection-end-line="56" selection-end-column="48" />
+            <state relative-caret-position="297">
+              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="RGCloudServices.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RGCloudServices.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="858">
+              <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WXOpenIdResEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/WXOpenIdResEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/config/Constant.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/HomeFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5709">
+              <caret line="218" column="9" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main2Activity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/Main2Activity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5115">
+              <caret line="181" column="34" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResponseCallBack.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/ResponseCallBack.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1782">
+              <caret line="80" column="66" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="summary.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/summary.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="363">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -2121,10 +2110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_calendar.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_information.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_activity_space.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/push/camera/TCLivePublisherActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/list/TCLiveListMgr.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/list/TCLiveListFragment.java" />
@@ -2144,10 +2129,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_update_password.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_forget_password.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register2.xml" />
-        <option value="$PROJECT_DIR$/summary.txt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/request/SpaceReqEntity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RGCloudServices.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RequestApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/adapter/SpaceMapNavigationAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/ActivitySpaceResEntity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_navigation.xml" />
@@ -2162,7 +2144,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_videolist.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/LiveListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/HomeFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LiveActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_live.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_live_list.xml" />
@@ -2170,15 +2151,23 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/RegisterActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/common/utils/TCUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/request/WXReqEntity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RGCloudServices.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RequestApi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/config/Constant.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/WXOpenIdResEntity.java" />
+        <option value="$PROJECT_DIR$/summary.txt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/HomeFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/rgcloud/wxapi/WXEntryActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-11" />
     <option name="y" value="-11" />
-    <option name="width" value="1942" />
+    <option name="width" value="1934" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -2206,12 +2195,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2220,263 +2206,10 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mipmap" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mipmap" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ic_launcher.png" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xiaozhibo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xiaozhibo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mainui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xiaozhibo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mainui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rgcloud" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rgcloud" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fragment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rgcloud" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapter" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rgcloud" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RGCloud" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manifests" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane />
       </pane>
     </panes>
   </component>
@@ -2487,7 +2220,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi" />
     <property name="device.picker.selection" value="QLXBBCA6A1931399" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="livea&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/LiveActivity.java&#10;login&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/LoginActivity.java&#10;Regist&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/RegisterActivity.java&#10;Persona&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;fragment&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_videolist.xml&#10;Main&#9;PSI&#9;JAVA://com.rgcloud.activity.Main2Activity&#10;home&#9;PSI&#9;JAVA://com.rgcloud.fragment.HomeFragment&#10;persona&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;Tc&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/TCMainActivity.java&#10;Per&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;Logina&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/LoginActivity.java&#10;main&#9;PSI&#9;JAVA://com.rgcloud.activity.Main2Activity&#10;per&#9;PSI&#9;JAVA://com.rgcloud.fragment.PersonalFragment&#10;Maina&#9;PSI&#9;JAVA://com.tencent.qcloud.xiaozhibo.mainui.TCMainActivity&#10;person&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;Map&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/MapActivity.java&#10;activitfr&#9;PSI&#9;JAVA://com.rgcloud.fragment.ActivityFragment&#10;act&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/ActivitiesActivity.java&#10;item_nav&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/item_navigation.xml&#10;cons&#9;PSI&#9;JAVA://com.rgcloud.config.Constant&#10;Const&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/common/utils/TCConstants.java&#10;TC&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/login/TCRegisterActivity.java&#10;Register&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/RegisterActivity.java&#10;Lo&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/login/TCLoginActivity.java&#10;Login&#9;PSI&#9;JAVA://com.rgcloud.activity.LoginActivity&#10;sum&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/summary.txt&#10;Regi&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/login/TCRegisterActivity.java&#10;forget&#9;PSI&#9;JAVA://com.rgcloud.activity.ForgetPasswordActivity&#10;Upda&#9;PSI&#9;JAVA://com.rgcloud.activity.UpdatePasswordActivity&#10;update&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_update_password.xml&#10;re&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_register2.xml&#10;Re&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_register2.xml&#10;activityre&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_register2.xml&#10;Splash&#9;PSI&#9;JAVA://com.tencent.qcloud.xiaozhibo.mainui.TCSplashActivity&#10;Space&#9;PSI&#9;JAVA://com.rgcloud.fragment.ActivitySpaceFragment&#10;activit&#9;PSI&#9;JAVA://com.rgcloud.activity.ActivitiesActivity&#10;acti&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/MapActivity.java&#10;Home&#9;PSI&#9;JAVA://com.rgcloud.fragment.HomeFragment&#10;TCLiveListMgr.java&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/list/TCLiveListMgr.java&#10;Applicat&#9;PSI&#9;JAVA://com.tencent.qcloud.xiaozhibo.TCApplication&#10;ac&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_activity.xml&#10;spac&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_activity_space.xml&#10;in&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_information.xml&#10;cala&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/CalendarActivity.java&#10;space&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_activity_space.xml&#10;frin&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_information.xml&#10;tit&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/layout_titlebar.xml&#10;Activit&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/ActivitiesActivity.java&#10;fragac&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_activity.xml&#10;Search&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/SearchResultActivity.java" />
+    <property name="SearchEverywhereHistoryKey" value="summ&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/summary.txt&#10;Res&#9;PSI&#9;JAVA://com.rgcloud.http.ResponseCallBack&#10;Main&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/Main2Activity.java&#10;home&#9;PSI&#9;JAVA://com.rgcloud.fragment.HomeFragment&#10;Const&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/config/Constant.java&#10;sum&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/summary.txt&#10;WxRes&#9;PSI&#9;JAVA://com.rgcloud.entity.response.WXOpenIdResEntity&#10;Wxre&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/entity/request/WXReqEntity.java&#10;Logi&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/LoginActivity.java&#10;constan&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/config/Constant.java&#10;livea&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/LiveActivity.java&#10;login&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/LoginActivity.java&#10;Regist&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/RegisterActivity.java&#10;Persona&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;fragment&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_videolist.xml&#10;persona&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;Tc&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/TCMainActivity.java&#10;Per&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;Logina&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/LoginActivity.java&#10;main&#9;PSI&#9;JAVA://com.rgcloud.activity.Main2Activity&#10;per&#9;PSI&#9;JAVA://com.rgcloud.fragment.PersonalFragment&#10;Maina&#9;PSI&#9;JAVA://com.tencent.qcloud.xiaozhibo.mainui.TCMainActivity&#10;person&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java&#10;Map&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/MapActivity.java&#10;activitfr&#9;PSI&#9;JAVA://com.rgcloud.fragment.ActivityFragment&#10;act&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/ActivitiesActivity.java&#10;item_nav&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/item_navigation.xml&#10;cons&#9;PSI&#9;JAVA://com.rgcloud.config.Constant&#10;TC&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/login/TCRegisterActivity.java&#10;Register&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/RegisterActivity.java&#10;Lo&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/login/TCLoginActivity.java&#10;Login&#9;PSI&#9;JAVA://com.rgcloud.activity.LoginActivity&#10;Regi&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/login/TCRegisterActivity.java&#10;forget&#9;PSI&#9;JAVA://com.rgcloud.activity.ForgetPasswordActivity&#10;Upda&#9;PSI&#9;JAVA://com.rgcloud.activity.UpdatePasswordActivity&#10;update&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_update_password.xml&#10;re&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_register2.xml&#10;Re&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_register2.xml&#10;activityre&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/activity_register2.xml&#10;Splash&#9;PSI&#9;JAVA://com.tencent.qcloud.xiaozhibo.mainui.TCSplashActivity&#10;Space&#9;PSI&#9;JAVA://com.rgcloud.fragment.ActivitySpaceFragment&#10;activit&#9;PSI&#9;JAVA://com.rgcloud.activity.ActivitiesActivity&#10;acti&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/MapActivity.java&#10;Home&#9;PSI&#9;JAVA://com.rgcloud.fragment.HomeFragment&#10;TCLiveListMgr.java&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/list/TCLiveListMgr.java&#10;Applicat&#9;PSI&#9;JAVA://com.tencent.qcloud.xiaozhibo.TCApplication&#10;ac&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_activity.xml&#10;spac&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_activity_space.xml&#10;in&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/res/layout/fragment_information.xml&#10;cala&#9;FILE&#9;file://F:/Download/XiaoZhiBo_Android/RGCloud/app/src/main/java/com/rgcloud/activity/CalendarActivity.java" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi" />
     <property name="DEBUGGABLE_DEVICE" value="huawei-huawei_tag_al00-QLXBBCA6A1931399" />
     <property name="DEBUGGABLE_PROCESS" value="com.rgcloud" />
@@ -2500,12 +2233,12 @@
     <property name="ExportApk.BuildType" value="release" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-hdpi" />
-      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-mdpi" />
-      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-xhdpi" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-xxxhdpi" />
       <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-xxhdpi" />
+      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\jniLibs\armeabi" />
+      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\layout" />
+      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\drawable" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.rgcloud.activity" />
@@ -2514,18 +2247,18 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.rgcloud.entity.response" />
       <recent name="com.rgcloud.fragment" />
       <recent name="com.rgcloud.activity" />
       <recent name="com.rgcloud.adapter" />
       <recent name="com.rgcloud.service" />
-      <recent name="com.rgcloud.view" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-hdpi" />
+      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-mdpi" />
+      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-xhdpi" />
       <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-xxxhdpi" />
       <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\mipmap-xxhdpi" />
-      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\jniLibs\armeabi" />
-      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\layout" />
-      <recent name="F:\Download\XiaoZhiBo_Android\RGCloud\app\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -3057,38 +2790,43 @@
       <option name="project" value="LOCAL" />
       <updated>1505662220658</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="wxj：将注册密码写死，和图标更换">
+      <created>1505663771517</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1505663771517</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-11" y="-11" width="1934" height="1056" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21274298" sideWeight="0.5046512" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.63372093" sideWeight="0.50215983" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7930232" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34651163" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6744186" sideWeight="0.49784017" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21274298" sideWeight="0.5046512" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29805616" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.63372093" sideWeight="0.50215983" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7930232" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5813953" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20518358" sideWeight="0.5755814" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53255814" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1729935" sideWeight="0.5755814" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34651163" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20518358" sideWeight="0.4244186" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3097,6 +2835,8 @@
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29805616" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.53255814" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3146,7 +2886,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="wxj：文化空间界面完成" />
     <MESSAGE value="wxj：添加不同尺寸的dimen" />
     <MESSAGE value="wxj：设置模块接功能实现" />
     <MESSAGE value="wxj：搜索界面" />
@@ -3171,7 +2910,8 @@
     <MESSAGE value="wxj：整合腾讯的注册登录" />
     <MESSAGE value="wxj：map界面接口对接" />
     <MESSAGE value="wxj：新建直播和列表界面，删去不要的部分，满足是直播可以直播看列表，普通着只可以看不可以播" />
-    <option name="LAST_COMMIT_MESSAGE" value="wxj：新建直播和列表界面，删去不要的部分，满足是直播可以直播看列表，普通着只可以看不可以播" />
+    <MESSAGE value="wxj：将注册密码写死，和图标更换" />
+    <option name="LAST_COMMIT_MESSAGE" value="wxj：将注册密码写死，和图标更换" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3230,6 +2970,12 @@
           <properties />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LoginActivity.java</url>
+          <line>241</line>
+          <properties />
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/list/TCLiveListMgr.java</url>
           <line>90</line>
@@ -3285,65 +3031,11 @@
           <option name="timeStamp" value="69" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="77" />
+      <option name="time" value="80" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/TCSplashActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="68" column="46" selection-start-line="68" selection-start-column="46" selection-end-line="68" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
-          <folding>
-            <element signature="e#1757#1793#0" expanded="true" />
-            <element signature="e#2332#2368#0" expanded="true" />
-            <element signature="e#3210#3253#0" expanded="true" />
-            <element signature="e#3656#3692#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="44" column="58" selection-start-line="44" selection-start-column="46" selection-end-line="44" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_update_password.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2137">
-          <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_forget_password.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="127" column="19" selection-start-line="127" selection-start-column="19" selection-end-line="127" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/UpdatePasswordActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -3361,23 +3053,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register2.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="109" column="43" selection-start-line="109" selection-start-column="43" selection-end-line="109" selection-end-column="43" />
-          <folding>
-            <element signature="e#3900#3912#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/summary.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="429">
+          <caret line="109" column="43" selection-start-line="109" selection-start-column="43" selection-end-line="109" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -3393,7 +3074,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="258" column="31" selection-start-line="258" selection-start-column="23" selection-end-line="258" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3401,7 +3081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3409,20 +3088,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="193" column="21" selection-start-line="193" selection-start-column="21" selection-end-line="193" selection-end-column="21" />
-          <folding>
-            <element signature="e#4282#4622#0" expanded="true" />
-            <element signature="e#4621#4622#0" expanded="true" />
-            <element signature="e#4662#4984#0" expanded="true" />
-            <element signature="e#4983#4984#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/config/Constant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3430,23 +3095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RGCloudServices.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="125" column="44" selection-start-line="125" selection-start-column="44" selection-end-line="125" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RequestApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="153" column="34" selection-start-line="153" selection-start-column="34" selection-end-line="153" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3454,7 +3102,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3462,7 +3109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3470,7 +3116,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3478,24 +3123,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
           <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_navigation.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
           <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-          <folding>
-            <element signature="e#280#292#0" expanded="false" />
-            <element signature="e#323#335#0" expanded="false" />
-            <element signature="e#367#379#0" expanded="false" />
-            <element signature="e#409#421#0" expanded="false" />
-          </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/ActivitySpaceFragment.java">
@@ -3503,39 +3141,33 @@
         <state relative-caret-position="81">
           <caret line="109" column="5" selection-start-line="109" selection-start-column="5" selection-end-line="109" selection-end-column="5" />
           <folding>
-            <element signature="e#2372#2383#0" expanded="true" />
-            <element signature="e#2584#3195#0" expanded="true" />
-            <element signature="e#3194#3195#0" expanded="true" />
-            <element signature="e#3243#3445#0" expanded="true" />
-            <element signature="e#3444#3445#0" expanded="true" />
-            <element signature="e#3501#4128#0" expanded="true" />
-            <element signature="e#3657#4102#0" expanded="true" />
-            <element signature="e#4101#4102#0" expanded="true" />
-            <element signature="e#4127#4128#0" expanded="true" />
+            <element signature="e#2372#2383#0" expanded="false" />
+            <element signature="e#2584#3195#0" expanded="false" />
+            <element signature="e#3194#3195#0" expanded="false" />
+            <element signature="e#3243#3445#0" expanded="false" />
+            <element signature="e#3444#3445#0" expanded="false" />
+            <element signature="e#3501#4128#0" expanded="false" />
+            <element signature="e#3657#4102#0" expanded="false" />
+            <element signature="e#4101#4102#0" expanded="false" />
+            <element signature="e#4127#4128#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_activities.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
-          <folding>
-            <element signature="e#468#480#0" expanded="true" />
-            <element signature="e#813#825#0" expanded="true" />
-            <element signature="e#859#871#0" expanded="true" />
-          </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/ActivitiesActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3543,30 +3175,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="70" column="52" selection-start-line="70" selection-start-column="52" selection-end-line="70" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_activity.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
           <caret line="49" column="37" selection-start-line="49" selection-start-column="37" selection-end-line="49" selection-end-column="37" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/MapActivity.java">
@@ -3574,10 +3203,10 @@
         <state relative-caret-position="373">
           <caret line="301" column="5" selection-start-line="301" selection-start-column="5" selection-end-line="301" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6951#7606#0" expanded="true" />
-            <element signature="e#7605#7606#0" expanded="true" />
-            <element signature="e#17707#17724#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#6951#7606#0" expanded="false" />
+            <element signature="e#7605#7606#0" expanded="false" />
+            <element signature="e#17707#17724#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3586,10 +3215,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="428">
           <caret line="51" column="118" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="118" />
-          <folding>
-            <element signature="e#1570#1838#0" expanded="false" />
-            <element signature="e#1837#1838#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3613,12 +3238,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="44" column="36" selection-start-line="44" selection-start-column="36" selection-end-line="44" selection-end-column="36" />
-          <folding>
-            <element signature="e#2929#3861#0" expanded="true" />
-            <element signature="e#3860#3861#0" expanded="true" />
-            <element signature="e#7198#7648#0" expanded="true" />
-            <element signature="e#7647#7648#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3627,119 +3246,219 @@
         <state relative-caret-position="308">
           <caret line="36" column="61" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="61" />
           <folding>
-            <element signature="e#2729#4099#0" expanded="true" />
-            <element signature="e#4098#4099#0" expanded="true" />
+            <element signature="e#2729#4099#0" expanded="false" />
+            <element signature="e#4098#4099#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/mainui/TCMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="151" column="18" selection-start-line="151" selection-start-column="18" selection-end-line="151" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/Main2Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="187" column="38" selection-start-line="187" selection-start-column="38" selection-end-line="187" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/HomeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="211" column="64" selection-start-line="211" selection-start-column="64" selection-end-line="211" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_live.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_videolist.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
           <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="36" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/fragment_live_list.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_live_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="56" column="48" selection-start-line="56" selection-start-column="48" selection-end-line="56" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer2">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="56" column="48" selection-start-line="56" selection-start-column="48" selection-end-line="56" selection-end-column="48" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/PersonalInfoResEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
+        <state relative-caret-position="462">
           <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_personal.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer2">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3267">
+          <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/PersonalFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="2046">
           <caret line="84" column="30" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/RegisterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
+        <state relative-caret-position="4257">
           <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LiveActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3498">
+          <caret line="143" column="26" selection-start-line="143" selection-start-column="26" selection-end-line="143" selection-end-column="26" />
+          <folding>
+            <element signature="e#5230#5231#0" expanded="false" />
+            <element signature="e#5277#5278#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/common/utils/TCUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="631" column="11" selection-start-line="631" selection-start-column="11" selection-end-line="631" selection-end-column="11" />
+          <folding>
+            <element signature="e#21087#21634#0" expanded="false" />
+            <element signature="e#21633#21634#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/ServiceGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="58" column="24" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RGCloudServices.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="55" column="28" selection-start-line="55" selection-start-column="28" selection-end-line="55" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/request/WXReqEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/config/Constant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/fragment/HomeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5709">
+          <caret line="218" column="9" selection-start-line="218" selection-start-column="9" selection-end-line="218" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/ResponseCallBack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1782">
+          <caret line="80" column="66" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/Main2Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5115">
+          <caret line="181" column="34" selection-start-line="181" selection-start-column="34" selection-end-line="181" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/summary.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/http/RequestApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/entity/response/WXOpenIdResEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/wxapi/WXEntryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="56" column="40" selection-start-line="56" selection-start-column="40" selection-end-line="56" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -3748,48 +3467,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+        <state relative-caret-position="407">
+          <caret line="233" column="41" selection-start-line="233" selection-start-column="41" selection-end-line="233" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/rgcloud/activity/LiveActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="143" column="26" selection-start-line="143" selection-start-column="26" selection-end-line="143" selection-end-column="26" />
-          <folding>
-            <element signature="e#2492#2897#0" expanded="true" />
-            <element signature="e#2896#2897#0" expanded="true" />
-            <element signature="e#5230#5231#0" expanded="true" />
-            <element signature="e#5277#5278#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/tencent/qcloud/xiaozhibo/common/utils/TCUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="620" column="11" selection-start-line="620" selection-start-column="11" selection-end-line="620" selection-end-column="11" />
-          <folding>
-            <element signature="e#21087#21634#0" expanded="true" />
-            <element signature="e#21633#21634#0" expanded="true" />
-            <element signature="e#21679#22224#0" expanded="true" />
-            <element signature="e#22223#22224#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
   </component>
