@@ -146,9 +146,12 @@ public class ActivityDetailActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.ll_location, R.id.tv_phone_activity_detail, R.id.tv_comment_activity_detail, R.id.iv_collect_activity_detail, R.id.iv_share_activity_detail, R.id.btn_get_ticket})
+    @OnClick({R.id.iv_back, R.id.ll_location, R.id.tv_phone_activity_detail, R.id.tv_comment_activity_detail, R.id.iv_collect_activity_detail, R.id.iv_share_activity_detail, R.id.btn_get_ticket})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
             case R.id.ll_location:
                 break;
             case R.id.tv_phone_activity_detail:

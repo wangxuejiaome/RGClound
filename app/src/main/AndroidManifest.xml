@@ -41,12 +41,9 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-
-
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
             android:value="48ae76de3f"/>
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="ulBWes6MGLatXi3o2XPN8n17VwQ8H7Z0"/>
@@ -55,7 +52,6 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"/>
-
 
         <!-- User defined. 用户自定义的广播接收器 -->
         <receiver
@@ -83,11 +79,14 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
-          <!--  <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
 
         <!-- 消息收发service -->
@@ -306,12 +305,6 @@
         <activity android:name=".activity.LoginActivity">
         </activity>
         <activity android:name=".activity.Main2Activity">
-
-               <intent-filter>
-                   <action android:name="android.intent.action.MAIN"/>
-
-                   <category android:name="android.intent.category.LAUNCHER"/>
-               </intent-filter>
         </activity>
         <activity android:name=".activity.ForgetPasswordActivity">
         </activity>
@@ -338,6 +331,13 @@
         <activity android:name=".activity.BNGuideActivity">
         </activity>
         <activity android:name=".activity.LiveActivity">
+        </activity>
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

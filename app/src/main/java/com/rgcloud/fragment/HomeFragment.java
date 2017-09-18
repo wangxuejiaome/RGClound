@@ -35,6 +35,7 @@ import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.GlideUtil;
 import com.rgcloud.util.PreferencesUtil;
+import com.rgcloud.util.ToastUtil;
 import com.stx.xhb.mylibrary.XBanner;
 
 import java.io.Serializable;
@@ -127,6 +128,10 @@ public class HomeFragment extends Fragment {
                 FunctionEntity functionEntity = mFunctionAdapter.getItem(position);
                 switch (functionEntity.name) {
                     case "我爱直播":
+                        if (mPreferencesUtil.getBoolean(PreferencesUtil.ISWXLOGIN)) {
+                            ToastUtil.showShortToast("读不起，微信登录暂不支持观看直播");
+                            return;
+                        }
                         if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
                             startActivity(new Intent(getActivity(), LoginActivity.class));
                         } else {
@@ -163,7 +168,7 @@ public class HomeFragment extends Fragment {
 
     private void setView() {
 
-        if(mHomeResEntity.TopChangeImageUrl != null){
+        if (mHomeResEntity.TopChangeImageUrl != null) {
             bannerHome.setData(mHomeResEntity.TopChangeImageUrl, null);
             bannerHome.setmAdapter(new XBanner.XBannerAdapter() {
                 @Override
