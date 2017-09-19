@@ -2,9 +2,11 @@ package com.rgcloud.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -79,6 +81,34 @@ public class ActivityDetailActivity extends BaseActivity {
         } else {
             btnGetTicket.setText("免费参观");
         }
+
+        //设置WebView属性，能够执行Javascript脚本
+        wvActivityDetail.getSettings().setJavaScriptEnabled(true);
+        wvActivityDetail.loadUrl(mActivityDetailResEntity.DetailUrl);
+
+        //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
+        wvActivityDetail.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                return true;
+            }
+
+         /*   @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                CirCleLoadingDialogUtil.showCircleProgressDialog(mContext);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+            }*/
+        });
+
     }
 
     private void getActivityDetail() {

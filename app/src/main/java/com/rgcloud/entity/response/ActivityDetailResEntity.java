@@ -36,5 +36,6 @@ public class ActivityDetailResEntity extends BaseResEntity {
     public int ActiveState;
     public int ShareSendScore;
     public int CommentSendScore;
+    public String DetailUrl;
     
 }

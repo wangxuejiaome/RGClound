@@ -16,6 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
 import com.rgcloud.activity.ActivitiesActivity;
+import com.rgcloud.activity.ActivityDetailActivity;
 import com.rgcloud.activity.CalendarActivity;
 import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.LoginActivity;
@@ -29,6 +30,7 @@ import com.rgcloud.adapter.FunctionNavigationAdapter;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.FunctionEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -155,11 +157,18 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         rvRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvRecommend.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
         mActivityAdapter = new ActivityAdapter(null);
         rvRecommend.setAdapter(mActivityAdapter);
+
+        rvRecommend.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ActivityResBean activityResBean = mActivityAdapter.getItem(position);
+                ActivityDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
+            }
+        });
     }
 
     private void initData() {
