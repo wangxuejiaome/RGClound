@@ -16,6 +16,7 @@ import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.PointActivity;
 import com.rgcloud.activity.SettingActivity;
 import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.response.CouponActivity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
@@ -94,6 +95,7 @@ public class PersonalFragment extends Fragment {
             case R.id.iv_header:
                 break;
             case R.id.tv_coupon_personal:
+                startActivity(new Intent(getActivity(), CouponActivity.class));
                 break;
             case R.id.tv_collection_personal:
                 break;
@@ -106,8 +108,8 @@ public class PersonalFragment extends Fragment {
                 break;
             case R.id.ll_point_personal:
                 Intent pointIntent = new Intent(getActivity(), PointActivity.class);
-                if(mPersonalInfoResEntity != null){
-                    pointIntent.putExtra("totalPoint",mPersonalInfoResEntity.TotalPoint);
+                if (mPersonalInfoResEntity != null) {
+                    pointIntent.putExtra("totalPoint", mPersonalInfoResEntity.TotalPoint);
                 }
                 startActivity(pointIntent);
                 break;

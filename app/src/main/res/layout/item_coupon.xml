@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/x20"
+              android:paddingRight="@dimen/x20">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y180"
+        android:background="@mipmap/bg_coupon"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/x128"
+            android:layout_height="@dimen/x128"
+            android:id="@+id/iv_coupon_item"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x80"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_coupon_default"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/y24"
+            android:paddingRight="@dimen/x30"
+            android:paddingTop="@dimen/y16">
+
+            <TextView
+                android:id="@+id/tv_name_coupon_item"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="活动名称"
+                android:textColor="#308cab"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_status_activity_coupon_item"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="活动状态："
+                android:textColor="#308cab"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击获取二维码"
+                android:textColor="#308cab"
+                android:textSize="11sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y60"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x50"
+        android:paddingRight="@dimen/x50">
+
+        <TextView
+            android:id="@+id/tv_validate_coupon_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="使用期限：2016.10.10-2017.10.17"
+            android:textColor="@color/grey700"
+            android:textSize="11sp"/>
+
+        <TextView
+            android:id="@+id/tv_status_coupon_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未使用"
+            android:textColor="@color/grey700"
+            android:textSize="11sp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

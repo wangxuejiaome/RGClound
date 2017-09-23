@@ -2223,6 +2223,7 @@
     <dimen name="y1278">1278.0px</dimen>
     <dimen name="y1279">1279.0px</dimen>
     <dimen name="y1280">1280px</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 
 </resources>

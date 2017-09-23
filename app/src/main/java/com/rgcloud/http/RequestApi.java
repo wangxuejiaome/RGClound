@@ -21,6 +21,7 @@ import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
+import com.rgcloud.entity.response.CouponResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.PointResEntity;
@@ -189,9 +190,16 @@ public class RequestApi {
     /**
      * 获取积分记录
      */
-    @POST("memberPointApi/pointRecords")
     public static void getPointRecord(PointReqEntity pointReqEntity, ResponseCallBack responseCallBack) {
         Call<PointResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getPointRecord(pointReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取卡券
+     */
+    public static void getCoupon(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
+        Call<CouponResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getCoupon(baseReqEntity);
         call.enqueue(responseCallBack);
     }
 

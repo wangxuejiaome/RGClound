@@ -1,6 +1,5 @@
 package com.rgcloud.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,21 +7,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
-import com.rgcloud.adapter.ActivitySpaceAdapter;
 import com.rgcloud.adapter.PointAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.request.PointReqEntity;
-import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.entity.response.PointResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.ToastUtil;
-
-import java.io.Serializable;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
