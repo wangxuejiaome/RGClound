@@ -10,6 +10,7 @@ import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
+import com.rgcloud.entity.request.PointReqEntity;
 import com.rgcloud.entity.request.PostCommentReqEntity;
 import com.rgcloud.entity.request.RegisterReqEntity;
 import com.rgcloud.entity.request.SpaceReqEntity;
@@ -21,6 +22,7 @@ import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
+import com.rgcloud.entity.response.PointResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
 import com.rgcloud.entity.response.WXOpenIdResEntity;
@@ -147,6 +149,13 @@ public interface RGCloudServices {
      */
     @POST("memberApi/memberInfo")
     Call<PersonalInfoResEntity> getPersonalInfo(@Body BaseReqEntity baseReqEntity);
+
+
+    /**
+     * 获取积分记录
+     */
+    @POST("memberPointApi/pointRecords")
+    Call<PointResEntity> getPointRecord(@Body PointReqEntity pointReqEntity);
 
 
 }

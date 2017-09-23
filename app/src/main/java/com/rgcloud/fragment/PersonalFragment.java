@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.rgcloud.R;
 import com.rgcloud.activity.LiveActivity;
+import com.rgcloud.activity.PointActivity;
 import com.rgcloud.activity.SettingActivity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
@@ -50,6 +51,7 @@ public class PersonalFragment extends Fragment {
     LinearLayout llSetting;
     @Bind(R.id.ll_about_us)
     LinearLayout llAboutUs;
+    private PersonalInfoResEntity mPersonalInfoResEntity;
 
     @Nullable
     @Override
@@ -70,11 +72,11 @@ public class PersonalFragment extends Fragment {
             @Override
             public void onObjectResponse(Object resEntity) {
                 super.onObjectResponse(resEntity);
-                PersonalInfoResEntity personalInfoResEntity = (PersonalInfoResEntity) resEntity;
-                if (personalInfoResEntity.CanDirectSeeding == 1) {
+                mPersonalInfoResEntity = (PersonalInfoResEntity) resEntity;
+                if (mPersonalInfoResEntity.CanDirectSeeding == 1) {
                     llLive.setVisibility(View.VISIBLE);
                 }
-                tvAvailablePoint.setText(personalInfoResEntity.RemindPoint + "积分");
+                tvAvailablePoint.setText(mPersonalInfoResEntity.RemindPoint + "积分");
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
             }
         });
@@ -103,6 +105,11 @@ public class PersonalFragment extends Fragment {
                 startActivity(liveIntent);
                 break;
             case R.id.ll_point_personal:
+                Intent pointIntent = new Intent(getActivity(), PointActivity.class);
+                if(mPersonalInfoResEntity != null){
+                    pointIntent.putExtra("totalPoint",mPersonalInfoResEntity.TotalPoint);
+                }
+                startActivity(pointIntent);
                 break;
             case R.id.ll_setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));

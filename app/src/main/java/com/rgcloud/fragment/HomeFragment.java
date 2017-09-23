@@ -47,6 +47,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Created by wangxuejiao on 2017/9/5.
@@ -54,6 +57,8 @@ import butterknife.OnClick;
 
 public class HomeFragment extends Fragment {
 
+    @Bind(R.id.ptr_classic_frame_layout)
+    PtrClassicFrameLayout ptrClassicFrameLayout;
     @Bind(R.id.iv_search)
     ImageView ivSearch;
     @Bind(R.id.banner_home)
@@ -169,6 +174,13 @@ public class HomeFragment extends Fragment {
                 ActivityDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
             }
         });
+
+        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                getHomeInfo();
+            }
+        });
     }
 
     private void initData() {
@@ -203,6 +215,7 @@ public class HomeFragment extends Fragment {
                 setView();
                 ((Main2Activity) getActivity()).setSearchKey(mHomeResEntity.HotSearchKeyWords);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+                ptrClassicFrameLayout.refreshComplete();
             }
         });
     }
