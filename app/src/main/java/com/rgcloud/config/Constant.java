@@ -7,6 +7,7 @@ package com.rgcloud.config;
 public class Constant {
 
     public static String apiBaseUrl = "http://soa.cultural.vdo17.com/api/";
+    public static final String BD_NAVIGATION_FOLDER_NAME = "BDNavigation";
     public static final int DEFAULT_PAGE_SIZE = 10;
     public static final String WX_APP_ID = "wxffddf684c9bc78e6";
     public static final String WX_APP_SECRET = "aa4525cadce7729c190c552f28bf7b90";

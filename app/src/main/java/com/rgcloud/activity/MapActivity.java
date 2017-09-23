@@ -53,6 +53,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
 import com.rgcloud.adapter.SpaceMapNavigationAdapter;
+import com.rgcloud.config.Constant;
 import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.http.RequestApi;
@@ -74,7 +75,7 @@ import butterknife.OnClick;
 
 public class MapActivity extends BaseActivity {
 
-    private static final String APP_FOLDER_NAME = "BNSDKSimpleDemo";
+    private static final String APP_FOLDER_NAME = Constant.BD_NAVIGATION_FOLDER_NAME;
     public static final String ROUTE_PLAN_NODE = "routePlanNode";
 
     @Bind(R.id.tb_map)
@@ -221,29 +222,6 @@ public class MapActivity extends BaseActivity {
             marker.setExtraInfo(bundle);
             mMarkerList.add(marker);
         }
-
-
-       /* for (int i = 0; i < 4; i++) {
-            if (i == 0) {
-                markerOptions = new MarkerOptions().position(new LatLng(31.946546, 118.800173)).icon(mBDMark).zIndex(9);
-            } else if (i == 1) {
-                markerOptions = new MarkerOptions().position(new LatLng(31.946807, 118.806767)).icon(mBDMark).zIndex(9);
-            } else if (i == 2) {
-                markerOptions = new MarkerOptions().position(new LatLng(31.946271, 118.806839)).icon(mBDMark).zIndex(9);
-            } else {
-                markerOptions = new MarkerOptions().position(new LatLng(31.936803, 118.805204)).icon(mBDMark).zIndex(9);
-            }
-
-            markerOptions.animateType(MarkerOptions.MarkerAnimateType.drop);
-            mBaiduMap.addOverlay(markerOptions);
-            Marker marker = (Marker) mBaiduMap.addOverlay(markerOptions);
-            Bundle bundle = new Bundle();
-            bundle.putString("spaceId", "1");
-            bundle.putString("spaceName", "太平花苑");
-            bundle.putString("spaceAddress", "静淮街18号");
-            marker.setExtraInfo(bundle);
-            mMarkerList.add(marker);
-        }*/
 
         OverlayManager overlayManager = new OverlayManager(mBaiduMap) {
             @Override
