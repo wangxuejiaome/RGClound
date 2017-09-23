@@ -30,13 +30,12 @@
                     android:scaleType="centerCrop"/>
 
                 <ImageView
+                    android:id="@+id/iv_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/iv_back"
-                    android:src="@mipmap/ic_back"
-                    android:padding="@dimen/x30"/>
+                    android:padding="@dimen/x30"
+                    android:src="@mipmap/ic_back"/>
             </FrameLayout>
-
 
 
             <TextView
@@ -119,14 +118,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
                 android:background="@color/white"
+                android:paddingBottom="@dimen/y10"
                 android:paddingLeft="@dimen/x20"
                 android:paddingTop="@dimen/y10"
-                android:paddingBottom="@dimen/y10"
                 android:text="活动详情"
                 android:textColor="@color/grey900"
                 android:textSize="12sp"
-                android:layout_marginTop="@dimen/y20"
                 />
 
             <WebView
@@ -198,7 +197,7 @@
             android:paddingRight="@dimen/x20"
             android:text="我要领票"
             android:textColor="@color/white"
-            android:textSize="28sp"/>
+            android:textSize="22sp"/>
 
     </LinearLayout>
 

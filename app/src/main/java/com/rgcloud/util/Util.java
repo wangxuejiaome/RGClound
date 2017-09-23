@@ -1,8 +1,16 @@
 package com.rgcloud.util;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -102,33 +110,24 @@ public class Util {
 
 
 
-    /*public static void callPhone(final Context context) {
+    public static void callPhone(final Activity activity,String phone) {
 
-        ConfirmDialogUtil.showDefaultConfirmDialog(context, null, "您确定拨打客服电话吗？\n 4008288008").setConfirmOrCancelDialogClickListener(new ConfirmOrCancelDialog.ConfirmOrCancelDialogClickListener() {
-            @Override
-            public void sureClick() {
-
-                if (Build.VERSION.SDK_INT >= 23) {
-                    int checkCallPhonePermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
-                    if(checkCallPhonePermission != PackageManager.PERMISSION_GRANTED){
-                        ActivityCompat.requestPermissions((Activity) context,new String[]{Manifest.permission.CALL_PHONE},0);
-                        return;
-                    }else{
-                        //上面已经写好的拨号方法
-                        Intent phoneIntent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + "4008288008"));
-                        context.startActivity(phoneIntent);
-                    }
-                } else {
-                    //上面已经写好的拨号方法
-                    Intent phoneIntent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + "4008288008"));
-                    context.startActivity(phoneIntent);
-                }
+        if (Build.VERSION.SDK_INT >= 23) {
+            int checkCallPhonePermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE);
+            if(checkCallPhonePermission != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.CALL_PHONE},0);
+                return;
+            }else{
+                //上面已经写好的拨号方法
+                Intent phoneIntent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phone));
+                activity.startActivity(phoneIntent);
             }
-            @Override
-            public void cancelClick() {
-            }
-        });
-    }*/
+        } else {
+            //上面已经写好的拨号方法
+            Intent phoneIntent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phone));
+            activity.startActivity(phoneIntent);
+        }
+    }
 
     /**
      * 手机号验证  验证手机号是否正确

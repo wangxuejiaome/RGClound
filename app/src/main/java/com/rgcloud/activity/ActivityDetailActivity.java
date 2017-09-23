@@ -3,12 +3,14 @@ package com.rgcloud.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -36,6 +38,7 @@ import com.rgcloud.util.BNEventHandler;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.GlideUtil;
 import com.rgcloud.util.ToastUtil;
+import com.rgcloud.util.Util;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,6 +51,7 @@ import butterknife.OnClick;
 
 import static com.baidu.navisdk.adapter.PackageUtil.getSdcardDir;
 import static com.rgcloud.activity.MapActivity.ROUTE_PLAN_NODE;
+import static java.util.ResourceBundle.clearCache;
 
 public class ActivityDetailActivity extends BaseActivity {
 
@@ -435,6 +439,16 @@ public class ActivityDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_phone_activity_detail:
+                if (mActivityDetailResEntity == null) return;
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
+                builder1.setMessage("您确定要拨打电话" + mActivityDetailResEntity.ConnectPhone + "吗？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Util.callPhone(ActivityDetailActivity.this, mActivityDetailResEntity.ConnectPhone);
+                            }
+                        }).setNegativeButton("取消", null)
+                        .show();
                 break;
             case R.id.tv_comment_activity_detail:
                 Intent commentIntent = new Intent(mContext, PostCommentActivity.class);
