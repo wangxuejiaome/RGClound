@@ -105,7 +105,6 @@ public class ActivityDetailActivity extends BaseActivity {
     private double mEndLng;
     private double mEndLat;
     private android.app.AlertDialog mShareDialog;
-    private boolean mHasCollect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,25 +197,10 @@ public class ActivityDetailActivity extends BaseActivity {
                 super.onObjectResponse(resEntity);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("收藏成功");
-                ivCollect.setImageResource(R.mipmap.ic_has_collect);
-                mHasCollect = true;
+                //ivCollect.setImageResource(R.mipmap.ic_has_collect);
             }
         });
     }
-
-    private void collectCancel() {
-        RequestApi.collectCancel(new CollectCancelReqEntity(mActivityId), new ResponseCallBack(mContext) {
-            @Override
-            public void onObjectResponse(Object resEntity) {
-                super.onObjectResponse(resEntity);
-                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
-                ToastUtil.showShortToast("取消收藏成功");
-                ivCollect.setImageResource(R.mipmap.ic_collect);
-                mHasCollect = false;
-            }
-        });
-    }
-
 
     private boolean initDirs() {
         mSDCardPath = getSdcardDir();
@@ -586,11 +570,7 @@ public class ActivityDetailActivity extends BaseActivity {
                 startActivityForResult(commentIntent, 0);
                 break;
             case R.id.iv_collect_activity_detail:
-                if (mHasCollect) {
-                    collectCancel();
-                } else {
-                    collect();
-                }
+                collect();
                 break;
             case R.id.iv_share_activity_detail:
                 showShareDialog();
