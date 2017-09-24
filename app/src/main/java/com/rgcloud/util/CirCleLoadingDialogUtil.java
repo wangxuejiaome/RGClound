@@ -40,7 +40,7 @@ public class CirCleLoadingDialogUtil {
      * @param context
      * @param message
      */
-    public static void showCircleProgressDialogNotCancel(Context context, String message) {
+    public static void showCircleProgressDialog(Context context, String message) {
 
         Activity activity = (Activity) context;
 
@@ -51,7 +51,6 @@ public class CirCleLoadingDialogUtil {
             }
             if(mCircleLoadingProgressDialog == null){
                 mCircleLoadingProgressDialog = new CircleLoadingProgressDialog(context);
-                mCircleLoadingProgressDialog.setCancelable(false);
             }
 
             mCircleLoadingProgressDialog.show();

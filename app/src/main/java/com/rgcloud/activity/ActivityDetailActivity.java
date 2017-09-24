@@ -41,6 +41,7 @@ import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.GlideUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.util.Util;
+import com.rgcloud.view.CircleLoadingProgressDialog;
 import com.tencent.qcloud.xiaozhibo.play.TCLivePlayerActivity;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -112,9 +113,6 @@ public class ActivityDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         initData();
         BNOuterLogUtil.setLogSwitcher(true);
-        if (initDirs()) {
-            initNavi();
-        }
     }
 
     private void initData() {
@@ -289,6 +287,9 @@ public class ActivityDetailActivity extends BaseActivity {
                 Toast.makeText(ActivityDetailActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
                 hasInitSuccess = true;
                 initSetting();
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
+
+                routeplanToNavi(mEndLng, mEndLat);
             }
 
             public void initStart() {
@@ -297,6 +298,7 @@ public class ActivityDetailActivity extends BaseActivity {
 
             public void initFailed() {
                 Toast.makeText(ActivityDetailActivity.this, "百度导航引擎初始化失败", Toast.LENGTH_SHORT).show();
+                CirCleLoadingDialogUtil.dismissCircleProgressDialog();
             }
 
         }, null, null, null);
@@ -557,8 +559,10 @@ public class ActivityDetailActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.ll_location:
-                if (mEndLat != 0 && mEndLng != 0) {
-                    routeplanToNavi(mEndLng, mEndLat);
+                if (mActivityDetailResEntity == null) return;
+                CirCleLoadingDialogUtil.showCircleProgressDialog(mContext, "导航准备中，请稍等……");
+                if (initDirs()) {
+                    initNavi();
                 }
                 break;
             case R.id.tv_phone_activity_detail:
