@@ -173,6 +173,7 @@ public class RegisterActivity extends BaseActivity implements TCRegisterMgr.TCRe
 
     @Override
     public void onFailure(int code, String msg) {
+        CirCleLoadingDialogUtil.dismissCircleProgressDialog();
         Log.d("TCRegister", "regist fail, code:" + code + " msg:" + msg);
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }

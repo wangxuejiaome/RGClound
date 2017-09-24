@@ -76,7 +76,7 @@ public class SettingActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.iv_back, R.id.tv_update_password, R.id.ll_clear_cache, R.id.btn_login_out})
+    @OnClick({R.id.iv_back, R.id.tv_update_password,R.id.tv_bind_phone, R.id.ll_clear_cache, R.id.btn_login_out})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -84,6 +84,9 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.tv_update_password:
                 startActivity(new Intent(mContext,UpdatePasswordActivity.class));
+                break;
+            case R.id.tv_bind_phone:
+                startActivity(new Intent(mContext,BindPhoneActivity.class));
                 break;
             case R.id.ll_clear_cache:
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);

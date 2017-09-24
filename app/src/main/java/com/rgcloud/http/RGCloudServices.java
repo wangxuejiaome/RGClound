@@ -4,6 +4,7 @@ import com.rgcloud.entity.BaseResEntity;
 import com.rgcloud.entity.request.ActivityDetailReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
+import com.rgcloud.entity.request.BindPhoneReqEntity;
 import com.rgcloud.entity.request.CollectCancelReqEntity;
 import com.rgcloud.entity.request.CollectReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
@@ -29,6 +30,7 @@ import com.rgcloud.entity.response.PointResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
 import com.rgcloud.entity.response.VerifyCodeResEntity;
 import com.rgcloud.entity.response.WXOpenIdResEntity;
+import com.umeng.socialize.sina.message.BaseResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -177,4 +179,10 @@ public interface RGCloudServices {
      */
     @POST("memberApi/findMemberComment")
     Call<CommentResEntity> getComment(@Body BaseReqEntity baseReqEntity);
+
+    /**
+     * 绑定手机号
+     */
+    @POST("memberApi/memberBindPhone")
+    Call<BaseResponse> bindPhone(@Body BindPhoneReqEntity bindPhoneReqEntity);
 }
