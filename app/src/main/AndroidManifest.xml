@@ -278,7 +278,7 @@
         <!-- umengAppKey，replace to yours -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="57fc8dc1e0f55a88800026ce">
+            android:value="59c77a686e27a41dca000f12">
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
@@ -304,7 +304,9 @@
         </activity>
         <activity android:name=".activity.LoginActivity">
         </activity>
-        <activity android:name=".activity.Main2Activity">
+        <activity
+            android:name=".activity.Main2Activity"
+            android:launchMode="singleTask">
         </activity>
         <activity android:name=".activity.ForgetPasswordActivity">
         </activity>

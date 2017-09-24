@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -39,9 +41,13 @@ import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.GlideUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.util.Util;
+import com.tencent.qcloud.xiaozhibo.play.TCLivePlayerActivity;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.editorpage.ShareActivity;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,7 +58,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.baidu.navisdk.adapter.PackageUtil.getSdcardDir;
 import static com.rgcloud.activity.MapActivity.ROUTE_PLAN_NODE;
 import static java.util.ResourceBundle.clearCache;
 
@@ -81,6 +86,8 @@ public class ActivityDetailActivity extends BaseActivity {
     @Bind(R.id.btn_get_ticket)
     Button btnGetTicket;
 
+    private SHARE_MEDIA mShareMedia = SHARE_MEDIA.WEIXIN;
+
     private final static String authBaseArr[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION};
     private final static String authComArr[] = {Manifest.permission.READ_PHONE_STATE};
     private final static int authBaseRequestCode = 1;
@@ -96,6 +103,7 @@ public class ActivityDetailActivity extends BaseActivity {
     private int mActivityId;
     private double mEndLng;
     private double mEndLat;
+    private android.app.AlertDialog mShareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -416,20 +424,65 @@ public class ActivityDetailActivity extends BaseActivity {
 
     }
 
-    public void showShare(){
-       /* new ShareAction(ActivityDetailActivity.this)
-                .withText("hello")
-                .setDisplayList(SHARE_MEDIA.WEIXIN)
-                .setCallback(shareListener)
-                .open();*/
+    /**
+     * 展示分享界面
+     */
+    private void showShareDialog() {
 
-        new ShareAction(ActivityDetailActivity.this)
-                .setPlatform(SHARE_MEDIA.WEIXIN)//传入平台
-                .withText("hello")//分享内容
-                .setCallback(shareListener)//回调监听器
-                .share();
+        View view = getLayoutInflater().inflate(R.layout.share_dialog, null);
+        mShareDialog = new android.app.AlertDialog.Builder(this, R.style.ConfirmDialogStyle).create();
+        mShareDialog.show();// 显示创建的AlertDialog，并显示，必须放在Window设置属性之前
+
+        Window window = mShareDialog.getWindow();
+        if (window != null) {
+            window.setContentView(view);//这一步必须指定，否则不出现弹窗
+            WindowManager.LayoutParams mParams = window.getAttributes();
+            mParams.width = android.view.WindowManager.LayoutParams.MATCH_PARENT;
+            mParams.height = android.view.WindowManager.LayoutParams.WRAP_CONTENT;
+            window.setGravity(Gravity.BOTTOM); // 此处可以设置dialog显示的位置
+            window.setBackgroundDrawableResource(android.R.color.white);
+            window.setAttributes(mParams);
+        }
+
+        Button btn_wx = (Button) view.findViewById(R.id.btn_share_wx);
+        Button btn_circle = (Button) view.findViewById(R.id.btn_share_circle);
+        Button btn_cancel = (Button) view.findViewById(R.id.btn_share_cancel);
+
+        btn_wx.setOnClickListener(mShareBtnClickListen);
+        btn_circle.setOnClickListener(mShareBtnClickListen);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mShareDialog.dismiss();
+            }
+        });
     }
 
+    private View.OnClickListener mShareBtnClickListen = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btn_share_wx:
+                    mShareMedia = SHARE_MEDIA.WEIXIN;
+                    break;
+                case R.id.btn_share_circle:
+                    mShareMedia = SHARE_MEDIA.WEIXIN_CIRCLE;
+                    break;
+                default:
+                    break;
+            }
+
+            ShareAction shareAction = new ShareAction(ActivityDetailActivity.this);
+            UMImage image = new UMImage(ActivityDetailActivity.this, R.mipmap.ic_launcher);//资源文件
+            UMWeb web = new UMWeb(mActivityDetailResEntity.SharedUrl);
+            web.setThumb(image);
+            web.setTitle("如皋文化云");
+            shareAction.withMedia(web);
+            shareAction.withText(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
+            shareAction.setCallback(shareListener);
+            shareAction.setPlatform(mShareMedia).share();
+        }
+    };
 
 
     private UMShareListener shareListener = new UMShareListener() {
@@ -448,7 +501,11 @@ public class ActivityDetailActivity extends BaseActivity {
          */
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Toast.makeText(ActivityDetailActivity.this,"成功了",Toast.LENGTH_LONG).show();
+            Toast.makeText(ActivityDetailActivity.this, "成功了", Toast.LENGTH_LONG).show();
+            if (mShareDialog != null) {
+                mShareDialog.dismiss();
+            }
+
         }
 
         /**
@@ -458,7 +515,10 @@ public class ActivityDetailActivity extends BaseActivity {
          */
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(ActivityDetailActivity.this,"失败"+t.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(ActivityDetailActivity.this, "失败" + t.getMessage(), Toast.LENGTH_LONG).show();
+            if (mShareDialog != null) {
+                mShareDialog.dismiss();
+            }
         }
 
         /**
@@ -467,11 +527,13 @@ public class ActivityDetailActivity extends BaseActivity {
          */
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(ActivityDetailActivity.this,"取消了",Toast.LENGTH_LONG).show();
+            Toast.makeText(ActivityDetailActivity.this, "取消了", Toast.LENGTH_LONG).show();
+            if (mShareDialog != null) {
+                mShareDialog.dismiss();
+            }
 
         }
     };
-
 
 
     public static void startActivityDetail(Context context, int activityId) {
@@ -521,7 +583,7 @@ public class ActivityDetailActivity extends BaseActivity {
                 // collectCancel();
                 break;
             case R.id.iv_share_activity_detail:
-                showShare();
+                showShareDialog();
                 break;
             case R.id.btn_get_ticket:
                 if (btnGetTicket.getText().toString().equals("我要领票")) {

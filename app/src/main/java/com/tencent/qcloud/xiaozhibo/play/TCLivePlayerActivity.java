@@ -72,7 +72,7 @@ import master.flame.danmaku.controller.IDanmakuView;
 /**
  * Created by RTMP on 2016/8/4
  */
-public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayListener, View.OnClickListener, TCPlayerMgr.PlayerListener, TCInputTextMsgDialog.OnTextSendListener, TCChatRoomMgr.TCChatRoomListener ,TXRecordCommon.ITXVideoRecordListener{
+public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayListener, View.OnClickListener, TCPlayerMgr.PlayerListener, TCInputTextMsgDialog.OnTextSendListener, TCChatRoomMgr.TCChatRoomListener, TXRecordCommon.ITXVideoRecordListener {
     private static final String TAG = TCLivePlayerActivity.class.getSimpleName();
 
     protected TXCloudVideoView mTXCloudVideoView;
@@ -129,7 +129,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
     private TCFrequeControl mLikeFrequeControl;
 
     //弹幕
-    private TCDanmuMgr  mDanmuMgr;
+    private TCDanmuMgr mDanmuMgr;
     private IDanmakuView mDanmuView;
 
     //点播相关
@@ -157,8 +157,9 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     //录制相关
     private boolean mRecording = false;
-    private ProgressBar     mRecordProgress = null;
+    private ProgressBar mRecordProgress = null;
     private long mStartRecordTimeStamp = 0;
+    private AlertDialog mShareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,7 +178,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         mPlayUrl = intent.getStringExtra(TCConstants.PLAY_URL);
         mGroupId = intent.getStringExtra(TCConstants.GROUP_ID);
         mPlayType = intent.getIntExtra(TCConstants.PLAY_TYPE, 0);
-        mIsLivePlay = (mPlayType==0);   //0表示是直播
+        mIsLivePlay = (mPlayType == 0);   //0表示是直播
         mPusherNickname = intent.getStringExtra(TCConstants.PUSHER_NAME);
         mPusherAvatar = intent.getStringExtra(TCConstants.PUSHER_AVATAR);
         mHeartCount = Long.decode(intent.getStringExtra(TCConstants.HEART_COUNT));
@@ -211,14 +212,16 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     static class TXPhoneStateListener extends PhoneStateListener {
         WeakReference<TXLivePlayer> mPlayer;
+
         public TXPhoneStateListener(TXLivePlayer player) {
             mPlayer = new WeakReference<TXLivePlayer>(player);
         }
+
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             super.onCallStateChanged(state, incomingNumber);
             TXLivePlayer player = mPlayer.get();
-            switch(state){
+            switch (state) {
                 //电话等待接听
                 case TelephonyManager.CALL_STATE_RINGING:
                     if (player != null) player.setMute(true);
@@ -233,8 +236,11 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
                     break;
             }
         }
-    };
+    }
+
+    ;
     private PhoneStateListener mPhoneListener = null;
+
     /**
      * 观众加入房间操作
      */
@@ -245,7 +251,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         mTCPlayerMgr = TCPlayerMgr.getInstance();
         mTCPlayerMgr.setPlayerListener(this);
 
-        if(mIsLivePlay) {
+        if (mIsLivePlay) {
             //仅当直播时才进行执行加入直播间逻辑
             mTCChatRoomMgr.setMessageListener(this);
             mTCChatRoomMgr.joinGroup(mGroupId);
@@ -303,7 +309,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean bFromUser) {
                 if (mTextProgress != null) {
-                    mTextProgress.setText(String.format(Locale.CHINA, "%02d:%02d:%02d/%02d:%02d:%02d", progress / 3600, (progress%3600)/60, (progress%3600) % 60, seekBar.getMax() / 3600, (seekBar.getMax()%3600) / 60, (seekBar.getMax()%3600) % 60));
+                    mTextProgress.setText(String.format(Locale.CHINA, "%02d:%02d:%02d/%02d:%02d:%02d", progress / 3600, (progress % 3600) / 60, (progress % 3600) % 60, seekBar.getMax() / 3600, (seekBar.getMax() % 3600) / 60, (seekBar.getMax() % 3600) % 60));
                 }
             }
 
@@ -365,7 +371,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         mMemberCount = (TextView) findViewById(R.id.tv_member_counts);
 
         mCurrentMemberCount++;
-        mMemberCount.setText(String.format(Locale.CHINA,"%d",mCurrentMemberCount));
+        mMemberCount.setText(String.format(Locale.CHINA, "%d", mCurrentMemberCount));
         mChatMsgListAdapter = new TCChatMsgListAdapter(this, mListViewMsg, mArrayListChatEntity);
         mListViewMsg.setAdapter(mChatMsgListAdapter);
 
@@ -393,7 +399,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
      * @param avatar 头像链接
      */
     private void showHeadIcon(ImageView view, String avatar) {
-        TCUtils.showPicWithUrl(this,view,avatar,R.drawable.face);
+        TCUtils.showPicWithUrl(this, view, avatar, R.drawable.face);
     }
 
     private boolean checkPlayUrl() {
@@ -405,7 +411,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         if (mIsLivePlay) {
             if (mPlayUrl.startsWith("rtmp://")) {
                 mUrlPlayType = TXLivePlayer.PLAY_TYPE_LIVE_RTMP;
-            } else if ((mPlayUrl.startsWith("http://") || mPlayUrl.startsWith("https://"))&& mPlayUrl.contains(".flv")) {
+            } else if ((mPlayUrl.startsWith("http://") || mPlayUrl.startsWith("https://")) && mPlayUrl.contains(".flv")) {
                 mUrlPlayType = TXLivePlayer.PLAY_TYPE_LIVE_FLV;
             } else {
                 Toast.makeText(getApplicationContext(), "播放地址不合法，直播目前仅支持rtmp,flv播放方式!", Toast.LENGTH_SHORT).show();
@@ -459,16 +465,16 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             if (-1 == result) {
                 Log.d(TAG, TCConstants.ERROR_MSG_NOT_QCLOUD_LINK);
 //                Toast.makeText(getApplicationContext(), TCConstants.ERROR_MSG_NOT_QCLOUD_LINK, Toast.LENGTH_SHORT).show();
-                rstData.putExtra(TCConstants.ACTIVITY_RESULT,TCConstants.ERROR_MSG_NOT_QCLOUD_LINK);
+                rstData.putExtra(TCConstants.ACTIVITY_RESULT, TCConstants.ERROR_MSG_NOT_QCLOUD_LINK);
             } else {
                 Log.d(TAG, TCConstants.ERROR_RTMP_PLAY_FAILED);
 //                Toast.makeText(getApplicationContext(), TCConstants.ERROR_RTMP_PLAY_FAILED, Toast.LENGTH_SHORT).show();
-                rstData.putExtra(TCConstants.ACTIVITY_RESULT,TCConstants.ERROR_MSG_NOT_QCLOUD_LINK);
+                rstData.putExtra(TCConstants.ACTIVITY_RESULT, TCConstants.ERROR_MSG_NOT_QCLOUD_LINK);
             }
 
             mTXCloudVideoView.onPause();
             stopPlay(true);
-            setResult(TCLiveListFragment.START_LIVE_PLAY,rstData);
+            setResult(TCLiveListFragment.START_LIVE_PLAY, rstData);
             finish();
         } else {
             mPlaying = true;
@@ -505,8 +511,8 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         stopPlay(true);
 
         Intent rstData = new Intent();
-        rstData.putExtra(TCConstants.ACTIVITY_RESULT,errorMsg);
-        setResult(TCLiveListFragment.START_LIVE_PLAY,rstData);
+        rstData.putExtra(TCConstants.ACTIVITY_RESULT, errorMsg);
+        setResult(TCLiveListFragment.START_LIVE_PLAY, rstData);
 
         super.showErrorAndQuit(errorMsg);
 
@@ -532,10 +538,10 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             case R.id.btn_back:
                 Intent rstData = new Intent();
                 long memberCount = mCurrentMemberCount - 1;
-                rstData.putExtra(TCConstants.MEMBER_COUNT, memberCount>=0 ? memberCount:0);
+                rstData.putExtra(TCConstants.MEMBER_COUNT, memberCount >= 0 ? memberCount : 0);
                 rstData.putExtra(TCConstants.HEART_COUNT, mHeartCount);
                 rstData.putExtra(TCConstants.PUSHER_ID, mPusherId);
-                setResult(0,rstData);
+                setResult(0, rstData);
                 finish();
                 break;
             case R.id.btn_like:
@@ -589,7 +595,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             case R.id.btn_log:
             case R.id.btn_vod_log:
                 showLog();
-            break;
+                break;
             case R.id.btn_record:
                 showRecordUI();
                 break;
@@ -613,17 +619,16 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         mTXCloudVideoView.onResume();
         if (!mIsLivePlay && !mVideoPause) {
             mTXLivePlayer.resume();
-        }
-        else {
+        } else {
             if (mDanmuMgr != null) {
                 mDanmuMgr.resume();
             }
             if (mPausing) {
                 mPausing = false;
-                    startPlay();
-                }
+                startPlay();
             }
         }
+    }
 
     @Override
     protected void onPause() {
@@ -639,8 +644,8 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             }
 
             mPausing = true;
-                stopPlay(false);
-            }
+            stopPlay(false);
+        }
 
     }
 
@@ -672,7 +677,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
     }
 
     public void quitRoom() {
-        if(mIsLivePlay) {
+        if (mIsLivePlay) {
 
             mTCChatRoomMgr.quitGroup(mGroupId);
             mTCChatRoomMgr.removeMsgListener();
@@ -686,7 +691,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
     @Override
     public void onPlayEvent(int event, Bundle param) {
         if (mTXCloudVideoView != null) {
-            mTXCloudVideoView.setLogText(null,param,event);
+            mTXCloudVideoView.setLogText(null, param, event);
         }
 //        if (event == TXLiveConstants.PLAY_EVT_PLAY_BEGIN) {
 ////            stopLoadingAnimation();
@@ -708,7 +713,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
                 mSeekBar.setProgress(progress);
             }
             if (mTextProgress != null) {
-                mTextProgress.setText(String.format(Locale.CHINA, "%02d:%02d:%02d/%02d:%02d:%02d", progress / 3600, (progress%3600) / 60, progress % 60, duration / 3600, (duration%3600) / 60, duration % 60));
+                mTextProgress.setText(String.format(Locale.CHINA, "%02d:%02d:%02d/%02d:%02d:%02d", progress / 3600, (progress % 3600) / 60, progress % 60, duration / 3600, (duration % 3600) / 60, duration % 60));
             }
 
             if (mSeekBar != null) {
@@ -722,7 +727,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             stopPlay(false);
             mVideoPause = false;
             if (mTextProgress != null) {
-                mTextProgress.setText(String.format(Locale.CHINA, "%s","00:00:00/00:00:00"));
+                mTextProgress.setText(String.format(Locale.CHINA, "%s", "00:00:00/00:00:00"));
             }
             if (mSeekBar != null) {
                 mSeekBar.setProgress(0);
@@ -731,8 +736,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
                 mPlayIcon.setBackgroundResource(R.drawable.play_start);
             }
             mBgImageView.setVisibility(View.VISIBLE);
-        }
-        else if (event == TXLiveConstants.PLAY_EVT_RCV_FIRST_I_FRAME) {
+        } else if (event == TXLiveConstants.PLAY_EVT_RCV_FIRST_I_FRAME) {
             mBgImageView.setVisibility(View.GONE);
         }
 //        else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
@@ -744,13 +748,14 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
     public void onNetStatus(Bundle status) {
         Log.d(TAG, "Current status: " + status.toString());
         if (mTXCloudVideoView != null) {
-            mTXCloudVideoView.setLogText(status,null,0);
+            mTXCloudVideoView.setLogText(status, null, 0);
         }
 
-        if(status.getInt(TXLiveConstants.NET_STATUS_VIDEO_WIDTH) > status.getInt(TXLiveConstants.NET_STATUS_VIDEO_HEIGHT)) {
-            if(mTXLivePlayer != null) mTXLivePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_LANDSCAPE);
-        }
-        else if(mTXLivePlayer != null) mTXLivePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
+        if (status.getInt(TXLiveConstants.NET_STATUS_VIDEO_WIDTH) > status.getInt(TXLiveConstants.NET_STATUS_VIDEO_HEIGHT)) {
+            if (mTXLivePlayer != null)
+                mTXLivePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_LANDSCAPE);
+        } else if (mTXLivePlayer != null)
+            mTXLivePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
     }
 
     private void notifyMsg(final TCChatEntity entity) {
@@ -762,10 +767,8 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 //                    if(mArrayListChatEntity.contains(entity))
 //                        return;
 //                }
-                if (mArrayListChatEntity.size() > 1000)
-                {
-                    while (mArrayListChatEntity.size() > 900)
-                    {
+                if (mArrayListChatEntity.size() > 1000) {
+                    while (mArrayListChatEntity.size() > 900) {
                         mArrayListChatEntity.remove(0);
                     }
                 }
@@ -778,6 +781,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     /**
      * 加入群组/退出群组回调
+     *
      * @param errCode 错误码
      */
     @Override
@@ -785,12 +789,10 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         if (errCode != 0) {
             if (TCConstants.ERROR_GROUP_NOT_EXIT == errCode) {
                 showErrorAndQuit(TCConstants.ERROR_MSG_GROUP_NOT_EXIT);
-            }
-            else if(TCConstants.ERROR_QALSDK_NOT_INIT == errCode){
-                ((TCApplication)getApplication()).initSDK();
+            } else if (TCConstants.ERROR_QALSDK_NOT_INIT == errCode) {
+                ((TCApplication) getApplication()).initSDK();
                 joinRoom();
-            }
-            else {
+            } else {
                 showErrorAndQuit(TCConstants.ERROR_MSG_JOIN_GROUP_FAILED + errCode);
             }
         } else {
@@ -802,7 +804,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     @Override
     public void onJoinGroupCallback(int code, String msg) {
-        if(code == 0){
+        if (code == 0) {
             Log.d(TAG, "onJoin group success" + msg);
         } else if (TCConstants.NO_LOGIN_CACHE == code) {
             TXLog.d(TAG, "onJoin group failed" + msg);
@@ -815,11 +817,11 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     public void onSendMsgCallback(int errCode, TIMMessage timMessage) {
         //消息发送成功后回显
-        if(errCode == 0) {
-            TIMElemType elemType =  timMessage.getElement(0).getType();
-            if(elemType == TIMElemType.Text) {
+        if (errCode == 0) {
+            TIMElemType elemType = timMessage.getElement(0).getType();
+            if (elemType == TIMElemType.Text) {
                 Log.d(TAG, "onSendTextMsgsuccess:" + errCode);
-            } else if(elemType == TIMElemType.Custom) {
+            } else if (elemType == TIMElemType.Custom) {
                 //custom消息存在消息回调,此处显示成功失败
                 Log.d(TAG, "onSendCustomMsgsuccess:" + errCode);
             }
@@ -860,7 +862,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
         mCurrentMemberCount++;
         mTotalMemberCount++;
-        mMemberCount.setText(String.format(Locale.CHINA,"%d",mCurrentMemberCount));
+        mMemberCount.setText(String.format(Locale.CHINA, "%d", mCurrentMemberCount));
 
         //左下角显示用户加入消息
         TCChatEntity entity = new TCChatEntity();
@@ -875,12 +877,12 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     public void handleMemberQuitMsg(TCSimpleUserInfo userInfo) {
 
-        if(mCurrentMemberCount > 0)
+        if (mCurrentMemberCount > 0)
             mCurrentMemberCount--;
         else
             Log.d(TAG, "接受多次退出请求，目前人数为负数");
 
-        mMemberCount.setText(String.format(Locale.CHINA,"%d",mCurrentMemberCount));
+        mMemberCount.setText(String.format(Locale.CHINA, "%d", mCurrentMemberCount));
 
         mAvatarListAdapter.removeItem(userInfo.userid);
 
@@ -961,7 +963,8 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     /**
      * TextInputDialog发送回调
-     * @param msg 文本信息
+     *
+     * @param msg       文本信息
      * @param danmuOpen 是否打开弹幕
      */
     @Override
@@ -1000,7 +1003,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         try {
             mShareUrl = mShareUrl + "?sdkappid=" + java.net.URLEncoder.encode(String.valueOf(TCConstants.IMSDK_APPID), "utf-8")
                     + "&acctype=" + java.net.URLEncoder.encode(String.valueOf(TCConstants.IMSDK_ACCOUNT_TYPE), "utf-8")
-                    + "&userid=" +java.net.URLEncoder.encode(mPusherId, "utf-8")
+                    + "&userid=" + java.net.URLEncoder.encode(mPusherId, "utf-8")
                     + "&type=" + java.net.URLEncoder.encode(String.valueOf(mPlayType), "utf-8")
                     + "&fileid=" + java.net.URLEncoder.encode(String.valueOf(mFileId), "utf-8")
                     + "&ts=" + java.net.URLEncoder.encode(String.valueOf(mTimeStamp), "utf-8");
@@ -1009,9 +1012,9 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         }
 
         if (mCoverUrl == null || mCoverUrl.isEmpty()) {
-            mImage= new UMImage(TCLivePlayerActivity.this.getApplicationContext(), R.drawable.bg);
+            mImage = new UMImage(TCLivePlayerActivity.this.getApplicationContext(), R.drawable.bg);
         } else {
-            mImage= new UMImage(TCLivePlayerActivity.this.getApplicationContext(), mCoverUrl);
+            mImage = new UMImage(TCLivePlayerActivity.this.getApplicationContext(), mCoverUrl);
         }
     }
 
@@ -1021,10 +1024,10 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
     private void showShareDialog() {
 
         View view = getLayoutInflater().inflate(R.layout.share_dialog, null);
-        final AlertDialog mDialog = new AlertDialog.Builder(this,R.style.ConfirmDialogStyle).create();
-        mDialog.show();// 显示创建的AlertDialog，并显示，必须放在Window设置属性之前
+        mShareDialog = new AlertDialog.Builder(this, R.style.ConfirmDialogStyle).create();
+        mShareDialog.show();// 显示创建的AlertDialog，并显示，必须放在Window设置属性之前
 
-        Window window =mDialog.getWindow();
+        Window window = mShareDialog.getWindow();
         if (window != null) {
             window.setContentView(view);//这一步必须指定，否则不出现弹窗
             WindowManager.LayoutParams mParams = window.getAttributes();
@@ -1037,20 +1040,20 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
         Button btn_wx = (Button) view.findViewById(R.id.btn_share_wx);
         Button btn_circle = (Button) view.findViewById(R.id.btn_share_circle);
-        Button btn_qq = (Button) view.findViewById(R.id.btn_share_qq);
+       /* Button btn_qq = (Button) view.findViewById(R.id.btn_share_qq);
         Button btn_qzone = (Button) view.findViewById(R.id.btn_share_qzone);
-        Button btn_wb = (Button) view.findViewById(R.id.btn_share_wb);
-        Button btn_cancle = (Button) view.findViewById(R.id.btn_share_cancle);
+        Button btn_wb = (Button) view.findViewById(R.id.btn_share_wb);*/
+        Button btn_cancle = (Button) view.findViewById(R.id.btn_share_cancel);
 
         btn_wx.setOnClickListener(mShareBtnClickListen);
         btn_circle.setOnClickListener(mShareBtnClickListen);
-        btn_qq.setOnClickListener(mShareBtnClickListen);
+      /*  btn_qq.setOnClickListener(mShareBtnClickListen);
         btn_qzone.setOnClickListener(mShareBtnClickListen);
-        btn_wb.setOnClickListener(mShareBtnClickListen);
+        btn_wb.setOnClickListener(mShareBtnClickListen);*/
         btn_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDialog.dismiss();
+                mShareDialog.dismiss();
             }
         });
     }
@@ -1065,7 +1068,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
                 case R.id.btn_share_circle:
                     mShare_meidia = SHARE_MEDIA.WEIXIN_CIRCLE;
                     break;
-                case R.id.btn_share_qq:
+          /*      case R.id.btn_share_qq:
                     mShare_meidia = SHARE_MEDIA.QQ;
                     break;
                 case R.id.btn_share_qzone:
@@ -1073,10 +1076,12 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
                     break;
                 case R.id.btn_share_wb:
                     mShare_meidia = SHARE_MEDIA.SINA;
-                    break;
+                    break;*/
                 default:
                     break;
             }
+
+            mShareDialog.dismiss();
 
             ShareAction shareAction = new ShareAction(TCLivePlayerActivity.this);
 
@@ -1093,34 +1098,43 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
     private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onStart(SHARE_MEDIA platform) {
-            Log.d("plat","platform" + platform);
+            Log.d("plat", "platform" + platform);
         }
 
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Log.d("plat","platform"+platform);
+            Log.d("plat", "platform" + platform);
             Toast.makeText(TCLivePlayerActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            if(mShareDialog != null){
+                mShareDialog.dismiss();
+            }
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(TCLivePlayerActivity.this,"分享失败"+t.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(TCLivePlayerActivity.this, "分享失败" + t.getMessage(), Toast.LENGTH_LONG).show();
+            if(mShareDialog != null){
+                mShareDialog.dismiss();
+            }
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(TCLivePlayerActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TCLivePlayerActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            if(mShareDialog != null){
+                mShareDialog.dismiss();
+            }
         }
     };
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /** attention to this below ,must add this**/
+        //attention to this below ,must add this （qq、微博等）
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
-        com.umeng.socialize.utils.Log.d("result","onActivityResult");
+        com.umeng.socialize.utils.Log.d("result", "onActivityResult");
     }
-
     protected void showLog() {
         mShowLog = !mShowLog;
         if (mTXCloudVideoView != null) {
@@ -1153,7 +1167,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         if (mUserAvatarList != null) {
             mUserAvatarList.setVisibility(View.GONE);
         }
-        if(mHeartLayout != null) {
+        if (mHeartLayout != null) {
             mHeartLayout.setVisibility(View.GONE);
         }
         if (mListViewMsg != null) {
@@ -1188,7 +1202,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         if (mUserAvatarList != null) {
             mUserAvatarList.setVisibility(View.VISIBLE);
         }
-        if(mHeartLayout != null) {
+        if (mHeartLayout != null) {
             mHeartLayout.setVisibility(View.VISIBLE);
         }
         if (mListViewMsg != null) {
@@ -1226,7 +1240,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
                 mTXLivePlayer.stopRecord();
             }
             ImageView liveRecord = (ImageView) findViewById(R.id.record);
-            if(liveRecord != null) liveRecord.setBackgroundResource(R.drawable.start_record);
+            if (liveRecord != null) liveRecord.setBackgroundResource(R.drawable.start_record);
             mRecording = false;
 
             if (mRecordProgress != null) {
@@ -1243,13 +1257,13 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         hideRecordUI();
 
         ImageView liveRecord = (ImageView) findViewById(R.id.record);
-        if(liveRecord != null) liveRecord.setBackgroundResource(R.drawable.start_record);
+        if (liveRecord != null) liveRecord.setBackgroundResource(R.drawable.start_record);
         mRecording = false;
     }
 
     private void stopRecord(boolean showToast) {
         // 录制时间要大于5s
-        if (System.currentTimeMillis() <= mStartRecordTimeStamp + 5*1000) {
+        if (System.currentTimeMillis() <= mStartRecordTimeStamp + 5 * 1000) {
             if (showToast) {
                 showTooShortToast();
                 return;
@@ -1263,7 +1277,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             mTXLivePlayer.stopRecord();
         }
         ImageView liveRecord = (ImageView) findViewById(R.id.record);
-        if(liveRecord != null) liveRecord.setBackgroundResource(R.drawable.start_record);
+        if (liveRecord != null) liveRecord.setBackgroundResource(R.drawable.start_record);
         mRecording = false;
     }
 
@@ -1273,7 +1287,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         mTXLivePlayer.setVideoRecordListener(this);
         mTXLivePlayer.startRecord(TXRecordCommon.RECORD_TYPE_STREAM_SOURCE);
         ImageView liveRecord = (ImageView) findViewById(R.id.record);
-        if(liveRecord != null) liveRecord.setBackgroundResource(R.drawable.stop_record);
+        if (liveRecord != null) liveRecord.setBackgroundResource(R.drawable.stop_record);
         mRecording = true;
         mStartRecordTimeStamp = System.currentTimeMillis();
     }
@@ -1289,7 +1303,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             int[] position = new int[2];
             mRecordProgress.getLocationOnScreen(position);
             Toast toast = Toast.makeText(this, "至少录到这里", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP|Gravity.LEFT, position[0], position[1] - statusBarHeight - 110);
+            toast.setGravity(Gravity.TOP | Gravity.LEFT, position[0], position[1] - statusBarHeight - 110);
             toast.show();
         }
     }
