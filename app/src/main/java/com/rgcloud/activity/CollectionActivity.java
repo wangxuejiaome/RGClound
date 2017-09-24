@@ -15,6 +15,7 @@ import com.rgcloud.entity.response.CollectionResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
+import com.rgcloud.util.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -82,6 +83,9 @@ public class CollectionActivity extends BaseActivity {
                 mCollectionAdapter.setNewData(collectionResEntity.MemberCollect);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ptrClassicFrameLayout.refreshComplete();
+                if(mCollectionAdapter.getItemCount() == 0){
+                    ToastUtil.showShortToast("暂无数据");
+                }
             }
 
             @Override

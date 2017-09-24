@@ -22,6 +22,7 @@ import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.entity.response.CollectionResEntity;
+import com.rgcloud.entity.response.CommentResEntity;
 import com.rgcloud.entity.response.CouponResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
@@ -209,6 +210,14 @@ public class RequestApi {
      */
     public static void getCollection(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
         Call<CollectionResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getCollection(baseReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取收藏
+     */
+    public static void getComment(BaseReqEntity baseReqEntity, ResponseCallBack responseCallBack) {
+        Call<CommentResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getComment(baseReqEntity);
         call.enqueue(responseCallBack);
     }
 

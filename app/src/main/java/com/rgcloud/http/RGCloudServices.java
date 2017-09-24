@@ -21,6 +21,7 @@ import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
 import com.rgcloud.entity.response.CollectionResEntity;
+import com.rgcloud.entity.response.CommentResEntity;
 import com.rgcloud.entity.response.CouponResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
@@ -171,4 +172,9 @@ public interface RGCloudServices {
     @POST("memberApi/findMemberCollectOutput")
     Call<CollectionResEntity> getCollection(@Body BaseReqEntity baseReqEntity);
 
+    /**
+     * 获取评论
+     */
+    @POST("memberApi/findMemberComment")
+    Call<CommentResEntity> getComment(@Body BaseReqEntity baseReqEntity);
 }

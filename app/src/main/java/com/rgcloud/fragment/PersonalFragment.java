@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.rgcloud.R;
 import com.rgcloud.activity.CollectionActivity;
+import com.rgcloud.activity.CommentActivity;
 import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.PointActivity;
 import com.rgcloud.activity.SettingActivity;
@@ -102,6 +103,7 @@ public class PersonalFragment extends Fragment {
                 startActivity(new Intent(getActivity(), CollectionActivity.class));
                 break;
             case R.id.tv_comment_personal:
+                startActivity(new Intent(getActivity(), CommentActivity.class));
                 break;
             case R.id.ll_live_personal:
                 Intent liveIntent = new Intent(getActivity(), LiveActivity.class);
