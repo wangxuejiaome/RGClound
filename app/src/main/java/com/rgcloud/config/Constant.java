@@ -1,7 +1,5 @@
 package com.rgcloud.config;
 
-import com.tencent.qalsdk.im_open.http;
-
 /**
  * Created by wangxuejiao on 2017/9/2.
  */

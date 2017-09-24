@@ -160,7 +160,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
                 mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
                 mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
-                mPreferencesUtil.put(PreferencesUtil.ISWXLOGIN, true);
+                mPreferencesUtil.put(PreferencesUtil.WX_BIND_PHONE, tokenResEntity.MemberPhone);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("登录成功");
                 AppActivityManager.getActivityManager().getCurrentActivity().startActivity(new Intent(TCApplication.getApplication(), Main2Activity.class));

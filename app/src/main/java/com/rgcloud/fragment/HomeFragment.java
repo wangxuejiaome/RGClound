@@ -1,12 +1,15 @@
 package com.rgcloud.fragment;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
 import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.activity.ActivityDetailActivity;
+import com.rgcloud.activity.BindPhoneActivity;
 import com.rgcloud.activity.CalendarActivity;
 import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.LoginActivity;
@@ -50,6 +54,8 @@ import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
+
+import static java.util.ResourceBundle.clearCache;
 
 /**
  * Created by wangxuejiao on 2017/9/5.
@@ -135,8 +141,17 @@ public class HomeFragment extends Fragment {
                 FunctionEntity functionEntity = mFunctionAdapter.getItem(position);
                 switch (functionEntity.name) {
                     case "我爱直播":
-                        if (mPreferencesUtil.getBoolean(PreferencesUtil.ISWXLOGIN)) {
-                            ToastUtil.showShortToast("读不起，微信登录暂不支持观看直播");
+                        if (TextUtils.isEmpty(mPreferencesUtil.getString(PreferencesUtil.WX_BIND_PHONE))) {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                            builder1
+                                    .setMessage("您好，微信登录的用户需要在设置中先绑定手机号再看直播")
+                                    .setPositiveButton("去绑定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            startActivity(new Intent(getActivity(), BindPhoneActivity.class));
+                                        }
+                                    }).setNegativeButton("取消", null)
+                                    .show();
                             return;
                         }
                         if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {

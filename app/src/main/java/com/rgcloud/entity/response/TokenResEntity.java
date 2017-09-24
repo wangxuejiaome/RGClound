@@ -22,5 +22,6 @@ public class TokenResEntity extends BaseResEntity{
     public String MemberNickName;
     public String RequestUrl;
     public String Token;
+    public String MemberPhone;
     
 }

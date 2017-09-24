@@ -16,6 +16,7 @@ import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.CountDownUtil;
+import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
 import com.tencent.qcloud.xiaozhibo.login.TCLoginMgr;
 import com.tencent.qcloud.xiaozhibo.login.TCRegisterMgr;
@@ -134,7 +135,8 @@ public class BindPhoneActivity extends BaseActivity implements TCRegisterMgr.TCR
 
         CirCleLoadingDialogUtil.dismissCircleProgressDialog();
         ToastUtil.showShortToast("绑定成功");
-        //PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
+        PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
+        preferencesUtil.put(PreferencesUtil.WX_BIND_PHONE, identifier);
         finish();
     }
 
