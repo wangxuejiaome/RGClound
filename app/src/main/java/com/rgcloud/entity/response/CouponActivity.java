@@ -91,21 +91,21 @@ public class CouponActivity extends BaseActivity {
 
 
         View view = View.inflate(mContext, R.layout.dialog_coupon_qr, null);
-        AlertDialog alertDialog = new AlertDialog.Builder(mContext)
-                .setTitle("门票二维码")
-                .setView(view, (int) getResources().getDimension(R.dimen.x100), 0, (int) getResources().getDimension(R.dimen.x100), 0)
+        AlertDialog alertDialog = new AlertDialog.Builder(mContext, R.style.ConfirmDialogStyle)
+                .setView(view)
                 .setCancelable(false)
                 .setNegativeButton("取消", null)
                 .show();
 
 
         ImageView ivQR = (ImageView) view.findViewById(R.id.iv_coupon_qr);
-        //GlideUtil.displayNoPlaceHolde(mContext, qrImage, ivQR);
-        GlideUtil.displayWithPlaceHolder(mContext,qrImage,R.mipmap.activity_temp,ivQR);
+        GlideUtil.displayWithPlaceHolder(mContext, qrImage, R.mipmap.activity_temp, ivQR);
 
         WindowManager.LayoutParams params = alertDialog.getWindow().getAttributes();
-        params.width = (int) getResources().getDimension(R.dimen.x500);
-        params.height = (int) getResources().getDimension(R.dimen.x500);
+       /*  params.width = (int) getResources().getDimension(R.dimen.x500);
+       params.height = (int) getResources().getDimension(R.dimen.x500);*/
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         alertDialog.getWindow().setAttributes(params);
 
     }
