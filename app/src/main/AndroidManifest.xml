@@ -346,6 +346,8 @@
             android:label="@string/title_activity_coupon"
             android:theme="@style/AppTheme">
         </activity>
+        <activity android:name=".activity.CollectionActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ import com.rgcloud.entity.request.WXReqEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
+import com.rgcloud.entity.response.CollectionResEntity;
 import com.rgcloud.entity.response.CouponResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
@@ -163,5 +164,11 @@ public interface RGCloudServices {
      */
     @POST("memberApi/findMemberTicket")
     Call<CouponResEntity> getCoupon(@Body BaseReqEntity baseReqEntity);
+
+    /**
+     * 获取收藏
+     */
+    @POST("memberApi/findMemberCollectOutput")
+    Call<CollectionResEntity> getCollection(@Body BaseReqEntity baseReqEntity);
 
 }

@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rgcloud.R;
+import com.rgcloud.activity.CollectionActivity;
 import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.PointActivity;
 import com.rgcloud.activity.SettingActivity;
@@ -98,6 +99,7 @@ public class PersonalFragment extends Fragment {
                 startActivity(new Intent(getActivity(), CouponActivity.class));
                 break;
             case R.id.tv_collection_personal:
+                startActivity(new Intent(getActivity(), CollectionActivity.class));
                 break;
             case R.id.tv_comment_personal:
                 break;
