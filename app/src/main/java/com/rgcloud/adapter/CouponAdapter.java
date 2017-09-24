@@ -1,8 +1,13 @@
 package com.rgcloud.adapter;
 
+import android.graphics.Bitmap;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.rgcloud.R;
@@ -47,7 +52,17 @@ public class CouponAdapter extends BaseQuickAdapter<CouponResEntity.CouponBean, 
             tvCouponStatus.setText("已过期");
         }
 
-        ImageView imageView = helper.getView(R.id.iv_coupon_item);
-        GlideUtil.displayWithPlaceHolder(AppActivityManager.getActivityManager().getCurrentActivity(), item.ActiveImage, R.mipmap.ic_coupon_default, imageView);
+        final ImageView imageView = helper.getView(R.id.iv_coupon_item);
+        Glide.with(AppActivityManager.getActivityManager().getCurrentActivity()).load( item.ActiveImage).asBitmap().centerCrop().into(new BitmapImageViewTarget(imageView) {
+            @Override
+            protected void setResource(Bitmap resource) {
+                RoundedBitmapDrawable circularBitmapDrawable =
+                        RoundedBitmapDrawableFactory.create(AppActivityManager.getActivityManager().getCurrentActivity().getResources(), resource);
+                circularBitmapDrawable.setCircular(true);
+                imageView.setImageDrawable(circularBitmapDrawable);
+            }
+        });
+
+        //GlideUtil.displayWithPlaceHolder(AppActivityManager.getActivityManager().getCurrentActivity(), item.ActiveImage, R.mipmap.ic_coupon_default, imageView);
     }
 }

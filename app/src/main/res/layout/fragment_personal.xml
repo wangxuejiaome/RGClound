@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
+        android:background="@mipmap/bg_personal"
         android:orientation="vertical">
 
         <ImageView
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/y24"
+            android:layout_marginTop="@dimen/y20"
             android:text="波波"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -96,13 +96,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_live_personal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y100"
-        android:id="@+id/ll_live_personal"
+        android:layout_marginTop="@dimen/y20"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x20"
         android:paddingRight="@dimen/x20"
-        android:layout_marginTop="@dimen/y20"
         android:visibility="gone">
 
         <TextView
@@ -110,8 +110,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="我的直播"
-            android:textSize="15sp"
-            android:textColor="@color/grey900"/>
+            android:textColor="@color/grey900"
+            android:textSize="15sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -126,9 +126,9 @@
         android:background="@color/colorDivider"/>
 
     <LinearLayout
+        android:id="@+id/ll_point_personal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y100"
-        android:id="@+id/ll_point_personal"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x20"
         android:paddingRight="@dimen/x20">
@@ -138,17 +138,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="我的积分"
-            android:textSize="15sp"
-            android:textColor="@color/grey900"/>
+            android:textColor="@color/grey900"
+            android:textSize="15sp"/>
 
         <TextView
+            android:id="@+id/tv_available_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_available_point"
+            android:layout_marginRight="@dimen/x20"
             android:text="0积分"
-            android:textSize="15sp"
             android:textColor="@color/grey500"
-            android:layout_marginRight="@dimen/x20"/>
+            android:textSize="15sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -163,21 +163,21 @@
         android:background="@color/colorDivider"/>
 
     <LinearLayout
+        android:id="@+id/ll_setting"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y100"
-        android:id="@+id/ll_setting"
+        android:layout_marginTop="@dimen/y20"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x20"
-        android:paddingRight="@dimen/x20"
-        android:layout_marginTop="@dimen/y20">
+        android:paddingRight="@dimen/x20">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="设置"
-            android:textSize="15sp"
-            android:textColor="@color/grey900"/>
+            android:textColor="@color/grey900"
+            android:textSize="15sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -192,21 +192,21 @@
         android:background="@color/colorDivider"/>
 
     <LinearLayout
+        android:id="@+id/ll_about_us"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y100"
-        android:id="@+id/ll_about_us"
+        android:layout_marginTop="@dimen/y20"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/x20"
-        android:paddingRight="@dimen/x20"
-        android:layout_marginTop="@dimen/y20">
+        android:paddingRight="@dimen/x20">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="关于我们"
-            android:textSize="15sp"
-            android:textColor="@color/grey900"/>
+            android:textColor="@color/grey900"
+            android:textSize="15sp"/>
 
         <ImageView
             android:layout_width="wrap_content"

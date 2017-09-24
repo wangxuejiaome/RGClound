@@ -17,6 +17,7 @@ import com.rgcloud.activity.CommentActivity;
 import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.PointActivity;
 import com.rgcloud.activity.SettingActivity;
+import com.rgcloud.activity.WebviewActivity;
 import com.rgcloud.entity.request.BaseReqEntity;
 import com.rgcloud.entity.response.CouponActivity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
@@ -79,6 +80,7 @@ public class PersonalFragment extends Fragment {
                 if (mPersonalInfoResEntity.CanDirectSeeding == 1) {
                     llLive.setVisibility(View.VISIBLE);
                 }
+                tvNickName.setText(mPersonalInfoResEntity.MemberNickName);
                 tvAvailablePoint.setText(mPersonalInfoResEntity.RemindPoint + "积分");
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
             }
@@ -121,6 +123,8 @@ public class PersonalFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.ll_about_us:
+                if (mPersonalInfoResEntity == null) return;
+                WebviewActivity.startWebView(getActivity(), "关于我们", mPersonalInfoResEntity.AboutUsUrl);
                 break;
         }
     }

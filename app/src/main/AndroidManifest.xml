@@ -354,6 +354,8 @@
         </activity>
         <activity android:name=".activity.BindPhoneActivity">
         </activity>
+        <activity android:name=".activity.WebviewActivity">
+        </activity>
     </application>
 
 </manifest>
