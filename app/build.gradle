@@ -46,7 +46,7 @@ android {
         }
     }
 
-  /*  signingConfigs {
+    /*signingConfigs {
         release {
             storeFile file('rgcloud.jks')
             storePassword 'wdrgcloud'
@@ -65,8 +65,8 @@ android {
         debug {
             signingConfig signingConfigs.release
         }
-    }*/
-
+    }
+*/
 
 }
 
