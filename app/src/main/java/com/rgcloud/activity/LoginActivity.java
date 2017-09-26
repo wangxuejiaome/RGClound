@@ -68,6 +68,11 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
     // IWXAPI 是第三方app和微信通信的openapi接口
     private IWXAPI api;
 
+    /**
+     * 用于被踢下线掉哪个方法登录
+     */
+    private boolean mIsWxLogin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +152,11 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
         });
     }
 
+    //踢下线的时候用
+    private static WXOpenIdResEntity mWxOpenIdResEntity;
+
     private static void wxLogin(WXOpenIdResEntity wxOpenIdResEntity) {
+        mWxOpenIdResEntity = wxOpenIdResEntity;
         WXReqEntity wxReqEntity = new WXReqEntity();
         wxReqEntity.OpenId = wxOpenIdResEntity.openid;
         wxReqEntity.UnionId = wxOpenIdResEntity.unionid;
@@ -160,7 +169,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
                 mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
                 mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
-                mPreferencesUtil.put(PreferencesUtil.USER_PHONE,tokenResEntity.MemberPhone);
+                mPreferencesUtil.put(PreferencesUtil.USER_PHONE, tokenResEntity.MemberPhone);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("登录成功");
                 AppActivityManager.getActivityManager().getCurrentActivity().startActivity(new Intent(TCApplication.getApplication(), Main2Activity.class));
@@ -179,7 +188,12 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mLoginType = 1;
-                        login();
+                        if (mIsWxLogin) {
+                            wxLogin(mWxOpenIdResEntity);
+                        } else {
+                            login();
+                        }
+
                     }
                 }).setNegativeButton("取消", null)
                 .show();
@@ -238,9 +252,11 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 startActivity(new Intent(mContext, ForgetPasswordActivity.class));
                 break;
             case R.id.btn_login:
+                mIsWxLogin = false;
                 login();
                 break;
             case R.id.btn_wx_login:
+                mIsWxLogin = true;
                 if (!api.isWXAppInstalled()) {
                     ToastUtil.showShortToast("您还未安装微信客户端");
                     return;
@@ -251,7 +267,6 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 req.state = "wechat_sdk_android";
                 api.sendReq(req);
                 break;
-
         }
     }
 
