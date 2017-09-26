@@ -33,6 +33,8 @@ public class BindPhoneActivity extends BaseActivity implements TCRegisterMgr.TCR
     EditText etPhone;
     @Bind(R.id.et_password_bind_phone)
     EditText etPassword;
+    @Bind(R.id.et_nick_name_bind_phone)
+    EditText etNickName;
     @Bind(R.id.et_verify_code_bind_phone)
     EditText etVerifyCode;
     @Bind(R.id.btn_verify_code_bind_phone)
@@ -57,6 +59,13 @@ public class BindPhoneActivity extends BaseActivity implements TCRegisterMgr.TCR
     private boolean checkedValidate() {
         if (TextUtils.isEmpty(etPhone.getText().toString().trim())) {
             ToastUtil.showShortToast("请输入手机号");
+            return false;
+        }
+        if (TextUtils.isEmpty(etNickName.getText().toString().trim())) {
+            ToastUtil.showShortToast("请输入昵称");
+            return false;
+        } else if (etNickName.getText().toString().trim().length() < 4) {
+            ToastUtil.showShortToast("昵称不能小于4位");
             return false;
         }
         if (TextUtils.isEmpty(etPassword.getText().toString().trim())) {
@@ -92,11 +101,12 @@ public class BindPhoneActivity extends BaseActivity implements TCRegisterMgr.TCR
         });
     }
 
-    private void binPhone() {
+    private void bindPhone() {
 
         if (!checkedValidate()) return;
         final BindPhoneReqEntity bindPhoneReqEntity = new BindPhoneReqEntity();
         bindPhoneReqEntity.PhoneNumber = etPhone.getText().toString().trim();
+        bindPhoneReqEntity.MemberNickName = etNickName.getText().toString().trim();
         bindPhoneReqEntity.ValidCode = etVerifyCode.getText().toString().trim();
         bindPhoneReqEntity.setPassword(etPassword.getText().toString().trim());
         RequestApi.bindPhone(bindPhoneReqEntity, new ResponseCallBack(mContext) {
@@ -105,7 +115,7 @@ public class BindPhoneActivity extends BaseActivity implements TCRegisterMgr.TCR
                 super.onObjectResponse(resEntity);
 
                 //在腾讯云上注册
-                mTCRegisterMgr.pwdRegist(bindPhoneReqEntity.PhoneNumber, "12345678");
+                mTCRegisterMgr.pwdRegist(bindPhoneReqEntity.MemberNickName, "12345678");
             }
         });
     }
@@ -136,7 +146,7 @@ public class BindPhoneActivity extends BaseActivity implements TCRegisterMgr.TCR
         CirCleLoadingDialogUtil.dismissCircleProgressDialog();
         ToastUtil.showShortToast("绑定成功");
         PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
-        preferencesUtil.put(PreferencesUtil.WX_BIND_PHONE, identifier);
+        preferencesUtil.put(PreferencesUtil.USER_PHONE, identifier);
         finish();
     }
 
@@ -161,7 +171,7 @@ public class BindPhoneActivity extends BaseActivity implements TCRegisterMgr.TCR
                 getVerifyCode();
                 break;
             case R.id.btn_bind_phone:
-                binPhone();
+                bindPhone();
                 break;
         }
     }

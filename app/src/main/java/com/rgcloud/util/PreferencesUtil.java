@@ -31,9 +31,9 @@ public class PreferencesUtil {
     public static final String ACCESS_TOKEN = "accessToken";
 
     /**
-     * 微信登录绑定的手机号
+     * 绑定的手机号
      */
-    public static final String WX_BIND_PHONE = "wxBindPhone";
+    public static final String USER_PHONE = "UserPhone";
 
 
     /**
@@ -224,7 +224,7 @@ public class PreferencesUtil {
     public void loginOutRemove() {
         mEditor.remove(ACCESS_TOKEN)
                 .remove(HAS_LOGIN)
-                .remove(WX_BIND_PHONE);
+                .remove(USER_PHONE);
         mEditor.commit();
     }
 

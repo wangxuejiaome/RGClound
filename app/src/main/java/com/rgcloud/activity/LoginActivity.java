@@ -160,7 +160,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 TokenResEntity tokenResEntity = (TokenResEntity) resEntity;
                 mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, tokenResEntity.Token);
                 mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
-                mPreferencesUtil.put(PreferencesUtil.WX_BIND_PHONE, tokenResEntity.MemberPhone);
+                mPreferencesUtil.put(PreferencesUtil.USER_PHONE,tokenResEntity.MemberPhone);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ToastUtil.showShortToast("登录成功");
                 AppActivityManager.getActivityManager().getCurrentActivity().startActivity(new Intent(TCApplication.getApplication(), Main2Activity.class));
@@ -203,6 +203,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
         mTCLoginMgr.removeTCLoginCallback();
         mPreferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, mTokenResEntity.Token);
         mPreferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
+        mPreferencesUtil.put(PreferencesUtil.USER_PHONE, etPhone.getText().toString().trim());
         CirCleLoadingDialogUtil.dismissCircleProgressDialog();
         ToastUtil.showShortToast("登录成功");
         startActivity(new Intent(mContext, Main2Activity.class));

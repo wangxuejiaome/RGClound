@@ -31,6 +31,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 
+import static com.rgcloud.wxapi.WXEntryActivity.code;
+
 
 public class RegisterActivity extends BaseActivity implements TCRegisterMgr.TCRegisterCallback {
 
@@ -159,6 +161,8 @@ public class RegisterActivity extends BaseActivity implements TCRegisterMgr.TCRe
             }
         });
 
+
+        TXLog.d("TCRegister", "注册的用户名是:" + identifier);
         //tcLoginMgr.pwdLogin(identifier, etPassword.getText().toString());
         tcLoginMgr.pwdLogin(identifier, "12345678");
         mTCRegisterMgr.removeTCRegisterCallback();
@@ -168,6 +172,7 @@ public class RegisterActivity extends BaseActivity implements TCRegisterMgr.TCRe
         PreferencesUtil preferencesUtil = new PreferencesUtil(mContext);
         preferencesUtil.put(PreferencesUtil.ACCESS_TOKEN, mTokenResEntity.Token);
         preferencesUtil.put(PreferencesUtil.HAS_LOGIN, true);
+        preferencesUtil.put(PreferencesUtil.USER_PHONE, etPhone.getText().toString().trim());
         startActivity(new Intent(mContext, Main2Activity.class));
     }
 

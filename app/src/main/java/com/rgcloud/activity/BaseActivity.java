@@ -20,7 +20,6 @@ import com.rgcloud.view.TitleBar;
  */
 
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
-
     private final String TAG = "BaseActivity";
     protected Context mContext;
 

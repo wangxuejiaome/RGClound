@@ -184,5 +184,5 @@ public interface RGCloudServices {
      * 绑定手机号
      */
     @POST("memberApi/memberBindPhone")
-    Call<BaseResponse> bindPhone(@Body BindPhoneReqEntity bindPhoneReqEntity);
+    Call<BaseResEntity> bindPhone(@Body BindPhoneReqEntity bindPhoneReqEntity);
 }

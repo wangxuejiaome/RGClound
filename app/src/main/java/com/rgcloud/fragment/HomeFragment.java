@@ -141,7 +141,13 @@ public class HomeFragment extends Fragment {
                 FunctionEntity functionEntity = mFunctionAdapter.getItem(position);
                 switch (functionEntity.name) {
                     case "我爱直播":
-                        if (TextUtils.isEmpty(mPreferencesUtil.getString(PreferencesUtil.WX_BIND_PHONE))) {
+                        if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
+                            ToastUtil.showShortToast("请先登录");
+                            startActivity(new Intent(getActivity(), LoginActivity.class));
+                            return;
+                        }
+
+                        if (TextUtils.isEmpty(mPreferencesUtil.getString(PreferencesUtil.USER_PHONE))) {
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
                             builder1
                                     .setMessage("您好，微信登录的用户需要在设置中先绑定手机号再看直播")
@@ -153,12 +159,10 @@ public class HomeFragment extends Fragment {
                                     }).setNegativeButton("取消", null)
                                     .show();
                             return;
-                        }
-                        if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
-                            startActivity(new Intent(getActivity(), LoginActivity.class));
                         } else {
                             startActivity(new Intent(getActivity(), LiveActivity.class));
                         }
+
                         break;
                     case "我要点单":
                         startActivity(new Intent(getActivity(), OrderActivity.class));

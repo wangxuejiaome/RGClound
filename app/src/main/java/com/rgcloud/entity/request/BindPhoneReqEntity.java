@@ -11,6 +11,7 @@ public class BindPhoneReqEntity extends BaseReqEntity {
     public String PhoneNumber;
     public String ValidCode;
     private String NewPassword;
+    public String MemberNickName;
 
     public void setPassword(String password) {
         NewPassword = MD5Util.encodeByMD5(password);

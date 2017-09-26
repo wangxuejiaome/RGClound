@@ -224,7 +224,7 @@ public class RequestApi {
      * 绑定手机号
      */
     public static void bindPhone(BindPhoneReqEntity bindPhoneReqEntity, ResponseCallBack responseCallBack) {
-        Call<BaseResponse> call = ServiceGenerator.createService(RGCloudServices.class, true).bindPhone(bindPhoneReqEntity);
+        Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).bindPhone(bindPhoneReqEntity);
         call.enqueue(responseCallBack);
     }
 }
