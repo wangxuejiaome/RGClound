@@ -66,12 +66,269 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y20"
+                    android:background="@color/colorDivider"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/ll_live"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                                 <ImageView
+                                     android:layout_width="match_parent"
+                                     android:layout_height="match_parent"
+                                     android:layout_alignParentBottom="true"
+                                     android:scaleType="centerInside"
+                                     android:src="@mipmap/ic_live_function"/>
+
+                        <TextView
+                            android:id="@+id/tv_live"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="我爱直播"
+                            android:textColor="@color/grey900"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_live"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/y2"
+                            android:text="围观如皋精彩现场"
+                            android:textColor="@color/grey500"
+                            android:textSize="9sp"/>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="@dimen/dline"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorDivider"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_order"
+                        android:layout_width="@dimen/x180"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/x20"
+                        android:paddingTop="@dimen/x20">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_order_function"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y20"
+                            android:text="我要点单"
+                            android:textColor="@color/grey900"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y2"
+                            android:text="百姓点单政府制单"
+                            android:textColor="@color/grey500"
+                            android:textSize="9sp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dline"
+                    android:background="@color/colorDivider"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dline"
+                    android:background="@color/colorDivider"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <LinearLayout
+                        android:id="@+id/ll_calendar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/y20"
+                        android:paddingTop="@dimen/y20">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_calendar_function"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y4"
+                            android:text="文化日历"
+                            android:textColor="@color/grey900"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y2"
+                            android:text="每日活动新鲜速递"
+                            android:textColor="@color/grey500"
+                            android:textSize="9sp"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/dline"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorDivider"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_map"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/y20"
+                        android:paddingTop="@dimen/y20">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="文化地图"
+                            android:textColor="@color/grey900"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y2"
+                            android:text="文化点位一栏无余"
+                            android:textColor="@color/grey500"
+                            android:textSize="9sp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y4"
+                            android:src="@mipmap/ic_map_function"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/dline"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorDivider"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_troupe"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/y20"
+                        android:paddingTop="@dimen/y20">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_troupe_function"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y4"
+                            android:text="民营剧团"
+                            android:textColor="@color/grey900"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y2"
+                            android:text="特色好剧任你来点"
+                            android:textColor="@color/grey500"
+                            android:textSize="9sp"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/dline"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorDivider"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_service"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/y20"
+                        android:paddingTop="@dimen/y20">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="志愿服务"
+                            android:textColor="@color/grey900"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y2"
+                            android:text="志愿活动组织报名"
+                            android:textColor="@color/grey500"
+                            android:textSize="9sp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y4"
+                            android:src="@mipmap/ic_service_function"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dline"
+                    android:background="@color/colorDivider"/>
+
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_function"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x20"
-                    android:layout_marginTop="@dimen/y10"/>
+                    android:layout_marginTop="@dimen/y10"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"

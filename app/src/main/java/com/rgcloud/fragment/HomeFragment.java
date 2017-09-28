@@ -14,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -55,8 +58,6 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-import static java.util.ResourceBundle.clearCache;
-
 /**
  * Created by wangxuejiao on 2017/9/5.
  */
@@ -75,6 +76,22 @@ public class HomeFragment extends Fragment {
     RecyclerView rvFunction;
     @Bind(R.id.rv_recommend)
     RecyclerView rvRecommend;
+    @Bind(R.id.tv_live)
+    TextView tvLive;
+    @Bind(R.id.ll_live)
+    RelativeLayout llLive;
+    @Bind(R.id.ll_order)
+    LinearLayout llOrder;
+    @Bind(R.id.imageView)
+    ImageView imageView;
+    @Bind(R.id.ll_calendar)
+    LinearLayout llCalendar;
+    @Bind(R.id.ll_map)
+    LinearLayout llMap;
+    @Bind(R.id.ll_troupe)
+    LinearLayout llTroupe;
+    @Bind(R.id.ll_service)
+    LinearLayout llService;
 
     private PreferencesUtil mPreferencesUtil;
 
@@ -123,12 +140,12 @@ public class HomeFragment extends Fragment {
         });
 
 
-        rvFunction.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+    /*    rvFunction.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         rvFunction.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x20).build());
         List<FunctionEntity> functionEntityList = new ArrayList<>();
         functionEntityList.add(new FunctionEntity("我爱直播", "围观如皋精彩现场", R.mipmap.ic_live_function));
-        functionEntityList.add(new FunctionEntity("我要点单", "百姓点单政府制单", R.mipmap.ic_order_fuction));
-        functionEntityList.add(new FunctionEntity("文化日历", "每日活动新鲜速递", R.mipmap.ic_canlendar_function));
+        functionEntityList.add(new FunctionEntity("我要点单", "百姓点单政府制单", R.mipmap.ic_order_function));
+        functionEntityList.add(new FunctionEntity("文化日历", "每日活动新鲜速递", R.mipmap.ic_calendar_function));
         functionEntityList.add(new FunctionEntity("文化地图", "文化点位一栏无余", R.mipmap.ic_map_function));
         functionEntityList.add(new FunctionEntity("民营剧团", "特色好戏任你来点", R.mipmap.ic_troupe_function));
         functionEntityList.add(new FunctionEntity("志愿服务", "志愿服务组织报名", R.mipmap.ic_service_function));
@@ -141,37 +158,17 @@ public class HomeFragment extends Fragment {
                 FunctionEntity functionEntity = mFunctionAdapter.getItem(position);
                 switch (functionEntity.name) {
                     case "我爱直播":
-                        if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
-                            ToastUtil.showShortToast("请先登录");
-                            startActivity(new Intent(getActivity(), LoginActivity.class));
-                            return;
-                        }
 
-                        if (TextUtils.isEmpty(mPreferencesUtil.getString(PreferencesUtil.USER_PHONE))) {
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                            builder1
-                                    .setMessage("您好，微信登录的用户需要在设置中先绑定手机号再看直播")
-                                    .setPositiveButton("去绑定", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            startActivity(new Intent(getActivity(), BindPhoneActivity.class));
-                                        }
-                                    }).setNegativeButton("取消", null)
-                                    .show();
-                            return;
-                        } else {
-                            startActivity(new Intent(getActivity(), LiveActivity.class));
-                        }
 
                         break;
                     case "我要点单":
-                        startActivity(new Intent(getActivity(), OrderActivity.class));
+
                         break;
                     case "文化日历":
-                        startActivity(new Intent(getActivity(), CalendarActivity.class));
+
                         break;
                     case "文化地图":
-                        startActivity(new Intent(getActivity(), MapActivity.class));
+
                         break;
                     case "民营剧团":
                         break;
@@ -179,7 +176,7 @@ public class HomeFragment extends Fragment {
                         break;
                 }
             }
-        });
+        });*/
 
         rvRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvRecommend.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
@@ -252,7 +249,7 @@ public class HomeFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.iv_search})
+    @OnClick({R.id.iv_search,R.id.ll_live, R.id.ll_order, R.id.ll_calendar, R.id.ll_map, R.id.ll_troupe, R.id.ll_service})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
@@ -261,6 +258,42 @@ public class HomeFragment extends Fragment {
                     searchIntent.putExtra("hotSearchKeys", (Serializable) mHomeResEntity.HotSearchKeyWords);
                     startActivity(searchIntent);
                 }
+                break;
+            case R.id.ll_live:
+                if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
+                    ToastUtil.showShortToast("请先登录");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mPreferencesUtil.getString(PreferencesUtil.USER_PHONE))) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1
+                            .setMessage("您好，微信登录的用户需要在设置中先绑定手机号再看直播")
+                            .setPositiveButton("去绑定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(getActivity(), BindPhoneActivity.class));
+                                }
+                            }).setNegativeButton("取消", null)
+                            .show();
+                    return;
+                } else {
+                    startActivity(new Intent(getActivity(), LiveActivity.class));
+                }
+                break;
+            case R.id.ll_order:
+                startActivity(new Intent(getActivity(), OrderActivity.class));
+                break;
+            case R.id.ll_calendar:
+                startActivity(new Intent(getActivity(), CalendarActivity.class));
+                break;
+            case R.id.ll_map:
+                startActivity(new Intent(getActivity(), MapActivity.class));
+                break;
+            case R.id.ll_troupe:
+                break;
+            case R.id.ll_service:
                 break;
         }
     }
