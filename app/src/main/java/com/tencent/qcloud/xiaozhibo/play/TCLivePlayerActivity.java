@@ -1105,7 +1105,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         public void onResult(SHARE_MEDIA platform) {
             Log.d("plat", "platform" + platform);
             Toast.makeText(TCLivePlayerActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
-            if(mShareDialog != null){
+            if (mShareDialog != null) {
                 mShareDialog.dismiss();
             }
         }
@@ -1113,7 +1113,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
             Toast.makeText(TCLivePlayerActivity.this, "分享失败" + t.getMessage(), Toast.LENGTH_LONG).show();
-            if(mShareDialog != null){
+            if (mShareDialog != null) {
                 mShareDialog.dismiss();
             }
         }
@@ -1121,7 +1121,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         @Override
         public void onCancel(SHARE_MEDIA platform) {
             Toast.makeText(TCLivePlayerActivity.this, platform + " 分享取消了", Toast.LENGTH_SHORT).show();
-            if(mShareDialog != null){
+            if (mShareDialog != null) {
                 mShareDialog.dismiss();
             }
         }
@@ -1135,6 +1135,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
         com.umeng.socialize.utils.Log.d("result", "onActivityResult");
     }
+
     protected void showLog() {
         mShowLog = !mShowLog;
         if (mTXCloudVideoView != null) {

@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.rgcloud.R;
 import com.rgcloud.util.PreferencesUtil;
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
 
     PreferencesUtil mPreferencesUtil;
 
@@ -16,7 +16,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        mPreferencesUtil = new PreferencesUtil(mContext);
+        mPreferencesUtil = new PreferencesUtil(this);
     }
 
 
@@ -25,7 +25,7 @@ public class SplashActivity extends BaseActivity {
         super.onStart();
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                startActivity(new Intent(mContext, Main2Activity.class));
+                startActivity(new Intent(SplashActivity.this, Main2Activity.class));
                 finish();
             }
         }, 2000);

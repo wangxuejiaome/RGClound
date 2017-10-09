@@ -180,6 +180,7 @@ public class HomeFragment extends Fragment {
             }
         });*/
 
+        rvRecommend.setNestedScrollingEnabled(false);
         rvRecommend.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvRecommend.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).spaceResId(R.dimen.x10).showLastDivider().build());
         mActivityAdapter = new ActivityAdapter(null);
