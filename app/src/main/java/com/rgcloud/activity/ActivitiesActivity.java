@@ -125,7 +125,7 @@ public class ActivitiesActivity extends BaseActivity {
     private void initData() {
         mActivityCategoryId = getIntent().getIntExtra("activityCategoryId", 0);
         mSelectedActivityTypeId = getIntent().getIntExtra("activityTypeId", 0);
-        mActivitySpaceId = getIntent().getIntExtra("activitySpaceId",0);
+        mActivitySpaceId = getIntent().getIntExtra("activitySpaceId", 0);
         getActivities();
     }
 
@@ -140,17 +140,24 @@ public class ActivitiesActivity extends BaseActivity {
                 super.onObjectResponse(resEntity);
                 if (resEntity == null) return;
                 mActivityResEntity = (ActivityResEntity) resEntity;
-                if (mActiveTypeList.size() == 0) {
-                    mActiveTypeList.addAll(mActivityResEntity.ActiveTypeList);
-                    mActiveTypeList.add(0, new ActivityResEntity.ActiveTypeListBean(0, "全部", false));
 
-                    for (int i = 0; i < mActiveTypeList.size(); i++) {
-                        ActivityResEntity.ActiveTypeListBean activeTypeListBean = mActiveTypeList.get(i);
-                        activeTypeListBean.hasSelected = activeTypeListBean.ActiveTypeId == mSelectedActivityTypeId;
+                if (mActivitySpaceId != 0) {//文化空间，不需要显示活动导航
+                    rvActivityNavigation.setVisibility(View.GONE);
+                } else {
+
+                    if (mActiveTypeList.size() == 0) {
+                        mActiveTypeList.addAll(mActivityResEntity.ActiveTypeList);
+                        mActiveTypeList.add(0, new ActivityResEntity.ActiveTypeListBean(0, "全部", false));
+
+                        for (int i = 0; i < mActiveTypeList.size(); i++) {
+                            ActivityResEntity.ActiveTypeListBean activeTypeListBean = mActiveTypeList.get(i);
+                            activeTypeListBean.hasSelected = activeTypeListBean.ActiveTypeId == mSelectedActivityTypeId;
+                        }
+
+                        mActivityNavigationAdapter.setNewData(mActiveTypeList);
                     }
-
-                    mActivityNavigationAdapter.setNewData(mActiveTypeList);
                 }
+
 
                 if (mPageIndex == 1) {
                     mActivityAdapter.setNewData(mActivityResEntity.ActiveList);
@@ -182,7 +189,7 @@ public class ActivitiesActivity extends BaseActivity {
         Intent intent = new Intent(context, ActivitiesActivity.class);
         intent.putExtra("activityCategoryId", activityCategoryId);
         intent.putExtra("activityTypeId", activityTypeId);
-        intent.putExtra("activitySpaceId",activitySpaceId);
+        intent.putExtra("activitySpaceId", activitySpaceId);
         context.startActivity(intent);
     }
 

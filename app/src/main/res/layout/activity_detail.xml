@@ -126,6 +126,7 @@
                 android:text="活动详情"
                 android:textColor="@color/grey900"
                 android:textSize="12sp"
+                android:visibility="gone"
                 />
 
             <WebView
@@ -134,7 +135,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:paddingLeft="@dimen/x20"
-                android:paddingRight="@dimen/x20"/>
+                android:paddingRight="@dimen/x20"
+                android:layout_marginTop="@dimen/y20"/>
 
         </LinearLayout>
 
@@ -143,7 +145,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y118"
+        android:layout_height="@dimen/y100"
         android:background="@color/white">
 
         <TextView
@@ -190,14 +192,14 @@
 
         <Button
             android:id="@+id/btn_get_ticket"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/x360"
             android:layout_height="match_parent"
             android:background="#2765b3"
             android:paddingLeft="@dimen/x20"
             android:paddingRight="@dimen/x20"
             android:text="我要领票"
             android:textColor="@color/white"
-            android:textSize="22sp"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
