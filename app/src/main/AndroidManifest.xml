@@ -356,6 +356,8 @@
         </activity>
         <activity android:name=".activity.WebviewActivity">
         </activity>
+        <activity android:name=".activity.SpaceActivity">
+        </activity>
     </application>
 
 </manifest>

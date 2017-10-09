@@ -73,6 +73,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.rgcloud.R.drawable.position;
+
 public class MapActivity extends BaseActivity {
 
     private static final String APP_FOLDER_NAME = Constant.BD_NAVIGATION_FOLDER_NAME;
@@ -683,6 +685,7 @@ public class MapActivity extends BaseActivity {
                 routeplanToNavi();
                 break;
             case R.id.btn_go_space:
+                ActivitiesActivity.startActivitiesActivity(mContext, 1, 0, mSelectedSpaceId);
                 break;
         }
     }
