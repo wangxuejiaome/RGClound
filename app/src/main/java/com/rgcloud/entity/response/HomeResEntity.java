@@ -20,7 +20,6 @@ public class HomeResEntity extends BaseResEntity {
      * RecommendList : [{"ActiveId":1,"SpaceId":2,"ActiveName":"sample string 3","SpaceName":"sample string 4","Address":"sample string 5","ActiveImage":"sample string 6","SpaceImage":"sample string 7","IsNeedTicket":8},{"ActiveId":1,"SpaceId":2,"ActiveName":"sample string 3","SpaceName":"sample string 4","Address":"sample string 5","ActiveImage":"sample string 6","SpaceImage":"sample string 7","IsNeedTicket":8}]
      */
 
-    public int Opera;
     public String VoluntaryService;
     public List<String> HotSearchKeyWords;
     public List<String> TopChangeImageUrl;
@@ -50,4 +49,6 @@ public class HomeResEntity extends BaseResEntity {
         public String ImageUrl;
     }
 
+    public  int Opera;
+    public int VoluntaryServiceId;
 }

@@ -58,6 +58,8 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
+import static com.rgcloud.R.drawable.position;
+
 /**
  * Created by wangxuejiao on 2017/9/5.
  */
@@ -292,8 +294,14 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), MapActivity.class));
                 break;
             case R.id.ll_troupe:
+                if(mHomeResEntity != null){
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.Opera, 0);
+                }
                 break;
             case R.id.ll_service:
+                if(mHomeResEntity != null){
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.VoluntaryServiceId, 0);
+                }
                 break;
         }
     }

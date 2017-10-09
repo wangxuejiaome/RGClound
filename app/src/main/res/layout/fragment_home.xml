@@ -156,10 +156,6 @@
                     android:layout_height="@dimen/dline"
                     android:background="@color/colorDivider"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dline"
-                    android:background="@color/colorDivider"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
