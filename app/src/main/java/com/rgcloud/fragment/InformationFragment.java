@@ -1,6 +1,7 @@
 package com.rgcloud.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,15 +13,21 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
+import com.rgcloud.activity.ActivityDetailActivity;
+import com.rgcloud.activity.Main2Activity;
+import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.InformationAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.request.ActivityReqEntity;
+import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.ToastUtil;
+
+import java.io.Serializable;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -69,8 +76,8 @@ public class InformationFragment extends Fragment {
         rvInformation.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                //ActivityResBean activityResBean = mActivitySpaceAdapter.getItem(position);
-                //ActivityDetailActivity.startActivityDetail(getActivity(),activityResBean.ActiveId);
+                ActivityResBean activityResBean = mInformationAdapter.getItem(position);
+                ActivityDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
             }
         });
 
@@ -139,5 +146,20 @@ public class InformationFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+    @OnClick({R.id.iv_search})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_search:
+                Main2Activity main2Activity = (Main2Activity) getActivity();
+                if (main2Activity.getSearchKey() != null) {
+                    Intent searchIntent = new Intent(getActivity(), SearchActivity.class);
+                    searchIntent.putExtra("hotSearchKeys", (Serializable) main2Activity.getSearchKey());
+                    startActivity(searchIntent);
+                }
+                break;
+        }
+    }
+
 
 }

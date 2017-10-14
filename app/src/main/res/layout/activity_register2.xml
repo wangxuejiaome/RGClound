@@ -76,7 +76,8 @@
             android:paddingTop="@dimen/y30"
             android:singleLine="true"
             android:textColor="@color/grey900"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"/>
 
     </LinearLayout>
 

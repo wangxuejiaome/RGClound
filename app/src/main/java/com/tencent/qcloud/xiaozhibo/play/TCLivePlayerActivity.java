@@ -1088,8 +1088,9 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
             UMWeb web = new UMWeb(mShareUrl);
             web.setThumb(mImage);
             web.setTitle(mTitle);
+            web.setDescription(mtvPuserName.getText() + "正在直播");
             shareAction.withMedia(web);
-            shareAction.withText(mtvPuserName.getText() + "正在直播");
+           // shareAction.withText(mtvPuserName.getText() + "正在直播");
             shareAction.setCallback(umShareListener);
             shareAction.setPlatform(mShare_meidia).share();
         }

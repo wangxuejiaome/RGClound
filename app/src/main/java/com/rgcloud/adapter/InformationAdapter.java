@@ -21,6 +21,8 @@ public class InformationAdapter extends BaseQuickAdapter<ActivityResBean, BaseVi
     protected void convert(BaseViewHolder helper, ActivityResBean item) {
 
 
-        helper.setText(R.id.tv_title_information_item, item.ActiveName);
+        helper.setText(R.id.tv_title_information_item, item.ActiveName)
+                .setText(R.id.tv_address_information_item,item.Address);
+
     }
 }

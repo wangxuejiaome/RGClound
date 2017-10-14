@@ -3,7 +3,6 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/white"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -33,7 +32,6 @@
         android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/x10"
         app:ptr_duration_to_close="200"
         app:ptr_duration_to_close_header="1000"
         app:ptr_keep_header_when_refresh="true"
@@ -45,7 +43,6 @@
             android:id="@+id/rv_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x10"
             android:layout_marginTop="@dimen/y10"/>
 
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>

@@ -3,14 +3,14 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@color/white"
-              android:paddingBottom="@dimen/y30"
-              android:paddingLeft="@dimen/x60"
-              android:paddingRight="@dimen/x30"
-              android:paddingTop="@dimen/y30">
+              android:paddingBottom="@dimen/y14"
+              android:paddingLeft="@dimen/x20"
+              android:paddingRight="@dimen/x20"
+              android:paddingTop="@dimen/y14">
 
     <ImageView
         android:id="@+id/iv_information"
-        android:layout_width="@dimen/x190"
+        android:layout_width="@dimen/x180"
         android:layout_height="@dimen/y120"
         android:scaleType="centerCrop"
         android:src="@mipmap/information_temp"
@@ -19,25 +19,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/x50"
+        android:layout_marginLeft="@dimen/x20"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_title_information_item"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="优雅与高贵并存"
             android:textColor="@color/grey900"
             android:textSize="16sp"/>
 
 
         <TextView
-            android:id="@+id/tv_time_information_item"
+            android:id="@+id/tv_address_information_item"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_location_blue"
+            android:drawablePadding="@dimen/x4"
             android:gravity="bottom"
-            android:text="49分钟钱"
+            android:singleLine="true"
+            android:text="地址"
             android:textColor="@color/grey500"
             android:textSize="12sp"/>
 

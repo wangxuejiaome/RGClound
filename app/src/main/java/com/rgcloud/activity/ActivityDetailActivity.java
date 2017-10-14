@@ -466,8 +466,9 @@ public class ActivityDetailActivity extends BaseActivity {
             UMWeb web = new UMWeb(mActivityDetailResEntity.SharedUrl);
             web.setThumb(image);
             web.setTitle("如皋文化云");
+            web.setDescription(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
             shareAction.withMedia(web);
-            shareAction.withText(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
+          //  shareAction.withText(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
             shareAction.setCallback(shareListener);
             shareAction.setPlatform(mShareMedia).share();
         }
