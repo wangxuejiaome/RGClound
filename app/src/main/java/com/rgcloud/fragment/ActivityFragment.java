@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-
 import com.rgcloud.R;
+import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.activity.ActivityDetailActivity;
+import com.rgcloud.activity.InformationDetailActivity;
 import com.rgcloud.activity.Main2Activity;
-import com.rgcloud.activity.PostCommentActivity;
 import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.ActivityNavigationAdapter;
@@ -107,7 +107,11 @@ public class ActivityFragment extends Fragment {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ActivityResBean activityResBean = mActivityAdapter.getItem(position);
-                ActivityDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
+                if (activityResBean.IsOrNotNewPage == 0) {
+                    ActivityDetailActivity.startActivityDetail(getActivity(),activityResBean.ActiveId);
+                } else {
+                    InformationDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
+                }
             }
         });
 

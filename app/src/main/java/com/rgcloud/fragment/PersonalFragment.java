@@ -15,6 +15,7 @@ import com.rgcloud.R;
 import com.rgcloud.activity.CollectionActivity;
 import com.rgcloud.activity.CommentActivity;
 import com.rgcloud.activity.LiveActivity;
+import com.rgcloud.activity.MessageActivity;
 import com.rgcloud.activity.PointActivity;
 import com.rgcloud.activity.SettingActivity;
 import com.rgcloud.activity.WebviewActivity;
@@ -93,9 +94,12 @@ public class PersonalFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.iv_header, R.id.tv_coupon_personal, R.id.tv_collection_personal, R.id.tv_comment_personal, R.id.ll_live_personal, R.id.ll_point_personal, R.id.ll_setting, R.id.ll_about_us})
+    @OnClick({R.id.iv_message, R.id.iv_header, R.id.tv_coupon_personal, R.id.tv_collection_personal, R.id.tv_comment_personal, R.id.ll_live_personal, R.id.ll_point_personal, R.id.ll_setting, R.id.ll_about_us})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_message:
+                startActivity(new Intent(getActivity(), MessageActivity.class));
+                break;
             case R.id.iv_header:
                 break;
             case R.id.tv_coupon_personal:

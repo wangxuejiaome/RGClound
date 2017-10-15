@@ -10,6 +10,7 @@ import com.rgcloud.entity.request.CollectReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
+import com.rgcloud.entity.request.MessageReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.PointReqEntity;
 import com.rgcloud.entity.request.PostCommentReqEntity;
@@ -25,6 +26,7 @@ import com.rgcloud.entity.response.CollectionResEntity;
 import com.rgcloud.entity.response.CommentResEntity;
 import com.rgcloud.entity.response.CouponResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
+import com.rgcloud.entity.response.MessageResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.PointResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
@@ -34,6 +36,8 @@ import com.umeng.socialize.sina.message.BaseResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 /**
  * Created by wangxuejiao on 2017/9/2.
@@ -225,6 +229,14 @@ public class RequestApi {
      */
     public static void bindPhone(BindPhoneReqEntity bindPhoneReqEntity, ResponseCallBack responseCallBack) {
         Call<BaseResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).bindPhone(bindPhoneReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取消息列表
+     */
+    public static void getMessage(MessageReqEntity messageReqEntity, ResponseCallBack responseCallBack) {
+        Call<MessageResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getMessage(messageReqEntity);
         call.enqueue(responseCallBack);
     }
 }

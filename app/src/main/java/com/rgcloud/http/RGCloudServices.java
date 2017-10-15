@@ -10,6 +10,7 @@ import com.rgcloud.entity.request.CollectReqEntity;
 import com.rgcloud.entity.request.ForgetPasswordReqEntity;
 import com.rgcloud.entity.request.GetTicketReqEntity;
 import com.rgcloud.entity.request.LoginReqEntity;
+import com.rgcloud.entity.request.MessageReqEntity;
 import com.rgcloud.entity.request.OrderReqEntity;
 import com.rgcloud.entity.request.PointReqEntity;
 import com.rgcloud.entity.request.PostCommentReqEntity;
@@ -25,6 +26,7 @@ import com.rgcloud.entity.response.CollectionResEntity;
 import com.rgcloud.entity.response.CommentResEntity;
 import com.rgcloud.entity.response.CouponResEntity;
 import com.rgcloud.entity.response.HomeResEntity;
+import com.rgcloud.entity.response.MessageResEntity;
 import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.entity.response.PointResEntity;
 import com.rgcloud.entity.response.TokenResEntity;
@@ -185,4 +187,11 @@ public interface RGCloudServices {
      */
     @POST("memberApi/memberBindPhone")
     Call<BaseResEntity> bindPhone(@Body BindPhoneReqEntity bindPhoneReqEntity);
+
+
+    /*
+    * 获取消息列表
+    */
+    @POST("memberApi/findPushLog")
+    Call<MessageResEntity> getMessage(@Body MessageReqEntity messageReqEntity);
 }

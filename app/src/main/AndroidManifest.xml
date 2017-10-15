@@ -360,6 +360,8 @@
         </activity>
         <activity android:name=".activity.InformationDetailActivity">
         </activity>
+        <activity android:name=".activity.MessageActivity">
+        </activity>
     </application>
 
 </manifest>

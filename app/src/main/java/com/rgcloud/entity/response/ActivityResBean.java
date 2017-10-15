@@ -14,4 +14,10 @@ public class ActivityResBean {
     public String ActiveImage;
     public String SpaceImage;
     public int IsNeedTicket;
+
+    /**
+     * 0-原来的活动详情，1-新的详情
+     */
+    public int IsOrNotNewPage;
+
 }

@@ -139,12 +139,7 @@ public class HomeFragment extends Fragment {
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 HomeResEntity.IconListBean iconListBean = (HomeResEntity.IconListBean) adapter.getItem(position);
-
-                if(position == 0){
-                    InformationDetailActivity.startActivityDetail(getActivity(),iconListBean.TypeId);
-                }else {
-                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId, 0);
-                }
+                ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId, 0);
             }
         });
 
