@@ -358,6 +358,8 @@
         </activity>
         <activity android:name=".activity.SpaceActivity">
         </activity>
+        <activity android:name=".activity.InformationDetailActivity">
+        </activity>
     </application>
 
 </manifest>

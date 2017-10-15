@@ -25,6 +25,7 @@ import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.activity.ActivityDetailActivity;
 import com.rgcloud.activity.BindPhoneActivity;
 import com.rgcloud.activity.CalendarActivity;
+import com.rgcloud.activity.InformationDetailActivity;
 import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.LoginActivity;
 import com.rgcloud.activity.Main2Activity;
@@ -136,8 +137,14 @@ public class HomeFragment extends Fragment {
         rvFunctionNavigation.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
+
                 HomeResEntity.IconListBean iconListBean = (HomeResEntity.IconListBean) adapter.getItem(position);
-                ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId, 0);
+
+                if(position == 0){
+                    InformationDetailActivity.startActivityDetail(getActivity(),iconListBean.TypeId);
+                }else {
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId, 0);
+                }
             }
         });
 

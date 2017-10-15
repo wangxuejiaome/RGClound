@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_activity_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y360"
+                    android:scaleType="centerCrop"/>
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/x30"
+                    android:src="@mipmap/ic_back"/>
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/tv_name_information_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y100"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x20"
+                android:paddingTop="@dimen/y10"
+                android:text="第一届水绘园旗袍秀"
+                android:textColor="@color/grey900"
+                android:textSize="12sp"
+                />
+
+            <WebView
+                android:id="@+id/wv_information_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_comment_information_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/ic_pencial"
+            android:gravity="center"
+            android:paddingLeft="@dimen/x20"
+            android:text="评论"
+            android:textColor="@color/grey900"
+            android:textSize="10sp"/>
+
+        <View
+            android:layout_width="@dimen/dline"
+            android:layout_height="@dimen/y70"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorDivider"/>
+
+        <ImageView
+            android:id="@+id/iv_collect_information_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_collect"/>
+
+        <View
+            android:layout_width="@dimen/dline"
+            android:layout_height="@dimen/y70"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorDivider"/>
+
+        <ImageView
+            android:id="@+id/iv_share_information_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_share"/>
+
+
+        <Button
+            android:id="@+id/btn_get_ticket"
+            android:layout_width="@dimen/x360"
+            android:layout_height="match_parent"
+            android:background="#2765b3"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x20"
+            android:text="我要抢票"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

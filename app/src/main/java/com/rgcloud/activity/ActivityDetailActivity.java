@@ -450,12 +450,16 @@ public class ActivityDetailActivity extends BaseActivity {
     private View.OnClickListener mShareBtnClickListen = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+            String  shareTitle = "如皋文化云";
+
             switch (view.getId()) {
                 case R.id.btn_share_wx:
                     mShareMedia = SHARE_MEDIA.WEIXIN;
                     break;
                 case R.id.btn_share_circle:
                     mShareMedia = SHARE_MEDIA.WEIXIN_CIRCLE;
+                    shareTitle = mActivityDetailResEntity.ActiveName;
                     break;
                 default:
                     break;
@@ -465,8 +469,8 @@ public class ActivityDetailActivity extends BaseActivity {
             UMImage image = new UMImage(ActivityDetailActivity.this, R.mipmap.ic_launcher);//资源文件
             UMWeb web = new UMWeb(mActivityDetailResEntity.SharedUrl);
             web.setThumb(image);
-            web.setTitle("如皋文化云");
-            web.setDescription(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
+            web.setTitle(shareTitle);
+            web.setDescription(mActivityDetailResEntity.ActiveName);
             shareAction.withMedia(web);
           //  shareAction.withText(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
             shareAction.setCallback(shareListener);

@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.rgcloud.R;
 import com.rgcloud.activity.ActivityDetailActivity;
+import com.rgcloud.activity.InformationDetailActivity;
 import com.rgcloud.activity.Main2Activity;
 import com.rgcloud.activity.SearchActivity;
 import com.rgcloud.adapter.InformationAdapter;
@@ -77,7 +78,7 @@ public class InformationFragment extends Fragment {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ActivityResBean activityResBean = mInformationAdapter.getItem(position);
-                ActivityDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
+                InformationDetailActivity.startActivityDetail(getActivity(), activityResBean.ActiveId);
             }
         });
 
