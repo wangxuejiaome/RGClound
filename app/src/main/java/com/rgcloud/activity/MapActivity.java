@@ -28,6 +28,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
@@ -305,12 +306,20 @@ public class MapActivity extends BaseActivity {
             if (isFirstLoc) {
                 isFirstLoc = false;
                 LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(18.0f);
+               /* MapStatus.Builder builder = new MapStatus.Builder();
+                builder.target(ll).zoom(13f);
                 //builder.target(ll);
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));*/
+
+                MapStatus mMapStatus = new MapStatus.Builder()
+                        .target(ll)
+                        .zoom(13)
+                        .build();
+                MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+                mBaiduMap.setMapStatus(mMapStatusUpdate);
                 getActivitySpace();
             }
+
         }
     }
 
@@ -411,7 +420,7 @@ public class MapActivity extends BaseActivity {
             @Override
             public void onAuthResult(int status, String msg) {
                 if (0 == status) {
-                    authinfo = "key校验成功!";
+                   // authinfo = "key校验成功!";
                 } else {
                     authinfo = "key校验失败, " + msg;
                 }
@@ -425,13 +434,13 @@ public class MapActivity extends BaseActivity {
             }
 
             public void initSuccess() {
-                Toast.makeText(MapActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MapActivity.this, "百度导航引擎初始化成功", Toast.LENGTH_SHORT).show();
                 hasInitSuccess = true;
                 initSetting();
             }
 
             public void initStart() {
-                Toast.makeText(MapActivity.this, "百度导航引擎初始化开始", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(MapActivity.this, "百度导航引擎初始化开始", Toast.LENGTH_SHORT).show();
             }
 
             public void initFailed() {

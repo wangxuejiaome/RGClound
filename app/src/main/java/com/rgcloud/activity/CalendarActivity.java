@@ -4,11 +4,20 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.codbking.calendar.CaledarAdapter;
+import com.codbking.calendar.CalendarBean;
+import com.codbking.calendar.CalendarDateView;
+import com.codbking.calendar.CalendarUtil;
+import com.codbking.calendar.CalendarView;
 import com.rgcloud.R;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.CalendarAdapter;
@@ -23,6 +32,7 @@ import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
@@ -34,17 +44,21 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class CalendarActivity extends BaseActivity {
 
-    @Bind(R.id.ptr_classic_frame_layout)
-    PtrClassicFrameLayout ptrClassicFrameLayout;
+/*    @Bind(R.id.ptr_classic_frame_layout)
+    PtrClassicFrameLayout ptrClassicFrameLayout;*/
     @Bind(R.id.tv_calendar)
     TextView tvCalendar;
-    @Bind(R.id.rv_calendar)
-    RecyclerView rvCalendar;
+   /* @Bind(R.id.rv_calendar)
+    RecyclerView rvCalendar;*/
+   @Bind(R.id.list)
+   ListView mList;
+    @Bind(R.id.calendarDateView)
+    CalendarDateView calendarDateView;
     @Bind(R.id.rv_calendar_activity)
     RecyclerView rvCalendarActivity;
 
     private ActivityAdapter mActivityAdapter;
-    private CalendarAdapter mCalendarAdapter;
+  //  private CalendarAdapter mCalendarAdapter;
     List<ActivityResEntity.WeekDayBean> mWeekDayBeanList = new ArrayList<>();
     private ActivityResEntity mActivityResEntity;
 
@@ -64,11 +78,77 @@ public class CalendarActivity extends BaseActivity {
 
 
     private void initView() {
-        rvCalendar.setLayoutManager(new GridLayoutManager(mContext, 7));
-        mCalendarAdapter = new CalendarAdapter(mWeekDayBeanList);
-        rvCalendar.setAdapter(mCalendarAdapter);
 
-        rvCalendar.addOnItemTouchListener(new OnItemClickListener() {
+
+        calendarDateView.setAdapter(new CaledarAdapter() {
+            @Override
+            public View getView(View convertView, ViewGroup parentView, CalendarBean bean) {
+                TextView view;
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(parentView.getContext()).inflate(R.layout.item_calendar, null);
+                    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(48,48);
+                    convertView.setLayoutParams(params);
+                }
+
+                view = (TextView) convertView.findViewById(R.id.text);
+
+                view.setText("" + bean.day);
+                if (bean.mothFlag != 0) {
+                    view.setTextColor(0xff9299a1);
+                } else {
+                    view.setTextColor(0xffffffff);
+                }
+
+                return convertView;
+            }
+        });
+
+        calendarDateView.setOnItemClickListener(new CalendarView.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int postion, CalendarBean bean) {
+                ToastUtil .showShortToast(bean.year + "/" + bean.moth+ "/" + bean.day);
+            }
+        });
+
+
+        mList.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return 100;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(CalendarActivity.this).inflate(android.R.layout.simple_list_item_1, null);
+                }
+
+                TextView textView = (TextView) convertView;
+                textView.setText("item" + position);
+
+                return convertView;
+            }
+        });
+
+
+
+
+
+        //  rvCalendar.setLayoutManager(new GridLayoutManager(mContext, 7));
+      //  mCalendarAdapter = new CalendarAdapter(mWeekDayBeanList);
+      //  rvCalendar.setAdapter(mCalendarAdapter);
+
+      /*  rvCalendar.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 for (int i = 0; i < mWeekDayBeanList.size(); i++) {
@@ -79,12 +159,13 @@ public class CalendarActivity extends BaseActivity {
                 mSelectedDay = mWeekDayBeanList.get(position).PostDay;
                 getActivities();
             }
-        });
+        });*/
 
         rvCalendarActivity.setLayoutManager(new LinearLayoutManager(mContext));
         rvCalendarActivity.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext).spaceResId(R.dimen.x10).showLastDivider().build());
         mActivityAdapter = new ActivityAdapter(null);
         rvCalendarActivity.setAdapter(mActivityAdapter);
+
 
         rvCalendarActivity.addOnItemTouchListener(new OnItemClickListener() {
             @Override
@@ -94,13 +175,13 @@ public class CalendarActivity extends BaseActivity {
             }
         });
 
-        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
+/*        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 mPageIndex = 1;
                 getActivities();
             }
-        });
+        });*/
 
         mActivityAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -121,6 +202,7 @@ public class CalendarActivity extends BaseActivity {
         });
     }
 
+
     private void initData() {
         getActivities();
     }
@@ -136,20 +218,20 @@ public class CalendarActivity extends BaseActivity {
                 super.onObjectResponse(resEntity);
                 if (resEntity == null) return;
                 mActivityResEntity = (ActivityResEntity) resEntity;
-                if (mWeekDayBeanList.size() == 0) {
+            /*    if (mWeekDayBeanList.size() == 0) {
                     mWeekDayBeanList.addAll(mActivityResEntity.WeekDay);
                     mWeekDayBeanList.get(3).hasSelected = true;
                     mCalendarAdapter.setNewData(mWeekDayBeanList);
 
                     String postDay = String.valueOf(mWeekDayBeanList.get(3).PostDay);
-                    String year = postDay.substring(0,4);
-                    String month = postDay.substring(4,6);
+                    String year = postDay.substring(0, 4);
+                    String month = postDay.substring(4, 6);
                     tvCalendar.setText(year + "." + month);
-                }
+                }*/
 
                 if (mPageIndex == 1) {
                     mActivityAdapter.setNewData(mActivityResEntity.ActiveList);
-                    ptrClassicFrameLayout.refreshComplete();
+                    //ptrClassicFrameLayout.refreshComplete();
                     mActivityAdapter.disableLoadMoreIfNotFullPage(rvCalendarActivity);
                 } else {
                     mActivityAdapter.addData(mActivityResEntity.ActiveList);

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="weekcalendar-1.0.6">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/noman.weekcalendar/weekcalendar/1.0.6/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/noman.weekcalendar/weekcalendar/1.0.6/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/noman.weekcalendar/weekcalendar/1.0.6/28f3abf09da99359d167e697b8b18ad22b268486/weekcalendar-1.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

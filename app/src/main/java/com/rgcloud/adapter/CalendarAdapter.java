@@ -24,15 +24,15 @@ public class CalendarAdapter extends BaseQuickAdapter<ActivityResEntity.WeekDayB
     @Override
     protected void convert(BaseViewHolder helper, ActivityResEntity.WeekDayBean item) {
 
-        helper.setText(R.id.tv_week_day_calendar, item.WeekDay);
-        TextView tvDay = helper.getView(R.id.tv_day_calendar);
-        tvDay.setText(item.ShowDay + "");
+       // helper.setText(R.id.tv_week_day_calendar, item.WeekDay);
+      //  TextView tvDay = helper.getView(R.id.tv_day_calendar);
+     /*   tvDay.setText(item.ShowDay + "");
         if (item.hasSelected) {
             tvDay.setTextColor(0xffffffff);
             tvDay.setBackgroundResource(R.drawable.shape_round_blue);
         } else {
             tvDay.setTextColor(0xff999999);
             tvDay.setBackgroundColor(0xffffffff);
-        }
+        }*/
     }
 }
