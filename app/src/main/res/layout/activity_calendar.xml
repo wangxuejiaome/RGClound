@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/white"
@@ -11,17 +12,17 @@
         android:background="@color/colorPrimaryBlue">
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/iv_back"
-            android:src="@mipmap/ic_back"
+            android:layout_centerVertical="true"
             android:padding="@dimen/x20"
-            android:layout_centerVertical="true"/>
+            android:src="@mipmap/ic_back"/>
 
         <TextView
+            android:id="@+id/tv_calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_calendar"
             android:layout_centerInParent="true"
             android:text="文化日历"
             android:textColor="@color/white"
@@ -30,124 +31,49 @@
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:orientation="horizontal"
-        android:background="#000000"
-        >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="日"
-            android:textColor="#ffffff"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="一"
-            android:textColor="#ffffff"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="二"
-            android:textColor="#ffffff"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="三"
-            android:textColor="#ffffff"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="四"
-            android:textColor="#ffffff"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="五"
-            android:textColor="#ffffff"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="六"
-            android:textColor="#ffffff"
-            />
-
-    </LinearLayout>
-
-    <com.codbking.calendar.CalendarLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-
-        <com.codbking.calendar.CalendarDateView
-            android:id="@+id/calendarDateView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
+    <!--    <com.loonggg.weekcalendar.view.WeekCalendar
+            android:id="@+id/week_calendar"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="#ffffff"
-            />
+            android:paddingBottom="10dp"
+            app:weekTextColor="@color/grey900"
+            app:daysSelectedTextColor="@color/white"
+            app:daysSelectedBackground="@drawable/shape_round_blue"
+            app:hideTodayName="true"
+            app:isCornerMark="false"
+            app:isShowMonth="false"/>-->
+
+    <com.loonggg.weekcalendar.view.WeekCalendar
+        android:id="@+id/week_calendar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingBottom="10dp"
+        app:daysSelectedBackground="@drawable/shape_round_blue"
+        app:isCornerMark="false"
+        app:monthBackgroundColor="#8F83F1"
+        app:nextArrowBg="@mipmap/ic_arrow_forward"
+        app:preArrowBg="@mipmap/ic_back"/>
 
 
-    </com.codbking.calendar.CalendarLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_calendar_activity"
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        app:ptr_duration_to_close="200"
+        app:ptr_duration_to_close_header="1000"
+        app:ptr_keep_header_when_refresh="true"
+        app:ptr_pull_to_fresh="false"
+        app:ptr_ratio_of_header_height_to_refresh="1.2"
+        app:ptr_resistance="1.7">
 
-    <!--   <in.srain.cube.views.ptr.PtrClassicFrameLayout
-           android:id="@+id/ptr_classic_frame_layout"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           app:ptr_duration_to_close="200"
-           app:ptr_duration_to_close_header="1000"
-           app:ptr_keep_header_when_refresh="true"
-           app:ptr_pull_to_fresh="false"
-           app:ptr_ratio_of_header_height_to_refresh="1.2"
-           app:ptr_resistance="1.7">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_calendar_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"/>
 
-        &lt;!&ndash;   <android.support.v7.widget.RecyclerView
-               android:id="@+id/rv_calendar_activity"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginTop="@dimen/y10"/>&ndash;&gt;
-
-       </in.srain.cube.views.ptr.PtrClassicFrameLayout>-->
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
 </LinearLayout>

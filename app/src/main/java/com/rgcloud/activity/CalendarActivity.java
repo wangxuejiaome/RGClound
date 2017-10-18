@@ -1,26 +1,17 @@
 package com.rgcloud.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.codbking.calendar.CaledarAdapter;
-import com.codbking.calendar.CalendarBean;
-import com.codbking.calendar.CalendarDateView;
-import com.codbking.calendar.CalendarUtil;
-import com.codbking.calendar.CalendarView;
+import com.loonggg.weekcalendar.view.WeekCalendar;
 import com.rgcloud.R;
 import com.rgcloud.adapter.ActivityAdapter;
-import com.rgcloud.adapter.CalendarAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
 import com.rgcloud.entity.request.ActivityReqEntity;
@@ -32,15 +23,12 @@ import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.ToastUtil;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
+
 
 public class CalendarActivity extends BaseActivity {
 
@@ -50,10 +38,8 @@ public class CalendarActivity extends BaseActivity {
     TextView tvCalendar;
    /* @Bind(R.id.rv_calendar)
     RecyclerView rvCalendar;*/
-   @Bind(R.id.list)
-   ListView mList;
-    @Bind(R.id.calendarDateView)
-    CalendarDateView calendarDateView;
+    @Bind(R.id.week_calendar)
+    WeekCalendar weekCalendar;
     @Bind(R.id.rv_calendar_activity)
     RecyclerView rvCalendarActivity;
 
@@ -79,67 +65,29 @@ public class CalendarActivity extends BaseActivity {
 
     private void initView() {
 
+        List<String> list = new ArrayList<>();
+        list.add("2017-09-13");
+        list.add("2017-10-13");
+        list.add("2017-10-11");
+        list.add("2017-10-10");
+        list.add("2017-10-16");
+//传入已经预约或者曾经要展示选中的时间列表
+        weekCalendar.setSelectDates(list);
 
-        calendarDateView.setAdapter(new CaledarAdapter() {
+        //设置日历点击事件
+        weekCalendar.setOnDateClickListener(new WeekCalendar.OnDateClickListener() {
             @Override
-            public View getView(View convertView, ViewGroup parentView, CalendarBean bean) {
-                TextView view;
-                if (convertView == null) {
-                    convertView = LayoutInflater.from(parentView.getContext()).inflate(R.layout.item_calendar, null);
-                    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(48,48);
-                    convertView.setLayoutParams(params);
-                }
-
-                view = (TextView) convertView.findViewById(R.id.text);
-
-                view.setText("" + bean.day);
-                if (bean.mothFlag != 0) {
-                    view.setTextColor(0xff9299a1);
-                } else {
-                    view.setTextColor(0xffffffff);
-                }
-
-                return convertView;
+            public void onDateClick(String time) {
+                Toast.makeText(mContext, time, Toast.LENGTH_SHORT).show();
             }
         });
-
-        calendarDateView.setOnItemClickListener(new CalendarView.OnItemClickListener() {
+//设置年月时间的回调
+        weekCalendar.setOnCurrentMonthDateListener(new WeekCalendar.OnCurrentMonthDateListener() {
             @Override
-            public void onItemClick(View view, int postion, CalendarBean bean) {
-                ToastUtil .showShortToast(bean.year + "/" + bean.moth+ "/" + bean.day);
+            public void onCallbackMonthDate(String year, String month) {
+                Toast.makeText(mContext, year + "-" + month, Toast.LENGTH_SHORT).show();
             }
         });
-
-
-        mList.setAdapter(new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return 100;
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                if (convertView == null) {
-                    convertView = LayoutInflater.from(CalendarActivity.this).inflate(android.R.layout.simple_list_item_1, null);
-                }
-
-                TextView textView = (TextView) convertView;
-                textView.setText("item" + position);
-
-                return convertView;
-            }
-        });
-
 
 
 
