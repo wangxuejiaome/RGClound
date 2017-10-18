@@ -57,7 +57,7 @@
                 <com.stx.xhb.mylibrary.XBanner
                     android:id="@+id/banner_home"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y270"
+                    android:layout_height="@dimen/y380"
                     app:AutoPlayTime="3000"
                     app:pointsPosition="CENTER"/>
 
