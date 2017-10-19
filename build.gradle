@@ -2,10 +2,10 @@
 
 buildscript {
     repositories {
-//        jcenter()
-        maven {
+        jcenter()
+       /* maven {
             url "http://maven.oa.com/nexus/content/groups/androidbuild"
-        }
+        }*/
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.0'
@@ -22,11 +22,11 @@ allprojects {
             dirs 'src/main/jniLibs'
         }
         jcenter()
-        maven {
+        /*maven {
             url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //            url "http://maven.oa.com/nexus/content/repositories/jcenter"
 
-        }
+        }*/
         maven {
             url "https://jitpack.io"
         }

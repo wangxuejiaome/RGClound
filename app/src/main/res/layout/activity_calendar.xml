@@ -31,42 +31,113 @@
     </RelativeLayout>
 
 
-    <!--    <com.loonggg.weekcalendar.view.WeekCalendar
-            android:id="@+id/week_calendar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:paddingBottom="10dp"
-            app:weekTextColor="@color/grey900"
-            app:daysSelectedTextColor="@color/white"
-            app:daysSelectedBackground="@drawable/shape_round_blue"
-            app:hideTodayName="true"
-            app:isCornerMark="false"
-            app:isShowMonth="false"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <com.loonggg.weekcalendar.view.WeekCalendar
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/y10"
+            android:paddingTop="@dimen/y10"
+            android:text="日"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/y10"
+            android:paddingTop="@dimen/y10"
+            android:text="一"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/y10"
+            android:paddingTop="@dimen/y10"
+            android:text="二"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/y10"
+            android:paddingTop="@dimen/y10"
+            android:text="三"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/y10"
+            android:paddingTop="@dimen/y10"
+            android:text="四"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/y10"
+            android:paddingTop="@dimen/y10"
+            android:text="五"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/y10"
+            android:paddingTop="@dimen/y10"
+            android:text="六"
+            android:textColor="@color/grey900"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <com.necer.ncalendar.calendar.WeekCalendar
         android:id="@+id/week_calendar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:paddingBottom="10dp"
-        app:daysSelectedBackground="@drawable/shape_round_blue"
-        app:isCornerMark="false"
-        app:monthBackgroundColor="#8F83F1"
-        app:nextArrowBg="@mipmap/ic_arrow_forward"
-        app:preArrowBg="@mipmap/ic_back"/>
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        app:firstDayOfWeek="Sunday"
+        app:isShowHoliday="false"
+        app:isShowLunar="false"
+        app:solarTextSize="14sp"
+        app:selectCircleColor="@color/colorPrimaryBlue"
+        app:hollowCircleColor="@color/colorPrimaryBlue"
+        app:selectCircleRadius="24"/>
 
 
     <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:ptr_duration_to_close="200"
         app:ptr_duration_to_close_header="1000"
         app:ptr_keep_header_when_refresh="true"
         app:ptr_pull_to_fresh="false"
         app:ptr_ratio_of_header_height_to_refresh="1.2"
         app:ptr_resistance="1.7">
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_calendar_activity"

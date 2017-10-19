@@ -1,4 +1,4 @@
-include ':app', ':weekcalendarlib'
+include ':app', ':ncalendar'
 
 
 
