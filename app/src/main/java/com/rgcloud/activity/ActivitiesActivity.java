@@ -134,6 +134,7 @@ public class ActivitiesActivity extends BaseActivity {
         activityReqEntity.ActiveType = mActivityCategoryId;
         activityReqEntity.ChildTypeId = mSelectedActivityTypeId;
         activityReqEntity.SpaceId = mActivitySpaceId;
+        activityReqEntity.PageIndex = mPageIndex;
         RequestApi.getActivity(activityReqEntity, new ResponseCallBack(mContext) {
             @Override
             public void onObjectResponse(Object resEntity) {

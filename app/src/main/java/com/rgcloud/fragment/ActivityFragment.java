@@ -150,6 +150,7 @@ public class ActivityFragment extends Fragment {
         ActivityReqEntity activityReqEntity = new ActivityReqEntity();
         activityReqEntity.ActiveType = 1;
         activityReqEntity.ChildTypeId = mSelectedTypeId;
+        activityReqEntity.PageIndex = mPageIndex;
         RequestApi.getActivity(activityReqEntity, new ResponseCallBack(getActivity()) {
             @Override
             public void onObjectResponse(Object resEntity) {
@@ -160,7 +161,7 @@ public class ActivityFragment extends Fragment {
                     mActiveTypeList.addAll(mActivityResEntity.ActiveTypeList);
                     mActiveTypeList.add(0, new ActivityResEntity.ActiveTypeListBean(0, "全部", true));
                     mActivityNavigationAdapter.setNewData(mActiveTypeList);
-                }
+                }mActivityResEntity = (ActivityResEntity) resEntity;
 
                 if (mPageIndex == 1) {
                     mActivityAdapter.setNewData(mActivityResEntity.ActiveList);
