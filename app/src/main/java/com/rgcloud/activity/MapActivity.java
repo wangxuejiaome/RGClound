@@ -418,7 +418,7 @@ public class MapActivity extends BaseActivity {
 
         BaiduNaviManager.getInstance().init(this, mSDCardPath, APP_FOLDER_NAME, new BaiduNaviManager.NaviInitListener() {
             @Override
-            public void onAuthResult(int status, String msg) {
+            public void onAuthResult(final int status, String msg) {
                 if (0 == status) {
                    // authinfo = "key校验成功!";
                 } else {
@@ -428,7 +428,10 @@ public class MapActivity extends BaseActivity {
 
                     @Override
                     public void run() {
-                        Toast.makeText(MapActivity.this, authinfo, Toast.LENGTH_LONG).show();
+
+                        if(0 != status){
+                            Toast.makeText(MapActivity.this, authinfo, Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }

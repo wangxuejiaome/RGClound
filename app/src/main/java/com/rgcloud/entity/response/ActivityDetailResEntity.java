@@ -38,5 +38,6 @@ public class ActivityDetailResEntity extends BaseResEntity {
     public int CommentSendScore;
     public String DetailUrl;
     public String SharedUrl;
+    public int RemaindTicket;
     
 }

@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/iv_information"
-        android:layout_width="@dimen/x180"
-        android:layout_height="@dimen/y120"
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/y130"
         android:scaleType="centerCrop"
         android:src="@mipmap/information_temp"
         />
@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:text="优雅与高贵并存"
             android:textColor="@color/grey900"
-            android:textSize="16sp"/>
+            android:textSize="15sp"/>
 
 
         <TextView

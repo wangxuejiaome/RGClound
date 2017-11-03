@@ -159,7 +159,14 @@ public class ActivityDetailActivity extends BaseActivity {
         tvTime.setText(mActivityDetailResEntity.ActiveTime);
         tvPhone.setText(mActivityDetailResEntity.ConnectPhone);
         if (mActivityDetailResEntity.IsNeedTicket == 1) {
-            btnGetTicket.setText("我要领票");
+            if(mActivityDetailResEntity.RemaindTicket == 0){
+                btnGetTicket.setEnabled(false);
+                btnGetTicket.setBackgroundColor(0xffcccccc);
+            }else {
+                btnGetTicket.setEnabled(true);
+                btnGetTicket.setBackgroundColor(0xff2765b3);
+            }
+            btnGetTicket.setText("我要领票(" + mActivityDetailResEntity.RemaindTicket + ")");
         } else {
             btnGetTicket.setText("免费参观");
         }
