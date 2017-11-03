@@ -8,13 +8,15 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.necer.ncalendar.calendar.WeekCalendar;
-import com.necer.ncalendar.listener.OnWeekCalendarChangedListener;
+import com.necer.ncalendar.calendar.NCalendar;
+import com.necer.ncalendar.listener.OnCalendarChangedListener;
 import com.rgcloud.R;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.config.Constant;
 import com.rgcloud.divider.HorizontalDividerItemDecoration;
+import com.rgcloud.entity.request.ActivityDaysReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
+import com.rgcloud.entity.response.ActivityDaysResEntity;
 import com.rgcloud.entity.response.ActivityResBean;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.http.RequestApi;
@@ -29,25 +31,20 @@ import java.util.Calendar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
 
+public class CalendarActivity extends BaseActivity implements OnCalendarChangedListener {
 
-public class CalendarActivity extends BaseActivity {
-
-    @Bind(R.id.ptr_classic_frame_layout)
-    PtrClassicFrameLayout ptrClassicFrameLayout;
     @Bind(R.id.tv_calendar)
     TextView tvCalendar;
-    @Bind(R.id.week_calendar)
-    WeekCalendar weekCalendar;
+    @Bind(R.id.calendar)
+    NCalendar calendar;
 
     @Bind(R.id.rv_calendar_activity)
     RecyclerView rvCalendarActivity;
 
     private ActivityAdapter mActivityAdapter;
     private ActivityResEntity mActivityResEntity;
+    private Integer mSelectMonth;
     private Integer mSelectedDay;
 
     private boolean mIsEnd;
@@ -58,13 +55,13 @@ public class CalendarActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);
+        calendar.setOnCalendarChangedListener(this);
         initView();
         initData();
     }
 
 
     private void initView() {
-
 
         Calendar c = Calendar.getInstance();  //获取Calendar的方法
         int month = c.get(Calendar.MONTH) + 1;//获取当前月份
@@ -82,16 +79,8 @@ public class CalendarActivity extends BaseActivity {
             dayStr = "" + day;
         }
 
-        weekCalendar.setDate(c.get(Calendar.YEAR) + "-" + monthStr + "-" + dayStr);
-        weekCalendar.setDefaultSelect(false);
-        weekCalendar.setOnWeekCalendarChangedListener(new OnWeekCalendarChangedListener() {
-            @Override
-            public void onWeekCalendarChanged(DateTime dateTime) {
-                mSelectedDay = Integer.valueOf("" + dateTime.getYear() + dateTime.getMonthOfYear() + dateTime.getDayOfMonth());
-                tvCalendar.setText(dateTime.getYear() + "年" + dateTime.getMonthOfYear() + "月");
-                getActivities();
-            }
-        });
+        mSelectMonth = Integer.valueOf(c.get(Calendar.YEAR) + monthStr);
+        calendar.setDate(c.get(Calendar.YEAR) + "-" + monthStr + "-" + dayStr);
 
 
         rvCalendarActivity.setLayoutManager(new LinearLayoutManager(mContext));
@@ -105,14 +94,6 @@ public class CalendarActivity extends BaseActivity {
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ActivityResBean activityResBean = mActivityAdapter.getItem(position);
                 ActivityDetailActivity.startActivityDetail(mContext, activityResBean.ActiveId);
-            }
-        });
-
-        ptrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                mPageIndex = 1;
-                getActivities();
             }
         });
 
@@ -137,7 +118,22 @@ public class CalendarActivity extends BaseActivity {
 
 
     private void initData() {
+        getActivityDays();
         getActivities();
+    }
+
+    private void getActivityDays(){
+        ActivityDaysReqEntity activityDaysReqEntity = new ActivityDaysReqEntity();
+        activityDaysReqEntity.Month = mSelectMonth;
+        RequestApi.getActivityDays(activityDaysReqEntity,new ResponseCallBack(mContext){
+            @Override
+            public void onObjectResponse(Object resEntity) {
+                super.onObjectResponse(resEntity);
+                if(resEntity == null) return;
+                ActivityDaysResEntity activityDaysResEntity = (ActivityDaysResEntity) resEntity;
+                calendar.setPoint(activityDaysResEntity.DayList);
+            }
+        } );
     }
 
     private void getActivities() {
@@ -154,7 +150,7 @@ public class CalendarActivity extends BaseActivity {
 
                 if (mPageIndex == 1) {
                     mActivityAdapter.setNewData(mActivityResEntity.ActiveList);
-                    ptrClassicFrameLayout.refreshComplete();
+                    //ptrClassicFrameLayout.refreshComplete();
                     mActivityAdapter.disableLoadMoreIfNotFullPage(rvCalendarActivity);
                 } else {
                     mActivityAdapter.addData(mActivityResEntity.ActiveList);
@@ -164,11 +160,22 @@ public class CalendarActivity extends BaseActivity {
                 mIsEnd = mActivityResEntity.ActiveList.size() < Constant.DEFAULT_PAGE_SIZE;
 
                 if (mActivityAdapter.getItemCount() == 0) {
-                    ToastUtil.showShortToast("暂无数据");
+                    ToastUtil.showShortToast("今天暂无活动");
                 }
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
             }
         });
+    }
+
+
+    @Override
+    public void onCalendarChanged(DateTime dateTime) {
+        mSelectMonth = Integer.valueOf("" + dateTime.getYear() +  dateTime.getMonthOfYear());
+        mSelectedDay = Integer.valueOf("" + dateTime.getYear() + dateTime.getMonthOfYear() + dateTime.getDayOfMonth());
+        tvCalendar.setText(dateTime.getYear() + "年" + dateTime.getMonthOfYear() + "月");
+        getActivityDays();
+        getActivities();
+
     }
 
 

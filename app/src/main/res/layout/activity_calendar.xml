@@ -114,7 +114,30 @@
 
     </LinearLayout>
 
-    <com.necer.ncalendar.calendar.WeekCalendar
+    <com.necer.ncalendar.calendar.NCalendar
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:firstDayOfWeek="Sunday"
+        app:isShowHoliday="false"
+        app:isShowLunar="false"
+        app:solarTextSize="14sp"
+        app:selectCircleColor="@color/colorPrimaryBlue"
+        app:hollowCircleColor="@color/colorPrimaryBlue"
+        app:pointColor="@color/colorPrimaryBlue"
+        app:pointSize="@dimen/x8"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_calendar_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/y10"
+            android:background="@color/white"/>
+
+    </com.necer.ncalendar.calendar.NCalendar>
+
+<!--    <com.necer.ncalendar.calendar.WeekCalendar
         android:id="@+id/week_calendar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y100"
@@ -124,10 +147,10 @@
         app:solarTextSize="14sp"
         app:selectCircleColor="@color/colorPrimaryBlue"
         app:hollowCircleColor="@color/colorPrimaryBlue"
-        app:selectCircleRadius="24"/>
+        app:selectCircleRadius="24"/>-->
 
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+<!--    <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/ptr_classic_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -139,12 +162,8 @@
         app:ptr_resistance="1.7">
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_calendar_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y10"/>
 
-    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>-->
 
 </LinearLayout>

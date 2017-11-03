@@ -1,6 +1,7 @@
 package com.rgcloud.http;
 
 import com.rgcloud.entity.BaseResEntity;
+import com.rgcloud.entity.request.ActivityDaysReqEntity;
 import com.rgcloud.entity.request.ActivityDetailReqEntity;
 import com.rgcloud.entity.request.ActivityReqEntity;
 import com.rgcloud.entity.request.BaseReqEntity;
@@ -19,6 +20,7 @@ import com.rgcloud.entity.request.SpaceReqEntity;
 import com.rgcloud.entity.request.UpdatePasswordReqEntity;
 import com.rgcloud.entity.request.VerifyCodeReqEntity;
 import com.rgcloud.entity.request.WXReqEntity;
+import com.rgcloud.entity.response.ActivityDaysResEntity;
 import com.rgcloud.entity.response.ActivityDetailResEntity;
 import com.rgcloud.entity.response.ActivityResEntity;
 import com.rgcloud.entity.response.ActivitySpaceResEntity;
@@ -135,6 +137,16 @@ public class RequestApi {
         Call<ActivityResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivity(activityReqEntity);
         call.enqueue(responseCallBack);
     }
+
+
+    /**
+     * 获取月活动日
+     */
+    public static void getActivityDays(ActivityDaysReqEntity activityDaysReqEntity, ResponseCallBack responseCallBack) {
+        Call<ActivityDaysResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getActivityDays(activityDaysReqEntity);
+        call.enqueue(responseCallBack);
+    }
+
 
     /**
      * 活动详情
