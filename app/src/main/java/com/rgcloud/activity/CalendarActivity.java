@@ -170,8 +170,23 @@ public class CalendarActivity extends BaseActivity implements OnCalendarChangedL
 
     @Override
     public void onCalendarChanged(DateTime dateTime) {
-        mSelectMonth = Integer.valueOf("" + dateTime.getYear() +  dateTime.getMonthOfYear());
-        mSelectedDay = Integer.valueOf("" + dateTime.getYear() + dateTime.getMonthOfYear() + dateTime.getDayOfMonth());
+
+        String monthStr = "";
+        String dayStr = "";
+
+        if (dateTime.getMonthOfYear() < 10) {
+            monthStr = "0" + dateTime.getMonthOfYear();
+        } else {
+            monthStr = "" + dateTime.getMonthOfYear();
+        }
+        if ( dateTime.getDayOfMonth() < 10) {
+            dayStr = "0" + dateTime.getDayOfMonth();
+        } else {
+            dayStr = "" + dateTime.getDayOfMonth();
+        }
+
+        mSelectMonth = Integer.valueOf("" + dateTime.getYear()  + monthStr);
+        mSelectedDay = Integer.valueOf("" + dateTime.getYear() + monthStr + dayStr);
         tvCalendar.setText(dateTime.getYear() + "年" + dateTime.getMonthOfYear() + "月");
         getActivityDays();
         getActivities();
