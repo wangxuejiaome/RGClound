@@ -322,7 +322,9 @@
         </activity>
         <activity android:name=".activity.CalendarActivity">
         </activity>
-        <activity android:name=".activity.ActivityDetailActivity">
+        <activity android:name=".activity.ActivityDetailActivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize|keyboardHidden">
         </activity>
         <activity android:name=".activity.ActivitiesActivity">
         </activity>

@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,6 +16,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -42,6 +46,7 @@ import com.rgcloud.util.GlideUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.util.Util;
 import com.rgcloud.view.CircleLoadingProgressDialog;
+import com.tencent.qalsdk.im_open.http;
 import com.tencent.qcloud.xiaozhibo.play.TCLivePlayerActivity;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -64,6 +69,8 @@ import static java.util.ResourceBundle.clearCache;
 
 public class ActivityDetailActivity extends BaseActivity {
 
+    @Bind(R.id.activity_detail)
+    LinearLayout llActivityDetail;
     @Bind(R.id.iv_activity_detail)
     ImageView ivActivityDetail;
     @Bind(R.id.tv_name_activity_detail)
@@ -86,6 +93,8 @@ public class ActivityDetailActivity extends BaseActivity {
     ImageView ivShare;
     @Bind(R.id.btn_get_ticket)
     Button btnGetTicket;
+    @Bind(R.id.ll_bottom)
+    LinearLayout llBottom;
 
     private SHARE_MEDIA mShareMedia = SHARE_MEDIA.WEIXIN;
 
@@ -105,14 +114,37 @@ public class ActivityDetailActivity extends BaseActivity {
     private double mEndLng;
     private double mEndLat;
     private android.app.AlertDialog mShareDialog;
+    private InsideWebChromeClient mInsideWebChromeClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
-        initData();
         BNOuterLogUtil.setLogSwitcher(true);
+        initWebView();
+        initData();
+
+    }
+
+    private void initWebView() {
+        WebSettings settings = wvActivityDetail.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setPluginState(WebSettings.PluginState.ON);
+        //settings.setPluginsEnabled(true);
+        settings.setAllowFileAccess(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        mInsideWebChromeClient = new InsideWebChromeClient();
+        InsideWebViewClient mInsideWebViewClient = new InsideWebViewClient();
+        //javascriptInterface = new JavascriptInterface();
+        //mWebView.addJavascriptInterface(javascriptInterface, "java2js_laole918");
+        wvActivityDetail.setWebChromeClient(mInsideWebChromeClient);
+        wvActivityDetail.setWebViewClient(mInsideWebViewClient);
+
     }
 
     private void initData() {
@@ -529,6 +561,73 @@ public class ActivityDetailActivity extends BaseActivity {
         }
     };
 
+    private class InsideWebChromeClient extends WebChromeClient {
+        private View mCustomView;
+        private CustomViewCallback mCustomViewCallback;
+
+        @Override
+        public void onShowCustomView(View view, CustomViewCallback callback) {
+            super.onShowCustomView(view, callback);
+            if (mCustomView != null) {
+                callback.onCustomViewHidden();
+                return;
+            }
+            mCustomView = view;
+            llActivityDetail.addView(mCustomView);
+            mCustomViewCallback = callback;
+            wvActivityDetail.setVisibility(View.GONE);
+            llBottom.setVisibility(View.GONE);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+
+        public void onHideCustomView() {
+            wvActivityDetail.setVisibility(View.VISIBLE);
+            if (mCustomView == null) {
+                return;
+            }
+            mCustomView.setVisibility(View.GONE);
+            llActivityDetail.removeView(mCustomView);
+            llBottom.setVisibility(View.VISIBLE);
+            mCustomViewCallback.onCustomViewHidden();
+            mCustomView = null;
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            super.onHideCustomView();
+        }
+    }
+
+
+    private class InsideWebViewClient extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            // TODO Auto-generated method stub
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            //mWebView.loadUrl(javascript);
+        }
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration config) {
+        super.onConfigurationChanged(config);
+        switch (config.orientation) {
+            case Configuration.ORIENTATION_LANDSCAPE:
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                break;
+            case Configuration.ORIENTATION_PORTRAIT:
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+                break;
+        }
+    }
+
 
     public static void startActivityDetail(Context context, int activityId) {
         Intent intent = new Intent(context, ActivityDetailActivity.class);
@@ -542,6 +641,34 @@ public class ActivityDetailActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             wvActivityDetail.reload();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        wvActivityDetail.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        wvActivityDetail.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (wvActivityDetail.canGoBack()) {
+            wvActivityDetail.goBack();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onDestroy() {
+        wvActivityDetail.destroy();
+        super.onDestroy();
     }
 
     @OnClick({R.id.iv_back, R.id.ll_location, R.id.tv_phone_activity_detail, R.id.tv_comment_activity_detail, R.id.iv_collect_activity_detail, R.id.iv_share_activity_detail, R.id.btn_get_ticket})
