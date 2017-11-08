@@ -168,6 +168,7 @@ public class ActivityDetailActivity extends BaseActivity {
             }
             btnGetTicket.setText("我要领票(" + mActivityDetailResEntity.RemaindTicket + ")");
         } else {
+            btnGetTicket.setEnabled(false);
             btnGetTicket.setText("免费参观");
         }
 
@@ -715,9 +716,7 @@ public class ActivityDetailActivity extends BaseActivity {
                 showShareDialog();
                 break;
             case R.id.btn_get_ticket:
-                if (btnGetTicket.getText().toString().equals("我要领票")) {
-                    getTicket();
-                }
+                getTicket();
                 break;
         }
     }
