@@ -142,6 +142,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
             @Override
             public void onResponse(Call<WXOpenIdResEntity> call, Response<WXOpenIdResEntity> response) {
                 WXOpenIdResEntity wxOpenIdResEntity = response.body();
+                mPreferencesUtil.put(PreferencesUtil.OPEN_ID, wxOpenIdResEntity.openid);
                 wxLogin(wxOpenIdResEntity);
             }
 
@@ -158,7 +159,11 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
     private static void wxLogin(WXOpenIdResEntity wxOpenIdResEntity) {
         mWxOpenIdResEntity = wxOpenIdResEntity;
         WXReqEntity wxReqEntity = new WXReqEntity();
-        wxReqEntity.OpenId = wxOpenIdResEntity.openid;
+        if (!TextUtils.isEmpty(mPreferencesUtil.getString(PreferencesUtil.OPEN_ID))) {
+            wxReqEntity.OpenId = mPreferencesUtil.getString(PreferencesUtil.OPEN_ID);
+        } else {
+            wxReqEntity.OpenId = wxOpenIdResEntity.openid;
+        }
         wxReqEntity.UnionId = wxOpenIdResEntity.unionid;
         wxReqEntity.EquipmentId = JPushInterface.getRegistrationID(TCApplication.getApplication());
         wxReqEntity.LoginType = 0;

@@ -33,7 +33,13 @@ public class PreferencesUtil {
     /**
      * 绑定的手机号
      */
-    public static final String USER_PHONE = "UserPhone";
+    public static final String USER_PHONE = "userPhone";
+
+
+    /**
+     * 微信openId
+     */
+    public static final String OPEN_ID = "openId";
 
 
     /**
