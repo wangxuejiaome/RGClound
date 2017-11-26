@@ -21,7 +21,9 @@ public class PersonalInfoResEntity extends BaseResEntity {
     public int TotalPoint;
     public int ThirdPartyUserCnt;
     public int CanDirectSeeding;
-    public  String AboutUsUrl;
+    public String AboutUsUrl;
     public String MemberNickName;
+    public String MyCultureWalletUrl;
+    public String MyVolunteerUrl;
 
 }

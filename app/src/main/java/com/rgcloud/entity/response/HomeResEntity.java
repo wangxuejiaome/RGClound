@@ -49,6 +49,10 @@ public class HomeResEntity extends BaseResEntity {
         public String ImageUrl;
     }
 
+    public int MainImportantActiveId;
     public  int Opera;
     public int VoluntaryServiceId;
+    public String CulturalWalletUrl;
+    public int ArtisticAppreciation;
+    public int CulturalTreasures;
 }

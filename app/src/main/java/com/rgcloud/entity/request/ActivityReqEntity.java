@@ -22,6 +22,7 @@ public class ActivityReqEntity extends BaseReqEntity {
 
     public int ActiveType;
     public int ChildTypeId;
+    public int ActiveState;
     public int SpaceId;
     public String ActiveName;
     public int PageIndex;

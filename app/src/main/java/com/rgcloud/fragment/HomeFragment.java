@@ -25,13 +25,13 @@ import com.rgcloud.activity.ActivitiesActivity;
 import com.rgcloud.activity.ActivityDetailActivity;
 import com.rgcloud.activity.BindPhoneActivity;
 import com.rgcloud.activity.CalendarActivity;
-import com.rgcloud.activity.InformationDetailActivity;
 import com.rgcloud.activity.LiveActivity;
 import com.rgcloud.activity.LoginActivity;
 import com.rgcloud.activity.Main2Activity;
 import com.rgcloud.activity.MapActivity;
 import com.rgcloud.activity.OrderActivity;
 import com.rgcloud.activity.SearchActivity;
+import com.rgcloud.activity.WebviewActivity;
 import com.rgcloud.adapter.ActivityAdapter;
 import com.rgcloud.adapter.FunctionAdapter;
 import com.rgcloud.adapter.FunctionNavigationAdapter;
@@ -59,8 +59,6 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-import static com.rgcloud.R.drawable.position;
-
 /**
  * Created by wangxuejiao on 2017/9/5.
  */
@@ -83,16 +81,8 @@ public class HomeFragment extends Fragment {
     TextView tvLive;
     @Bind(R.id.ll_live)
     RelativeLayout llLive;
-    @Bind(R.id.ll_order)
-    LinearLayout llOrder;
     @Bind(R.id.imageView)
     ImageView imageView;
-    @Bind(R.id.ll_calendar)
-    LinearLayout llCalendar;
-    @Bind(R.id.ll_map)
-    LinearLayout llMap;
-    @Bind(R.id.ll_troupe)
-    LinearLayout llTroupe;
     @Bind(R.id.ll_service)
     LinearLayout llService;
 
@@ -129,17 +119,41 @@ public class HomeFragment extends Fragment {
     private void initView() {
 
         rvFunctionNavigation.setLayoutManager(new GridLayoutManager(getActivity(), 4));
-     /*   rvFunctionNavigation.addItemDecoration(new DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL_LIST));*/
-        mFunctionNavigationAdapter = new FunctionNavigationAdapter(null);
+
+        List<FunctionEntity> functionEntityList = new ArrayList<>();
+        functionEntityList.add(new FunctionEntity("重大活动", "", R.mipmap.ic_speaker_function));
+        functionEntityList.add(new FunctionEntity("精彩回放", "", R.mipmap.ic_tv_function));
+        functionEntityList.add(new FunctionEntity("文化日历", "", R.mipmap.ic_calendar_function));
+        functionEntityList.add(new FunctionEntity("我要点单", "", R.mipmap.ic_order_function));
+
+        mFunctionNavigationAdapter = new FunctionNavigationAdapter(functionEntityList);
         rvFunctionNavigation.setAdapter(mFunctionNavigationAdapter);
 
         rvFunctionNavigation.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                HomeResEntity.IconListBean iconListBean = (HomeResEntity.IconListBean) adapter.getItem(position);
-                ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId, 0);
+                switch (position) {
+                    case 0://重大活动
+                        if (mHomeResEntity != null) {
+                            ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.MainImportantActiveId, 0);
+                        }
+                        break;
+                    case 1://精彩回放
+                        if (mHomeResEntity != null) {
+                            ActivitiesActivity.startActivitiesActivity(getActivity(), 1, -1, 0);
+                        }
+                        break;
+                    case 2:
+                        startActivity(new Intent(getActivity(),CalendarActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(getActivity(),OrderActivity.class));
+                        break;
+                }
+
+              /*  HomeResEntity.IconListBean iconListBean = (HomeResEntity.IconListBean) adapter.getItem(position);
+                ActivitiesActivity.startActivitiesActivity(getActivity(), 1, iconListBean.TypeId, 0);*/
             }
         });
 
@@ -222,7 +236,7 @@ public class HomeFragment extends Fragment {
             });
         }
 
-        mFunctionNavigationAdapter.setNewData(mHomeResEntity.IconList);
+        //   mFunctionNavigationAdapter.setNewData(mHomeResEntity.IconList);
         mActivityAdapter.setNewData(mHomeResEntity.RecommendList);
     }
 
@@ -254,7 +268,7 @@ public class HomeFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.iv_search,R.id.ll_live, R.id.ll_order, R.id.ll_calendar, R.id.ll_map, R.id.ll_troupe, R.id.ll_service})
+    @OnClick({R.id.iv_search, R.id.ll_live, R.id.ll_culture_red_packet, R.id.ll_map, R.id.ll_art, R.id.ll_culture, R.id.ll_service})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_search:
@@ -287,22 +301,37 @@ public class HomeFragment extends Fragment {
                     startActivity(new Intent(getActivity(), LiveActivity.class));
                 }
                 break;
-            case R.id.ll_order:
-                startActivity(new Intent(getActivity(), OrderActivity.class));
+            case R.id.ll_culture_red_packet:
+                if (mHomeResEntity == null) return;
+                if (TextUtils.isEmpty(mHomeResEntity.CulturalWalletUrl)) {
+                    ToastUtil.showShortToast("暂未开放");
+                } else {
+
+                    if (!mPreferencesUtil.getBoolean(PreferencesUtil.HAS_LOGIN)) {
+                        ToastUtil.showShortToast("请先登录");
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                    } else {
+                        WebviewActivity.startWebView(getActivity(), "文化红包", mHomeResEntity.CulturalWalletUrl + "?Token=" + mPreferencesUtil.getString(PreferencesUtil.ACCESS_TOKEN));
+                    }
+                }
                 break;
-            case R.id.ll_calendar:
-                startActivity(new Intent(getActivity(), CalendarActivity.class));
-                break;
+
             case R.id.ll_map:
                 startActivity(new Intent(getActivity(), MapActivity.class));
                 break;
-            case R.id.ll_troupe:
-                if(mHomeResEntity != null){
-                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.Opera, 0);
+
+            case R.id.ll_art:
+                if (mHomeResEntity != null) {
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1,mHomeResEntity.ArtisticAppreciation, 0);
+                }
+                break;
+            case R.id.ll_culture:
+                if (mHomeResEntity != null) {
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1,mHomeResEntity.CulturalTreasures, 0);
                 }
                 break;
             case R.id.ll_service:
-                if(mHomeResEntity != null){
+                if (mHomeResEntity != null) {
                     ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.VoluntaryServiceId, 0);
                 }
                 break;

@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -32,12 +34,15 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
+import static com.rgcloud.R.drawable.position;
 import static com.tencent.qalsdk.base.a.ca;
 
 public class ActivitiesActivity extends BaseActivity {
 
     @Bind(R.id.ptr_classic_frame_layout)
     PtrClassicFrameLayout ptrClassicFrameLayout;
+    @Bind(R.id.tv_title_name)
+    TextView tvTitleName;
     @Bind(R.id.rv_activity_navigation)
     RecyclerView rvActivityNavigation;
     @Bind(R.id.rv_activity)
@@ -51,6 +56,11 @@ public class ActivitiesActivity extends BaseActivity {
     private int mActivityCategoryId;
     private int mSelectedActivityTypeId;
     private int mActivitySpaceId;
+
+    /**
+     * 标识是否是志愿服务分类
+     */
+    private boolean mIsvoluntaryServiceType;
 
     private boolean mIsEnd;
     private int mPageIndex = 1;
@@ -78,6 +88,11 @@ public class ActivitiesActivity extends BaseActivity {
                 }
                 mActivityNavigationAdapter.notifyDataSetChanged();
                 mSelectedActivityTypeId = mActiveTypeList.get(position).ActiveTypeId;
+                if (mActiveTypeList.get(position).TypeName.contains("志愿")) {
+                    mIsvoluntaryServiceType = true;
+                } else {
+                    mIsvoluntaryServiceType = false;
+                }
                 getActivities();
             }
         });
@@ -91,7 +106,11 @@ public class ActivitiesActivity extends BaseActivity {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ActivityResBean activityResBean = mActivityAdapter.getItem(position);
-                ActivityDetailActivity.startActivityDetail(mContext, activityResBean.ActiveId);
+                if (mIsvoluntaryServiceType) {
+                    ActivityDetailActivity.startActivityDetail(mContext, activityResBean.ActiveId, "voluntaryServiceFlag");
+                } else {
+                    ActivityDetailActivity.startActivityDetail(mContext, activityResBean.ActiveId);
+                }
             }
         });
 
@@ -132,7 +151,11 @@ public class ActivitiesActivity extends BaseActivity {
     private void getActivities() {
         ActivityReqEntity activityReqEntity = new ActivityReqEntity();
         activityReqEntity.ActiveType = mActivityCategoryId;
-        activityReqEntity.ChildTypeId = mSelectedActivityTypeId;
+        if (mSelectedActivityTypeId == -1) {//精彩回放
+            activityReqEntity.ActiveState = 2;
+        } else {
+            activityReqEntity.ChildTypeId = mSelectedActivityTypeId;
+        }
         activityReqEntity.SpaceId = mActivitySpaceId;
         activityReqEntity.PageIndex = mPageIndex;
         RequestApi.getActivity(activityReqEntity, new ResponseCallBack(mContext) {
@@ -142,7 +165,13 @@ public class ActivitiesActivity extends BaseActivity {
                 if (resEntity == null) return;
                 mActivityResEntity = (ActivityResEntity) resEntity;
 
-                if (mActivitySpaceId != 0) {//文化空间，不需要显示活动导航
+                if (mSelectedActivityTypeId == -1) {
+                    tvTitleName.setText("精彩回放");
+                } else {
+                    tvTitleName.setText("活动");
+                }
+
+                if (mActivitySpaceId != 0 || mSelectedActivityTypeId == -1) {//文化空间、 精彩回放 不需要显示活动导航
                     rvActivityNavigation.setVisibility(View.GONE);
                 } else {
 
@@ -153,6 +182,12 @@ public class ActivitiesActivity extends BaseActivity {
                         for (int i = 0; i < mActiveTypeList.size(); i++) {
                             ActivityResEntity.ActiveTypeListBean activeTypeListBean = mActiveTypeList.get(i);
                             activeTypeListBean.hasSelected = activeTypeListBean.ActiveTypeId == mSelectedActivityTypeId;
+
+                            if (activeTypeListBean.hasSelected  && mActiveTypeList.get(i).TypeName.contains("志愿")) {
+                                mIsvoluntaryServiceType = true;
+                            } else {
+                                mIsvoluntaryServiceType = false;
+                            }
                         }
 
                         mActivityNavigationAdapter.setNewData(mActiveTypeList);

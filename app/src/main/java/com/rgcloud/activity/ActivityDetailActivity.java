@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -64,6 +65,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.R.attr.data;
 import static com.rgcloud.activity.MapActivity.ROUTE_PLAN_NODE;
 import static java.util.ResourceBundle.clearCache;
 
@@ -116,6 +118,11 @@ public class ActivityDetailActivity extends BaseActivity {
     private android.app.AlertDialog mShareDialog;
     private InsideWebChromeClient mInsideWebChromeClient;
 
+    /**
+     * 不为空，标识这个详情是志愿服务分类
+     */
+    private String mVoluntaryServiceFlag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +156,7 @@ public class ActivityDetailActivity extends BaseActivity {
 
     private void initData() {
         mActivityId = getIntent().getIntExtra("activityId", 0);
+        mVoluntaryServiceFlag = getIntent().getStringExtra("voluntaryServiceFlag");
         getActivityDetail();
     }
 
@@ -158,18 +166,24 @@ public class ActivityDetailActivity extends BaseActivity {
         tvAddress.setText(mActivityDetailResEntity.ActiveAddress);
         tvTime.setText(mActivityDetailResEntity.ActiveTime);
         tvPhone.setText(mActivityDetailResEntity.ConnectPhone);
-        if (mActivityDetailResEntity.IsNeedTicket == 1) {
-            if(mActivityDetailResEntity.RemaindTicket == 0){
-                btnGetTicket.setEnabled(false);
-                btnGetTicket.setBackgroundColor(0xffcccccc);
-            }else {
-                btnGetTicket.setEnabled(true);
-                btnGetTicket.setBackgroundColor(0xff2765b3);
-            }
-            btnGetTicket.setText("我要领票(" + mActivityDetailResEntity.RemaindTicket + ")");
+
+        if (!TextUtils.isEmpty(mVoluntaryServiceFlag)) {
+            btnGetTicket.setText("参加志愿服务");
         } else {
-            btnGetTicket.setEnabled(false);
-            btnGetTicket.setText("免费参观");
+
+            if (mActivityDetailResEntity.IsNeedTicket == 1) {
+                if (mActivityDetailResEntity.RemaindTicket == 0) {
+                    btnGetTicket.setEnabled(false);
+                    btnGetTicket.setBackgroundColor(0xffcccccc);
+                } else {
+                    btnGetTicket.setEnabled(true);
+                    btnGetTicket.setBackgroundColor(0xff2765b3);
+                }
+                btnGetTicket.setText("我要领票(" + mActivityDetailResEntity.RemaindTicket + ")");
+            } else {
+                btnGetTicket.setEnabled(false);
+                btnGetTicket.setText("免费参观");
+            }
         }
 
         //设置WebView属性，能够执行Javascript脚本
@@ -491,7 +505,7 @@ public class ActivityDetailActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
 
-            String  shareTitle = "如皋文化云";
+            String shareTitle = "如皋文化云";
 
             switch (view.getId()) {
                 case R.id.btn_share_wx:
@@ -512,7 +526,7 @@ public class ActivityDetailActivity extends BaseActivity {
             web.setTitle(shareTitle);
             web.setDescription(mActivityDetailResEntity.ActiveName);
             shareAction.withMedia(web);
-          //  shareAction.withText(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
+            //  shareAction.withText(mActivityDetailResEntity.ActiveName + "景点正在开放，欢迎前来观赏");
             shareAction.setCallback(shareListener);
             shareAction.setPlatform(mShareMedia).share();
         }
@@ -637,9 +651,14 @@ public class ActivityDetailActivity extends BaseActivity {
     }
 
 
-    public static void startActivityDetail(Context context, int activityId) {
+    public static void startActivityDetail(Context context, int activityId, String... ss) {
         Intent intent = new Intent(context, ActivityDetailActivity.class);
         intent.putExtra("activityId", activityId);
+        for (int i = 0; i < ss.length; i++) {
+            if (i == 0) {
+                intent.putExtra("voluntaryServiceFlag", ss[0]);
+            }
+        }
         context.startActivity(intent);
     }
 

@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y20"
-            android:text="波波"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="12sp"
             />
@@ -136,6 +136,7 @@
 
     </LinearLayout>
 
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dline"
@@ -165,6 +166,66 @@
             android:text="0积分"
             android:textColor="@color/grey500"
             android:textSize="15sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_arrow_forward"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dline"
+        android:background="@color/colorDivider"/>
+
+    <LinearLayout
+        android:id="@+id/ll_culture_red_packet"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y20"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="文化红包"
+            android:textColor="@color/grey900"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_arrow_forward"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dline"
+        android:background="@color/colorDivider"/>
+
+    <LinearLayout
+        android:id="@+id/ll_volunteen_personal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="我的志愿"
+            android:textColor="@color/grey900"
+            android:textSize="15sp"
+            android:id="@+id/textView"/>
+
 
         <ImageView
             android:layout_width="wrap_content"

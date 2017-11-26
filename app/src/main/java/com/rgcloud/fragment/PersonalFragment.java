@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,8 @@ import com.rgcloud.entity.response.PersonalInfoResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
+import com.rgcloud.util.PreferencesUtil;
+import com.rgcloud.util.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -57,6 +61,14 @@ public class PersonalFragment extends Fragment {
     @Bind(R.id.ll_about_us)
     LinearLayout llAboutUs;
     private PersonalInfoResEntity mPersonalInfoResEntity;
+
+    PreferencesUtil mPreferencesUtil;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPreferencesUtil = new PreferencesUtil(getActivity());
+    }
 
     @Nullable
     @Override
@@ -94,7 +106,7 @@ public class PersonalFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.iv_message, R.id.iv_header, R.id.tv_coupon_personal, R.id.tv_collection_personal, R.id.tv_comment_personal, R.id.ll_live_personal, R.id.ll_point_personal, R.id.ll_setting, R.id.ll_about_us})
+    @OnClick({R.id.iv_message, R.id.iv_header, R.id.tv_coupon_personal, R.id.tv_collection_personal, R.id.tv_comment_personal, R.id.ll_live_personal, R.id.ll_point_personal, R.id.ll_culture_red_packet, R.id.ll_volunteen_personal, R.id.ll_setting, R.id.ll_about_us})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_message:
@@ -122,6 +134,22 @@ public class PersonalFragment extends Fragment {
                     pointIntent.putExtra("totalPoint", mPersonalInfoResEntity.TotalPoint);
                 }
                 startActivity(pointIntent);
+                break;
+            case R.id.ll_culture_red_packet:
+                if(mPersonalInfoResEntity == null) return;
+                if(TextUtils.isEmpty(mPersonalInfoResEntity.MyCultureWalletUrl)){
+                    ToastUtil.showShortToast("暂未开放");
+                }else {
+                    WebviewActivity.startWebView(getActivity(), "文化红包", mPersonalInfoResEntity.MyCultureWalletUrl   + "?Token=" + mPreferencesUtil.getString(PreferencesUtil.ACCESS_TOKEN));
+                }
+                break;
+            case R.id.ll_volunteen_personal:
+                if(mPersonalInfoResEntity == null) return;
+                if(TextUtils.isEmpty(mPersonalInfoResEntity.MyVolunteerUrl)){
+                    ToastUtil.showShortToast("暂未开放");
+                }else {
+                    WebviewActivity.startWebView(getActivity(), "我的志愿", mPersonalInfoResEntity.MyVolunteerUrl  + "?Token=" + mPreferencesUtil.getString(PreferencesUtil.ACCESS_TOKEN));
+                }
                 break;
             case R.id.ll_setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));

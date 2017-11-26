@@ -117,7 +117,7 @@
 
 
                     <LinearLayout
-                        android:id="@+id/ll_order"
+                        android:id="@+id/ll_culture_red_packet"
                         android:layout_width="@dimen/x180"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
@@ -128,13 +128,13 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/ic_order_function"/>
+                            android:src="@mipmap/ic_red_packet_function"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y20"
-                            android:text="我要点单"
+                            android:text="文化红包"
                             android:textColor="@color/grey900"
                             android:textSize="12sp"/>
 
@@ -142,7 +142,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y2"
-                            android:text="百姓点单政府制单"
+                            android:text="抢抢福利尽收口袋"
                             android:textColor="@color/grey500"
                             android:textSize="9sp"/>
 
@@ -150,12 +150,10 @@
 
                 </LinearLayout>
 
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dline"
                     android:background="@color/colorDivider"/>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -163,7 +161,7 @@
                     android:background="@color/white">
 
                     <LinearLayout
-                        android:id="@+id/ll_calendar"
+                        android:id="@+id/ll_map"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -176,44 +174,12 @@
                             android:id="@+id/imageView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/ic_calendar_function"/>
+                            android:src="@mipmap/ic_map_function"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y4"
-                            android:text="文化日历"
-                            android:textColor="@color/grey900"
-                            android:textSize="12sp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/y2"
-                            android:text="每日活动新鲜速递"
-                            android:textColor="@color/grey500"
-                            android:textSize="9sp"/>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="@dimen/dline"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorDivider"/>
-
-                    <LinearLayout
-                        android:id="@+id/ll_map"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:paddingBottom="@dimen/y20"
-                        android:paddingTop="@dimen/y20">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="文化地图"
                             android:textColor="@color/grey900"
                             android:textSize="12sp"/>
@@ -226,11 +192,43 @@
                             android:textColor="@color/grey500"
                             android:textSize="9sp"/>
 
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/dline"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorDivider"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_art"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/y20"
+                        android:paddingTop="@dimen/y20">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="艺术欣赏"
+                            android:textColor="@color/grey900"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y2"
+                            android:text="各类精彩演出视频"
+                            android:textColor="@color/grey500"
+                            android:textSize="9sp"/>
+
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y4"
-                            android:src="@mipmap/ic_map_function"/>
+                            android:src="@mipmap/ic_art_function"/>
 
                     </LinearLayout>
 
@@ -240,7 +238,7 @@
                         android:background="@color/colorDivider"/>
 
                     <LinearLayout
-                        android:id="@+id/ll_troupe"
+                        android:id="@+id/ll_culture"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -258,7 +256,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y4"
-                            android:text="民营剧团"
+                            android:text="文化瑰宝"
                             android:textColor="@color/grey900"
                             android:textSize="12sp"/>
 
@@ -266,7 +264,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y2"
-                            android:text="特色好剧任你来点"
+                            android:text="文化古韵尽收眼底"
                             android:textColor="@color/grey500"
                             android:textSize="9sp"/>
 
@@ -311,6 +309,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
 
                 <View
                     android:layout_width="match_parent"
