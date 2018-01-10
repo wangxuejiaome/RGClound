@@ -54,7 +54,12 @@ public class WXEntryActivity extends WXCallbackActivity implements IWXAPIEventHa
                 SendAuth.Resp resp = (SendAuth.Resp) baseResp;
                 if (!TextUtils.isEmpty(resp.code)) {
                     code = resp.code;
-                    LoginActivity.getWXOpenId();
+
+                    if(mWXResListener != null){
+                        mWXResListener.onWxCodeRes(code);
+                    }
+
+                    //LoginActivity.getWXOpenId();
                 }
                 break;
             case BaseResp.ErrCode.ERR_USER_CANCEL:
@@ -105,4 +110,21 @@ public class WXEntryActivity extends WXCallbackActivity implements IWXAPIEventHa
             Toast.makeText(this, obj.extInfo, Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    private static WXResListener mWXResListener;
+
+    public interface WXResListener{
+
+        void onWxCodeRes(String code);
+    }
+
+
+    public static void setWxResListener(WXResListener wxResListener){
+        mWXResListener = wxResListener;
+    }
+
+
+
+
 }

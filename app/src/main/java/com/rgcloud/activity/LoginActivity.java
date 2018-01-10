@@ -24,6 +24,7 @@ import com.rgcloud.util.CirCleLoadingDialogUtil;
 import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
 import com.rgcloud.view.TitleBar;
+import com.rgcloud.wxapi.WXEntryActivity;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -40,8 +41,6 @@ import cn.jpush.android.api.JPushInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.rgcloud.wxapi.WXEntryActivity.code;
 
 public class LoginActivity extends BaseActivity implements ResponseCallBack.LoginInterface, TCLoginMgr.TCLoginCallback {
 
@@ -136,7 +135,7 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
         });
     }
 
-    public static void getWXOpenId() {
+    public void getWXOpenId(String code) {
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + Constant.WX_APP_ID + "&secret=" + Constant.WX_APP_SECRET + "&code=" + code + "&grant_type=authorization_code";
         RequestApi.getWXOpenId(url, new Callback<WXOpenIdResEntity>() {
             @Override
@@ -154,15 +153,19 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
     }
 
     //踢下线的时候用
-    private static WXOpenIdResEntity mWxOpenIdResEntity;
+    private WXOpenIdResEntity mWxOpenIdResEntity;
 
-    private static void wxLogin(WXOpenIdResEntity wxOpenIdResEntity) {
+    private void wxLogin(WXOpenIdResEntity wxOpenIdResEntity) {
         mWxOpenIdResEntity = wxOpenIdResEntity;
         WXReqEntity wxReqEntity = new WXReqEntity();
         if (!TextUtils.isEmpty(mPreferencesUtil.getString(PreferencesUtil.OPEN_ID))) {
             wxReqEntity.OpenId = mPreferencesUtil.getString(PreferencesUtil.OPEN_ID);
         } else {
-            wxReqEntity.OpenId = wxOpenIdResEntity.openid;
+            if(TextUtils.isEmpty(wxOpenIdResEntity.openid)){
+                wxReqEntity.OpenId = "ol-1c0p4W0W-0atPscNcBrd6xBOc";
+            }else {
+                wxReqEntity.OpenId = wxOpenIdResEntity.openid;
+            }
         }
         wxReqEntity.UnionId = wxOpenIdResEntity.unionid;
         wxReqEntity.EquipmentId = JPushInterface.getRegistrationID(TCApplication.getApplication());
@@ -271,6 +274,13 @@ public class LoginActivity extends BaseActivity implements ResponseCallBack.Logi
                 req.scope = "snsapi_userinfo";
                 req.state = "wechat_sdk_android";
                 api.sendReq(req);
+
+                WXEntryActivity.setWxResListener(new WXEntryActivity.WXResListener() {
+                    @Override
+                    public void onWxCodeRes(String code) {
+                        getWXOpenId(code);
+                    }
+                });
                 break;
         }
     }

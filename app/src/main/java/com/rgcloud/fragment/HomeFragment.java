@@ -145,10 +145,10 @@ public class HomeFragment extends Fragment {
                         }
                         break;
                     case 2:
-                        startActivity(new Intent(getActivity(),CalendarActivity.class));
+                        startActivity(new Intent(getActivity(), CalendarActivity.class));
                         break;
                     case 3:
-                        startActivity(new Intent(getActivity(),OrderActivity.class));
+                        startActivity(new Intent(getActivity(), OrderActivity.class));
                         break;
                 }
 
@@ -322,18 +322,25 @@ public class HomeFragment extends Fragment {
 
             case R.id.ll_art:
                 if (mHomeResEntity != null) {
-                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1,mHomeResEntity.ArtisticAppreciation, 0);
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.ArtisticAppreciation, 0);
                 }
                 break;
             case R.id.ll_culture:
                 if (mHomeResEntity != null) {
-                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1,mHomeResEntity.CulturalTreasures, 0);
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.CulturalTreasures, 0);
                 }
                 break;
             case R.id.ll_service:
+                if (mHomeResEntity == null) return;
+                if (!TextUtils.isEmpty(mHomeResEntity.VoluntaryService)) {
+                    WebviewActivity.startWebView(getActivity(), "志愿服务", mHomeResEntity.CulturalWalletUrl + "?Token=" + mPreferencesUtil.getString(PreferencesUtil.ACCESS_TOKEN));
+                } else {
+                    ToastUtil.showShortToast("暂未开放");
+                }
+/*
                 if (mHomeResEntity != null) {
                     ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.VoluntaryServiceId, 0);
-                }
+                }*/
                 break;
         }
     }
