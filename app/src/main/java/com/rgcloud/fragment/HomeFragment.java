@@ -333,7 +333,7 @@ public class HomeFragment extends Fragment {
             case R.id.ll_service:
                 if (mHomeResEntity == null) return;
                 if (!TextUtils.isEmpty(mHomeResEntity.VoluntaryService)) {
-                    WebviewActivity.startWebView(getActivity(), "志愿服务", mHomeResEntity.CulturalWalletUrl + "?Token=" + mPreferencesUtil.getString(PreferencesUtil.ACCESS_TOKEN));
+                    WebviewActivity.startWebView(getActivity(), "志愿服务", mHomeResEntity.VoluntaryService + "?Token=" + mPreferencesUtil.getString(PreferencesUtil.ACCESS_TOKEN));
                 } else {
                     ToastUtil.showShortToast("暂未开放");
                 }
