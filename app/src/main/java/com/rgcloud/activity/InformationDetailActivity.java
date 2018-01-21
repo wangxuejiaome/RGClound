@@ -278,6 +278,8 @@ public class InformationDetailActivity extends BaseActivity {
             case R.id.btn_get_ticket:
                 if (btnGetTicket.getText().toString().equals("我要抢票")) {
                     getTicket();
+                }else {
+                    ToastUtil.showShortToast("该活动不需要门票，免费参观哦");
                 }
                 break;
         }

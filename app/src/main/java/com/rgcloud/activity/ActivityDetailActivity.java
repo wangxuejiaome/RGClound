@@ -181,7 +181,7 @@ public class ActivityDetailActivity extends BaseActivity {
                 }
                 btnGetTicket.setText("我要领票(" + mActivityDetailResEntity.RemaindTicket + ")");
             } else {
-                btnGetTicket.setEnabled(false);
+                btnGetTicket.setEnabled(true);
                 btnGetTicket.setText("免费参观");
             }
         }
@@ -735,7 +735,11 @@ public class ActivityDetailActivity extends BaseActivity {
                 showShareDialog();
                 break;
             case R.id.btn_get_ticket:
-                getTicket();
+                if (mActivityDetailResEntity.IsNeedTicket == 1) {
+                    getTicket();
+                } else {
+                    ToastUtil.showShortToast("该活动不需要门票，免费参观哦");
+                }
                 break;
         }
     }
