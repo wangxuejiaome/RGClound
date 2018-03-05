@@ -43,6 +43,7 @@ import com.rgcloud.entity.response.HomeResEntity;
 import com.rgcloud.http.RequestApi;
 import com.rgcloud.http.ResponseCallBack;
 import com.rgcloud.util.CirCleLoadingDialogUtil;
+import com.rgcloud.util.DownloadImageUtil;
 import com.rgcloud.util.GlideUtil;
 import com.rgcloud.util.PreferencesUtil;
 import com.rgcloud.util.ToastUtil;
@@ -251,10 +252,17 @@ public class HomeFragment extends Fragment {
                 ((Main2Activity) getActivity()).setSearchKey(mHomeResEntity.HotSearchKeyWords);
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ptrClassicFrameLayout.refreshComplete();
+
+                /*if(!TextUtils.isEmpty(mHomeResEntity.Android_StartSiagramImg)){
+                    DownloadImageUtil.downloadImage(mHomeResEntity.Android_StartSiagramImg,"splashBg.jpg");
+
+                              }*/
+
+                DownloadImageUtil.downloadImage("http://rgcloud.oss-cn-shanghai.aliyuncs.com/index/bannernew3.png", "splashBg.jpg");
+
             }
         });
     }
-
 
     @Override
     public void onStop() {

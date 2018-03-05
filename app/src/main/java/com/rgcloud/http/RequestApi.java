@@ -36,10 +36,12 @@ import com.rgcloud.entity.response.VerifyCodeResEntity;
 import com.rgcloud.entity.response.WXOpenIdResEntity;
 import com.umeng.socialize.sina.message.BaseResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 /**
  * Created by wangxuejiao on 2017/9/2.
@@ -250,5 +252,12 @@ public class RequestApi {
     public static void getMessage(MessageReqEntity messageReqEntity, ResponseCallBack responseCallBack) {
         Call<MessageResEntity> call = ServiceGenerator.createService(RGCloudServices.class, true).getMessage(messageReqEntity);
         call.enqueue(responseCallBack);
+    }
+
+    /**
+     * 获取启动图
+     */
+    public static Call<ResponseBody> getSpalshBg(@Url String imageUrl) {
+        return ServiceGenerator.createService(RGCloudServices.class, false).getSpalshBg(imageUrl);
     }
 }

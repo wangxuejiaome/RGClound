@@ -23,6 +23,8 @@ public class HomeResEntity extends BaseResEntity {
     public String VoluntaryService;
     public List<String> HotSearchKeyWords;
     public List<String> TopChangeImageUrl;
+
+
     /**
      * TypeId : 1
      * Name : sample string 2
@@ -55,4 +57,5 @@ public class HomeResEntity extends BaseResEntity {
     public String CulturalWalletUrl;
     public int ArtisticAppreciation;
     public int CulturalTreasures;
+    public String Android_StartSiagramImg;
 }

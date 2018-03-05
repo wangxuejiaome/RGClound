@@ -36,10 +36,12 @@ import com.rgcloud.entity.response.VerifyCodeResEntity;
 import com.rgcloud.entity.response.WXOpenIdResEntity;
 import com.umeng.socialize.sina.message.BaseResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
 /**
@@ -202,4 +204,12 @@ public interface RGCloudServices {
     */
     @POST("memberApi/findPushLog")
     Call<MessageResEntity> getMessage(@Body MessageReqEntity messageReqEntity);
+
+
+    /*
+    * 获取启动图
+    */
+    @Streaming
+    @GET
+    Call<ResponseBody> getSpalshBg(@Url String fileUrl);
 }
