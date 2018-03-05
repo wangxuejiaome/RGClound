@@ -23,6 +23,13 @@ public class HomeResEntity extends BaseResEntity {
     public String VoluntaryService;
     public List<String> HotSearchKeyWords;
     public List<String> TopChangeImageUrl;
+    public List<BannerBean> TopChangeImageList;
+
+    public static class BannerBean {
+        public int Id;
+        public int ConnectId;
+        public String PicPath;
+    }
 
 
     /**

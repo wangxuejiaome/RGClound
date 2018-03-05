@@ -225,17 +225,27 @@ public class HomeFragment extends Fragment {
 
     private void setView() {
 
-        if (mHomeResEntity.TopChangeImageUrl != null) {
-            bannerHome.setData(mHomeResEntity.TopChangeImageUrl, null);
+        if (mHomeResEntity.TopChangeImageList != null) {
+            bannerHome.setData(mHomeResEntity.TopChangeImageList, null);
             bannerHome.setmAdapter(new XBanner.XBannerAdapter() {
                 @Override
                 public void loadBanner(XBanner banner, Object model, View view, int position) {
                     ImageView imageView = (ImageView) view;
                     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    GlideUtil.displayWithPlaceHolder(getActivity(), (String) model, R.mipmap.banner_default, imageView);
+                    GlideUtil.displayWithPlaceHolder(getActivity(), ((HomeResEntity.BannerBean) model).PicPath, R.mipmap.banner_default, imageView);
                 }
             });
         }
+        bannerHome.setOnItemClickListener(new XBanner.OnItemClickListener() {
+            @Override
+            public void onItemClick(XBanner banner, int position) {
+                if(mHomeResEntity == null || mHomeResEntity.TopChangeImageList == null) return;
+                HomeResEntity.BannerBean bannerBean = mHomeResEntity.TopChangeImageList.get(position);
+                if(bannerBean.ConnectId != 0){
+                    ActivityDetailActivity.startActivityDetail(getActivity(),bannerBean.ConnectId);
+                }
+            }
+        });
 
         //   mFunctionNavigationAdapter.setNewData(mHomeResEntity.IconList);
         mActivityAdapter.setNewData(mHomeResEntity.RecommendList);
@@ -253,12 +263,9 @@ public class HomeFragment extends Fragment {
                 CirCleLoadingDialogUtil.dismissCircleProgressDialog();
                 ptrClassicFrameLayout.refreshComplete();
 
-                /*if(!TextUtils.isEmpty(mHomeResEntity.Android_StartSiagramImg)){
-                    DownloadImageUtil.downloadImage(mHomeResEntity.Android_StartSiagramImg,"splashBg.jpg");
-
-                              }*/
-
-                DownloadImageUtil.downloadImage("http://rgcloud.oss-cn-shanghai.aliyuncs.com/index/bannernew3.png", "splashBg.jpg");
+                if (!TextUtils.isEmpty(mHomeResEntity.Android_StartSiagramImg)) {
+                    DownloadImageUtil.downloadImage(mHomeResEntity.Android_StartSiagramImg, "splashBg.jpg");
+                }
 
             }
         });
