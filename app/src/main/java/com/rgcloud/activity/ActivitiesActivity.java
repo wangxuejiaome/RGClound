@@ -167,11 +167,13 @@ public class ActivitiesActivity extends BaseActivity {
 
                 if (mSelectedActivityTypeId == -1) {
                     tvTitleName.setText("精彩回放");
-                } else {
+                } else if(mSelectedActivityTypeId == -2){//文化瑰宝
+                    tvTitleName.setText("文化瑰宝");
+                } else{
                     tvTitleName.setText("活动");
                 }
 
-                if (mActivitySpaceId != 0 || mSelectedActivityTypeId == -1) {//文化空间、 精彩回放 不需要显示活动导航
+                if (mActivitySpaceId != 0 || mSelectedActivityTypeId == -1 || mSelectedActivityTypeId == -2) {//文化空间、 精彩回放、文化瑰宝 不需要显示活动导航
                     rvActivityNavigation.setVisibility(View.GONE);
                 } else {
 
