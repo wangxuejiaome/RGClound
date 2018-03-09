@@ -342,7 +342,7 @@ public class HomeFragment extends Fragment {
                 break;
             case R.id.ll_culture:
                 if (mHomeResEntity != null) {
-                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, -2, 0);
+                    ActivitiesActivity.startActivitiesActivity(getActivity(), 1, mHomeResEntity.CulturalTreasures, 0,"文化瑰宝");
                 }
                 break;
             case R.id.ll_service:

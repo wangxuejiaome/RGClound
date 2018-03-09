@@ -56,6 +56,7 @@ public class ActivitiesActivity extends BaseActivity {
     private int mActivityCategoryId;
     private int mSelectedActivityTypeId;
     private int mActivitySpaceId;
+    private String mActivityTypeName;
 
     /**
      * 标识是否是志愿服务分类
@@ -145,6 +146,7 @@ public class ActivitiesActivity extends BaseActivity {
         mActivityCategoryId = getIntent().getIntExtra("activityCategoryId", 0);
         mSelectedActivityTypeId = getIntent().getIntExtra("activityTypeId", 0);
         mActivitySpaceId = getIntent().getIntExtra("activitySpaceId", 0);
+        mActivityTypeName = getIntent().getStringExtra("activityTypeName");
         getActivities();
     }
 
@@ -167,13 +169,14 @@ public class ActivitiesActivity extends BaseActivity {
 
                 if (mSelectedActivityTypeId == -1) {
                     tvTitleName.setText("精彩回放");
-                } else if(mSelectedActivityTypeId == -2){//文化瑰宝
-                    tvTitleName.setText("文化瑰宝");
-                } else{
-                    tvTitleName.setText("活动");
+                } else {
+                    if (!TextUtils.isEmpty(mActivityTypeName)) {
+                        tvTitleName.setText(mActivityTypeName);
+                    } else {
+                        tvTitleName.setText("活动");
+                    }
                 }
-
-                if (mActivitySpaceId != 0 || mSelectedActivityTypeId == -1 || mSelectedActivityTypeId == -2) {//文化空间、 精彩回放、文化瑰宝 不需要显示活动导航
+                if (mActivitySpaceId != 0 || mSelectedActivityTypeId == -1 || (!TextUtils.isEmpty(mActivityTypeName) && mActivityTypeName.equals("文化瑰宝"))) {//文化空间、 精彩回放、文化瑰宝 不需要显示活动导航
                     rvActivityNavigation.setVisibility(View.GONE);
                 } else {
 
@@ -185,7 +188,7 @@ public class ActivitiesActivity extends BaseActivity {
                             ActivityResEntity.ActiveTypeListBean activeTypeListBean = mActiveTypeList.get(i);
                             activeTypeListBean.hasSelected = activeTypeListBean.ActiveTypeId == mSelectedActivityTypeId;
 
-                            if (activeTypeListBean.hasSelected  && mActiveTypeList.get(i).TypeName.contains("志愿")) {
+                            if (activeTypeListBean.hasSelected && mActiveTypeList.get(i).TypeName.contains("志愿")) {
                                 mIsvoluntaryServiceType = true;
                             } else {
                                 mIsvoluntaryServiceType = false;
@@ -223,11 +226,14 @@ public class ActivitiesActivity extends BaseActivity {
      * @param activityCategoryId 1.活动（活动、活动空间） 2.资讯 3.民营剧团
      * @param activityTypeId     分类下的子分类
      */
-    public static void startActivitiesActivity(Context context, int activityCategoryId, int activityTypeId, int activitySpaceId) {
+    public static void startActivitiesActivity(Context context, int activityCategoryId, int activityTypeId, int activitySpaceId, String... args) {
         Intent intent = new Intent(context, ActivitiesActivity.class);
         intent.putExtra("activityCategoryId", activityCategoryId);
         intent.putExtra("activityTypeId", activityTypeId);
         intent.putExtra("activitySpaceId", activitySpaceId);
+        if (args != null && args.length > 0){
+            intent.putExtra("activityTypeName", args[0]);
+        }
         context.startActivity(intent);
     }
 
