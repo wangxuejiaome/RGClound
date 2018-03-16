@@ -337,7 +337,8 @@ public class TCLivePublisherActivity extends TCBaseActivity implements ITXLivePu
         //mBeautySeekBar.setProgress(100);
 
         //设置视频质量：高清
-        mTXLivePusher.setVideoQuality(TXLiveConstants.VIDEO_QUALITY_HIGH_DEFINITION, false, false);
+       // mTXLivePusher.setVideoQuality(TXLiveConstants.VIDEO_QUALITY_HIGH_DEFINITION, false, false);
+        mTXLivePusher.setVideoQuality(TXLiveConstants.VIDEO_QUALITY_SUPER_DEFINITION, false, false);
         mTXCloudVideoView.enableHardwareDecode(true);
         mTXLivePusher.startCameraPreview(mTXCloudVideoView);
 //        mTXLivePusher.setMirror(true);
