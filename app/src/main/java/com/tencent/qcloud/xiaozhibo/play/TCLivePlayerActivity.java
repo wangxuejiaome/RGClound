@@ -804,7 +804,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
 
     @Override
     public void onJoinGroupCallback(int code, String msg) {
-        if (code == 0) {
+       /* if (code == 0) {
             Log.d(TAG, "onJoin group success" + msg);
         } else if (TCConstants.NO_LOGIN_CACHE == code) {
             TXLog.d(TAG, "onJoin group failed" + msg);
@@ -812,7 +812,7 @@ public class TCLivePlayerActivity extends TCBaseActivity implements ITXLivePlayL
         } else {
             TXLog.d(TAG, "onJoin group failed" + msg);
             showErrorAndQuit(TCConstants.ERROR_MSG_JOIN_GROUP_FAILED + code);
-        }
+        }*/
     }
 
     public void onSendMsgCallback(int errCode, TIMMessage timMessage) {
