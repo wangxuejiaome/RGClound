@@ -35,9 +35,8 @@
             android:layout_marginLeft="@dimen/x70"
             android:background="@null"
             android:gravity="fill_vertical"
-            android:hint="输入1-6个字"
+            android:hint="输入标题"
             android:imeOptions="actionNext"
-            android:maxLength="6"
             android:singleLine="true"
             android:textColor="@color/grey900"
             android:textSize="14sp"/>
@@ -65,9 +64,9 @@
 
 
         <RadioGroup
+            android:id="@+id/rg_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rg_order"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/x60"
             android:orientation="horizontal">
@@ -134,7 +133,7 @@
         android:gravity="right"
         android:paddingRight="@dimen/x24"
         android:paddingTop="@dimen/x10"
-        android:text="0/120"
+        android:text="0/200"
         android:textColor="@color/grey700"
         android:textSize="14sp"/>
 

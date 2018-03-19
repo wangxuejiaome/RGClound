@@ -28,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         mPreferencesUtil = new PreferencesUtil(this);
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "splashBg1.jpg");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "splashBg.jpg");
         if (file.exists()) {
             //加载图片
             Glide.with(SplashActivity.this).load(file).placeholder(R.mipmap.splash_bg).into(ivSplash);

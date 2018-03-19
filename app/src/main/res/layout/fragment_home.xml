@@ -188,7 +188,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/y2"
-                            android:text="文化点位一栏无余"
+                            android:text="文化点位一揽无余"
                             android:textColor="@color/grey500"
                             android:textSize="9sp"/>
 

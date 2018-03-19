@@ -179,6 +179,7 @@ public class MapActivity extends BaseActivity {
                 Bundle bundle = marker.getExtraInfo();
                 tvNameSpace.setText(bundle.getString("spaceName"));
                 tvAddressSpace.setText(bundle.getString("spaceAddress"));
+                tvPhoneSpace.setText(bundle.getString("spacePhone"));
                 // latlngToAddress(marker.getPosition(), tvAddressSpace);
                 mSelectedLat = marker.getPosition().latitude;
                 mSelectLng = marker.getPosition().longitude;
@@ -222,6 +223,7 @@ public class MapActivity extends BaseActivity {
             bundle.putInt("spaceId", spaceBean.Id);
             bundle.putString("spaceName", spaceBean.SpaceName);
             bundle.putString("spaceAddress", spaceBean.SpaceAddress);
+            bundle.putString("spacePhone",spaceBean.SpacePhone);
             marker.setExtraInfo(bundle);
             mMarkerList.add(marker);
         }

@@ -81,7 +81,7 @@ public class OrderActivity extends BaseActivity {
          */
         etContent.addTextChangedListener(new TextWatcher() {
 
-            int maxCount = 120;
+            int maxCount = 200;
             int selectionStart;
             int selectionEnd;
             int inputNumber;
@@ -102,7 +102,7 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                tvInputCount.setText(inputNumber + "/120");
+                tvInputCount.setText(inputNumber + "/200");
                 selectionStart = etContent.getSelectionStart();
                 selectionEnd = etContent.getSelectionEnd();
 
