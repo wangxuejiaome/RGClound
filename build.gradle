@@ -42,8 +42,8 @@ ext {
     buildToolsVersion = "24.0.3"
     minSdkVersion = 15
     targetSdkVersion = 21
-    versionCode = 7
-    versionName = "v1.0.7"
+    versionCode = 8
+    versionName = "v1.0.8"
     proguard = true
     rootPrj = "$projectDir/.."
     ndkAbi = 'armeabi'//, 'armeabi-v7a', 'arm64-v8a'
